@@ -16,6 +16,8 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
 });
 
+console.log('hey -- hallo');
+
 const client = new ApolloClient({
     cache: new InMemoryCache({ fragmentMatcher }),
     link: new HttpLink({

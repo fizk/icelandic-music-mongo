@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {StatelessComponent} from 'react';
-// import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {Route} from 'react-router-dom';
 import Index from "../../pages/Index";
 import Collection from "../../pages/Collection";
@@ -19,17 +18,3 @@ const App: StatelessComponent<{}> = () => (
 );
 
 export default App;
-
-
-/*
-const App: StatelessComponent<{}> = () => (
-    <Router>
-        <Chrome>
-            <Route exact={true} path="/" component={Index} />
-            <Route path="/listamenn" component={ArtistType} />
-            <Route path="/verk" component={CollectionType} />
-            <Route path="/stak" component={Item} />
-        </Chrome>
-    </Router>
-);
- */
