@@ -1,0 +1,9 @@
+@import "../../config";
+
+.member-timeline {
+
+}
+
+.member-timeline__line {
+    fill: map_get($color, purple);
+}

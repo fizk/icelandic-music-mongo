@@ -1,0 +1,45 @@
+@import "../../config";
+@import "../../functions";
+
+.options-list {
+    //ref
+}
+
+.options-list__item {
+    padding: map_get($space, sm) map_get($space, md);
+}
+
+.options-list--sm {
+    .options-list__item {
+        padding: map_get($space, xs) map_get($space, md);
+    }
+}
+
+.options-list--md {
+    .options-list__item {
+        padding: map_get($space, xs) map_get($space, md);
+    }
+}
+
+.options-list--ld {
+    .options-list__item {
+        padding: map_get($space, sm) map_get($space, md);
+    }
+}
+
+.options-list--x-ld {
+    .options-list__item {
+        padding: map_get($space, sm) map_get($space, md);
+    }
+}
+
+.options-list__item:hover,
+.options-list__item--active {
+    background-color: map_get($color, secondary-light);
+}
+
+// - -[options-list-container]- - - - - - -
+.options-list__container {
+    background-color: map_get($color, white);
+    @include shadow;
+}

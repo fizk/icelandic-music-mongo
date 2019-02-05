@@ -1,0 +1,197 @@
+// ArtistType
+{
+    "_id" : ObjectId("5c5253a2952c8733a920cbf9"),
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : [],
+    "__contentType" : "artist/person",
+    "name" : "John Lennon",
+    "description" : "Lennon description",
+    "genres" : [
+        "pop",
+        "rock"
+    ],
+    "aka" : [
+        "John"
+    ],
+    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+    "to" : ISODate("2013-11-20T23:32:18.000Z")
+}
+{
+    "_id" : ObjectId("1c5253a2952c8733a920cbf1"),
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : [],
+    "__contentType" : "artist/person",
+    "name" : "Paul McCartney",
+    "description" : "Paul description",
+    "genres" : [
+        "pop",
+        "rock"
+    ],
+    "aka" : [
+        "Paul"
+    ],
+    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+    "to" : ISODate("2013-11-20T23:32:18.000Z")
+}
+{
+    "_id" : ObjectId("2c5253a2952c8733a920cbf2"),
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : [],
+    "__contentType" : "artist/person",
+    "name" : "George Harrison",
+    "description" : "George description",
+    "genres" : [
+        "pop",
+        "rock"
+    ],
+    "aka" : [
+        "George"
+    ],
+    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+    "to" : ISODate("2013-11-20T23:32:18.000Z")
+}
+{
+    "_id" : ObjectId("3c5253a2952c8733a920cbf3"),
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : [],
+    "__contentType" : "artist/person",
+    "name" : "Ringo Starr",
+    "description" : "Ringo description",
+    "genres" : [
+        "pop",
+        "rock"
+    ],
+    "aka" : [
+        "Ringo"
+    ],
+    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+    "to" : ISODate("2013-11-20T23:32:18.000Z")
+}
+{
+    "_id" : ObjectId("4c5253a2952c8733a920cbf4"),
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : [
+        {
+            "_id" : {
+                "namespace" : "artist",
+                "oid" : ObjectId("5c5253a2952c8733a920cbf9")
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "7b2d0ec6-259f-11e9-ab14-d663bd873d93",
+            "__contentType" : "artist/person+member",
+            "periods" : [
+                {
+                    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+                    "to" : ISODate("2013-11-20T23:32:18.000Z")
+                }
+            ]
+        },
+        {
+            "_id" : {
+                "namespace" : "artist",
+                "oid" : ObjectId("1c5253a2952c8733a920cbf1")
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "7b2d142a-259f-11e9-ab14-d663bd873d93",
+            "__contentType" : "artist/person+member",
+            "periods" : [
+                {
+                    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+                    "to" : ISODate("2013-11-20T23:32:18.000Z")
+                }
+            ]
+        },
+        {
+            "_id" : {
+                "namespace" : "artist",
+                "oid" : ObjectId("2c5253a2952c8733a920cbf2")
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "7b2d214a-259f-11e9-ab14-d663bd873d93",
+            "__contentType" : "artist/person+member",
+            "periods" : [
+                {
+                    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+                    "to" : ISODate("2013-11-20T23:32:18.000Z")
+                }
+            ]
+        },
+        {
+            "_id" : {
+                "namespace" : "artist",
+                "oid" : ObjectId("3c5253a2952c8733a920cbf3")
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "7b2d2280-259f-11e9-ab14-d663bd873d93",
+            "__contentType" : "artist/person+member",
+            "periods" : [
+                {
+                    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+                    "to" : ISODate("2013-11-20T23:32:18.000Z")
+                }
+            ]
+        },
+        {
+            "_id" : {
+                "namespace" : "collection",
+                "oid" : ObjectId("5c5253a1234c8733a920cbf9"),
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "7b2d2281-259f-11e9-ab14-d663bd873d93",
+            __contentType: 'collection/album',
+        },
+        {
+            "_id" : {
+                "namespace" : "collection",
+                "oid" : ObjectId("6c5253a1234c8733a921cbf9"),
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "8b1d2281-259f-11e9-ab14-d663bd873d93",
+            __contentType: 'collection/album',
+        }
+    ],
+    "__contentType" : "artist/group",
+    "name" : "The Beatles",
+    "description" : "The Beatles description",
+    "genres" : [
+        "pop",
+        "rock"
+    ],
+    "aka" : [
+        "Beatles"
+    ],
+    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+    "to" : ISODate("2013-11-20T23:32:18.000Z")
+}
+
+
+// CollectionType
+{
+    "_id" : ObjectId("5c5253a1234c8733a920cbf9"),
+    "updateTime": ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime": ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref": [],
+    "__contentType": "collection/album",
+    "name": "Please Please Me",
+    "releaseDates": ISODate("1963-09-04T23:32:18.000Z"),
+    "description": "Please Please Me is the debut studio album by the English rock band the Beatles.",
+    "genres": ["Merseybeat", "rock and roll", "rock", "pop"],
+    "aka": []
+}
+{
+    "_id" : ObjectId("6c5253a1234c8733a921cbf9"),
+    "updateTime": ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime": ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref": [],
+    "__contentType": 'collection/album',
+    "name": "With the Beatles",
+    "releaseDates": ISODate("1963-09-04T23:32:18.000Z"),
+    "description": "With the Beatles is the second studio album by the English rock band the Beatles.",
+    "genres": ["rock and roll", "rock", "pop"],
+    "aka": []
+}

@@ -1,0 +1,61 @@
+@import "../../config";
+@import "../../functions";
+
+.avatar-image-container {
+    @include circle;
+
+    background-color: map_get($color, disabled);
+    position: relative;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+}
+
+.avatar-image-container--sm {
+    width: 30px;
+    height: 30px;
+}
+
+.avatar-image-container--md {
+    width: 60px;
+    height: 60px;
+}
+
+.avatar-image-container--lg {
+    width: 120px;
+    height: 120px;
+}
+
+.avatar-image-preload {
+    @include circle;
+
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-size: cover;
+}
+
+.avatar-image-loaded {
+    @include circle;
+
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-size: cover;
+
+    opacity: 0;
+
+    transition: opacity 1s ease;
+}
+
+.avatar-image-fade-in {
+    opacity: 1;
+}

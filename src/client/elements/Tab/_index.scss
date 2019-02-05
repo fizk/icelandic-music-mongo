@@ -1,0 +1,37 @@
+@import "../../config";
+
+.tab {
+    padding: map_get($space, md);
+    cursor: pointer;
+}
+.tab--active {
+    background-color: map_get($color, primary);
+}
+
+// - - - - - - - - - - - - - - -
+.tab-container {}
+.tab-container--stretch {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+// - - - - - - - - - - - - - - -
+.tab-content {
+    .tab-container--stretch & {
+        height: 100%
+    }
+
+}
+
+// - - - - - - - - - - - - - - -
+.tab-item {
+    .tab-container--stretch & {
+        height: 100%;
+    }
+}
+
+// - - - - - - - - - - - - - - -
+.tab-list {
+    display: flex;
+}

@@ -1,0 +1,55 @@
+@import "../../config";
+@import "../../functions";
+
+.poster-image-container {
+    background-color: map_get($color, disabled);
+    position: relative;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+}
+
+.poster-image-container--sm {
+    width: 30px;
+    height: 30px;
+}
+
+.poster-image-container--md {
+    width: 60px;
+    height: 60px;
+}
+
+.poster-image-container--lg {
+    width: 120px;
+    height: 120px;
+}
+
+.poster-image-preload {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-size: cover;
+}
+
+.poster-image-loaded {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-size: cover;
+
+    opacity: 0;
+
+    transition: opacity 1s ease;
+}
+
+.poster-image-fade-in {
+    opacity: 1;
+}

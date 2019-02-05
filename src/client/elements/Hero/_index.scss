@@ -1,0 +1,82 @@
+@import "../../config";
+
+.hero {
+    background-size: cover;
+    background-position: center;
+    background-color: map_get($color, disabled);
+    width: 100%;
+    height: 40vh;
+}
+.hero__container {
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity .2s;
+    height: 100%;
+    width: 100%;
+}
+
+.hero__container--fade-in {
+    opacity: 1;
+}
+
+// -- -- --
+
+
+.hero-image-container {
+    background-size: cover;
+    background-position: center;
+    background-color: map_get($color, disabled);
+    width: 100%;
+    height: 40vh;
+    position: relative;
+}
+
+//.hero-image-container--sm {
+//    width: 30px;
+//    height: 30px;
+//}
+//
+//.hero-image-container--md {
+//    width: 60px;
+//    height: 60px;
+//}
+//
+//.hero-image-container--lg {
+//    width: 120px;
+//    height: 120px;
+//}
+
+.hero-image-preload {
+
+
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-size: cover;
+}
+
+.hero-image-loaded {
+
+
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-size: cover;
+
+    opacity: 0;
+
+    transition: opacity 1s ease;
+}
+
+.hero-image-fade-in {
+    opacity: 1;
+}

@@ -1,0 +1,8 @@
+@import "../../config";
+
+.icon {
+    path {
+        fill: map_get($color, disabled);
+    }
+}
+

@@ -1,0 +1,77 @@
+version: '3'
+
+services:
+
+
+  master:
+    container_name: icelandic-music-master
+    build:
+      context: .
+      dockerfile: LoadBalancerDockerfile
+    ports:
+      - 80:80
+    expose:
+      - 80
+    volumes:
+      - ./public:/usr/local/apache2/htdocs
+    depends_on:
+      - web
+      - image-server
+    links:
+      - web
+      - image-server
+
+
+  web:
+    container_name: icelandic-music-web
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./dist:/usr/src/app/dist
+      - ./public:/usr/src/app/public
+    depends_on:
+      - database
+      - search
+    links:
+      - database
+      - search
+    command: npm run nodemon
+
+
+  database:
+    container_name: icelandic-music-database
+    image: mongo:3.4.19-jessie
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data/db
+
+
+  image-server:
+    container_name: icelandic-music-images
+    image: apsl/thumbor:6.4.2-simd-avx2
+    ports:
+      - 8000:8000
+    environment:
+      - DETECTORS=['thumbor.detectors.face_detector','thumbor.detectors.feature_detector']
+      - UPLOAD_MAX_SIZE=1000000
+      - UPLOAD_ENABLED=True
+      - ALLOW_UNSAFE_URL="True"
+      - ALLOW_ANIMATED_GIFS="True"
+      - USE_GIFSICLE_ENGINE="True"
+      - FILE_STORAGE_ROOT_PATH="/data/thumbor"
+    restart: "always"
+    volumes:
+      - ./data/thumbor:/data/thumbor
+
+  search:
+    container_name: icelandic-music-search
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - ./data/search/:/usr/share/elasticsearch/data

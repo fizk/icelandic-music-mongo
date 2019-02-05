@@ -1,0 +1,19 @@
+@import "../../config";
+
+.mark-down-container {
+    p + p {
+        margin-top: map_get($space, md);
+    }
+
+    p + ul {
+        margin-top: map_get($space, md);
+    }
+
+    ul + p {
+        margin-top: map_get($space, md);
+    }
+
+    ul {
+        list-style-position: inside;
+    }
+}

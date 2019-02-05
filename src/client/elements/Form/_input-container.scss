@@ -1,0 +1,9 @@
+@import "../../config";
+
+.input-container {
+    //ref
+}
+
+.input-container + .input-container {
+    padding-top: map_get($space, md);
+}

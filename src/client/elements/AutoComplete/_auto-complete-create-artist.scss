@@ -1,0 +1,17 @@
+@import "../../config";
+
+.auto-complete-create-artist {
+    padding: map_get($space, xs);
+    cursor: pointer;
+    background-color: map_get($color, disabled);
+}
+
+.auto-complete-create-artist:hover,
+.auto-complete-create-artist--active {
+    background-color: map_get($color, secondary-light);
+}
+
+.auto-complete-create-artist__title {
+    font-weight: normal;
+    font-size: map_get($font-size, sm);
+}

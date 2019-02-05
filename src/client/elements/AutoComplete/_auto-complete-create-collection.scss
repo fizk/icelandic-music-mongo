@@ -1,0 +1,17 @@
+@import "../../config";
+
+.auto-complete-create-collection {
+    padding: map_get($space, xs);
+    cursor: pointer;
+    background-color: map_get($color, disabled);
+}
+
+.auto-complete-create-collection:hover,
+.auto-complete-create-collection--active {
+    background-color: map_get($color, secondary-light);
+}
+
+.auto-complete-create-collection__title {
+    font-weight: normal;
+    font-size: map_get($font-size, sm);
+}

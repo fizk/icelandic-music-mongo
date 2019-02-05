@@ -1,0 +1,46 @@
+@import "../../config";
+
+
+.textarea {
+    outline: none;
+    box-sizing: border-box;
+
+    //border-style: none;
+    border: 1px solid rgb(200, 200, 200);
+}
+
+.textarea::placeholder {
+    color: map_get($color, primary-light);
+}
+
+// - - [variations] - -
+.textarea--tail-element {
+    //ref
+}
+
+.textarea--sm {
+    padding: map_get($space, xs) map_get($space, md);
+}
+
+.textarea--md {
+    padding: map_get($space, xs) map_get($space, md);
+}
+
+.textarea--lg {
+    padding: map_get($space, sm) map_get($space, md);
+}
+
+.textarea--x-lg {
+    padding: map_get($space, sm) map_get($space, md);
+}
+
+.textarea--error {
+    border-color: map_get($color-label, error);
+}
+
+.textarea--elastic {
+    width: 100%;
+}
+.textarea--stretch {
+    height: 100%;
+}

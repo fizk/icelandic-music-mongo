@@ -1,0 +1,11 @@
+.artist-panel {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.artist-panel__tile {
+    background-position: center;
+    background-size: cover;
+    width: 50%;
+    height: 20vh;
+}

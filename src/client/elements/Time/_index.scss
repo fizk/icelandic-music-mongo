@@ -1,0 +1,5 @@
+@import "../../config";
+
+.time {
+    font-size: map_get($font-size, sm);
+}

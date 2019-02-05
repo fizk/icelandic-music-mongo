@@ -1,0 +1,8 @@
+@import "../../config";
+@import "../../functions";
+
+.paper {
+    background-color: map_get($color, white);
+    padding: map_get($space, md);
+    @include shadow;
+}

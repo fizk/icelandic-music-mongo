@@ -1,0 +1,76 @@
+@import "../../config";
+@import "../../functions";
+
+.collection-header {
+    //ref
+}
+
+.collection-header__hero {
+    position: relative;
+}
+
+.collection-header__headline {
+    display: flex;
+    margin-top: -60px;
+    margin-bottom: map_get($space, md);
+    position: relative;
+    padding: 0 map_get($space, md);
+}
+
+.collection-header__avatar {
+    @include circle;
+}
+
+.collection-header__avatar-container {
+    position: relative;
+    z-index: 2;
+    border: map_get($border, width-thick) solid map_get($color, light);
+}
+
+.collection-header__name {
+    align-self: flex-end;
+    margin-top: 78px;
+    margin-left: map_get($space, md);
+}
+
+.collection-header__hero-button {
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    background-color: map_get($color, secondary);
+    cursor: pointer;
+}
+.collection-header__avatar-button {
+    display: inline-block;
+    position: absolute;
+    background-color: map_get($color, secondary);
+    cursor: pointer;
+}
+
+.collection-header__aka {
+    margin-left: map_get($space, md);
+    display: inline-block;
+}
+
+.collection-header__fab {
+    position: absolute;
+    top: 20px;
+    right: map_get($space, md);
+    width: 80px;
+    height: 80px;
+    background-color: map_get($color, secondary);
+    @include circle;
+    cursor: pointer;
+}
+
+.collection-header__edit-toggle {
+    position: absolute;
+    bottom: 0;
+    right: map_get($space, md);
+    width: 20px;
+    height: 20px;
+    background-color: map_get($color, secondary);
+    @include circle;
+    cursor: pointer;
+}
+

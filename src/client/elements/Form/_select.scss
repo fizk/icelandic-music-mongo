@@ -1,0 +1,44 @@
+@import "../../config";
+
+.select {
+    border-style: none;
+    outline: none;
+    box-sizing: border-box;
+    background-color: map_get($color, light);
+    -webkit-appearance: textfield;
+    appearance: textfield;
+    border-radius: 0;
+}
+
+.select::placeholder {
+    color: map_get($color, primary-light);
+}
+
+// - - [variations] - -
+.select--tail-element {
+    //ref
+}
+
+.select--elastic {
+    width: 100%;
+}
+
+.select--sm {
+    padding: map_get($space, xs) map_get($space, md);
+}
+
+.select--md {
+    padding: map_get($space, xs) map_get($space, md);
+}
+
+.select--lg {
+    padding: map_get($space, sm) map_get($space, md);
+}
+
+.select--x-lg {
+    padding: map_get($space, sm) map_get($space, md);
+}
+
+.select--error {
+    border-color: map_get($color-label, error);
+}

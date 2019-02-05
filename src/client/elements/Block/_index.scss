@@ -1,0 +1,14 @@
+.block {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.block__static {
+    //ref
+}
+
+.block__stretched {
+    flex-grow: 1;
+    display: flex;
+}

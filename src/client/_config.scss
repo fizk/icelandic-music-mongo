@@ -1,0 +1,51 @@
+$space: (
+    xxs:  4px,
+    xs:  8px,
+    sm:  11px,
+    md:  16px,
+    lg:  23px,
+    xl:  32px,
+    xxl:  46px,
+);
+
+$font-size: (
+    xs: 11px,
+    sm: 14px,
+    md: 16px,
+    lg: 22px,
+    xl: 32px,
+    xxl: 46px,
+);
+
+$color: (
+    white: #ffffff,
+    blue: #0000ee,
+    purple: #973999,
+    pink: #f8598b,
+    orange: #f7bf00,
+    gray: #496274,
+    black: #2a2e31,
+
+    light: #fafafa,
+
+    disabled: #e1e2e1,
+
+    primary-light: #819ca9,
+    primary: #546e7a,
+    primary-dark: #29434e,
+
+    secondary-light: #ffffb3,
+    secondary: #ffe082,
+    secondary-dark: #caae53,
+);
+
+$color-label: (
+    ok: green,
+    warning: map_get($color, orange),
+    error: red,
+);
+
+$border: (
+    width: 1px,
+    width-thick: 5px,
+);

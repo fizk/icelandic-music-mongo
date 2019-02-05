@@ -1,0 +1,32 @@
+@import "../../config";
+@import "../../functions";
+
+.auto-complete-artist {
+    display: flex;
+    align-items: center;
+    padding: map_get($space, xs);
+    cursor: pointer;
+}
+
+.auto-complete-artist:hover,
+.auto-complete-artist--active {
+    background-color: map_get($color, secondary-light);
+}
+
+.auto-complete-artist__icon {
+    width: 30px;
+}
+
+.auto-complete-artist__content {
+    padding-left: map_get($space, sm);
+}
+
+.auto-complete-artist__title {
+    font-weight: normal;
+    font-size: map_get($font-size, sm);
+}
+
+.auto-complete-artist__time {
+    font-weight: normal;
+    font-size: map_get($font-size, xs);
+}

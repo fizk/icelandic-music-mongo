@@ -1,0 +1,55 @@
+@import "../../config";
+@import "../../functions";
+
+.list {
+    list-style: none;
+    counter-reset: section;
+}
+
+.list-header {
+    padding: map_get($space, xl) 0 map_get($space, xs) 0;
+}
+.list-footer {
+    //ref
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+}
+
+.list-item + .list-item {
+    margin-top: map_get($space, xs);
+}
+
+.list-item__avatar {
+    width: 76px;
+}
+
+.list-item--numbered {
+    &::before {
+        counter-increment: section;
+        content: counter(section);
+        display: grid;
+        align-items: center;
+        background-color: map_get($color, secondary);
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        @include circle;
+        margin-right: 16px;
+    }
+}
+
+.list-item__content {
+    flex-grow: 1;
+}
+
+.list + .list-footer {
+    margin-top: map_get($space, xs);
+    margin-bottom: map_get($space, md);
+}
+
+.list-header + .list {
+    margin-top: map_get($space, xs);
+}

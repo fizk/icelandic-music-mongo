@@ -1,0 +1,13 @@
+
+.suggest-item {
+    display: flex;
+    align-items: center;
+}
+
+.suggest-item__avatar {
+    width: 76px;
+}
+
+.suggest-item__content {
+    flex-grow: 1;
+}

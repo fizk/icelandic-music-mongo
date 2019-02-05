@@ -1,0 +1,75 @@
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+@font-face {
+    font-family: 'tt-webfont';
+    src: url('/fonts/tt-regular-webfont.woff2') format('woff2'); /* Super Modern Browsers */
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'tt-webfont';
+    src: url('/fonts/tt-medium-webfont.woff2') format('woff2'); /* Super Modern Browsers */
+    font-weight: bold;
+}
+body {
+    box-sizing: inherit;
+    font-family: 'tt-webfont', sans-serif;
+    background-color: rgb(250, 250, 250);
+}
+
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    color: #496274;
+    background-color: #f5f6f7;
+    box-sizing: inherit;
+}
+
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+}
+
+main[role=main] {
+    max-width: 1024px;
+    margin: auto;
+}
+
+a {
+    color: rgb(0, 0, 238);
+    text-decoration: none;
+}
+a:hover {
+    color: rgb(0, 0, 238);
+    text-decoration: underline;
+}
+
+
+header {
+    background-color: #546e7a;
+    background-image: linear-gradient(to right, #973999, #f8598b, #f7bf00);
+    nav {
+        max-width: 980px;
+        margin: auto;
+
+        ul {
+            list-style: none;
+            li {
+                display: inline-block;
+                a {
+                    display: block;
+                    padding: 8px 16px 8px 0;
+                }
+            }
+
+        }
+    }
+}
+
+footer {
+    background-color: rgb(240, 240, 240);
+}

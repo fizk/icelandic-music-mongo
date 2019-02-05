@@ -1,0 +1,7 @@
+@mixin circle {
+    border-radius: 50%;
+}
+
+@mixin shadow {
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+}
