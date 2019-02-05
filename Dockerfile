@@ -4,7 +4,9 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 COPY tsconfig.json ./
-COPY "@types" ./
+COPY "@types/*" "./@types/"
+COPY .babelrc ./
+COPY webpack.config.js ./
 
 RUN npm i
 

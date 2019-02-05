@@ -6,21 +6,13 @@ import { HttpLink} from 'apollo-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import App from './components/App';
-// import firebase from "firebase/app";
-// require("firebase/storage");
-// import UploadTaskSnapshot = firebase.storage.UploadTaskSnapshot;
 import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import introspectionQueryResultData from '../fragmentTypes';
 
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-    introspectionQueryResultData
-});
-
+const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData});
 const client = new ApolloClient({
-    cache: new InMemoryCache({ fragmentMatcher }),
-    link: new HttpLink({
-        uri: '/graphql'
-    })
+    cache: new InMemoryCache({fragmentMatcher}),
+    link: new HttpLink({uri: '/graphql'})
 });
 
 ReactDOM.hydrate(

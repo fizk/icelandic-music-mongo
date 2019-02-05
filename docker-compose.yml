@@ -28,7 +28,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./dist:/usr/src/app/dist
+      - ./src:/usr/src/app/src
       - ./public:/usr/src/app/public
     depends_on:
       - database
@@ -36,7 +36,7 @@ services:
     links:
       - database
       - search
-    command: npm run nodemon
+    command: npm run dev:compile-watch
 
 
   database:
