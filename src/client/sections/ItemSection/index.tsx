@@ -16,7 +16,7 @@ const itemQuery = gql`
                     _id
                     name
                     releaseDates
-                    avatar {url base64}
+                    avatar {_id url base64}
                     artists {
                         ... on Person {
                             _id

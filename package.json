@@ -12,7 +12,7 @@
     "build-client": "./node_modules/.bin/webpack",
     "build-client:watch": "./node_modules/.bin/webpack -w",
     "dev:compile-watch": "npm run build-server && npm run build-client && npm run dev:watch",
-    "dev:watch": "npm run build-server:watch & build-client:watch & npm run nodemon & wait",
+    "dev:watch": "npm run build-server:watch & npm run build-client:watch & npm run nodemon & wait",
     "run:fragment": "node scripts/fragments.js"
   },
   "keywords": [],

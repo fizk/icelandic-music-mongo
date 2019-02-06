@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -23,7 +24,8 @@ module.exports = {
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: '[name].css'
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
     module: {
         rules: [

@@ -28,16 +28,16 @@ export const collectionQuery = gql`
                 ... on Person {
                     _id
                     name
-                    avatar {base64 url}
+                    avatar {_id base64 url}
                 }
                 ... on Group {
                     _id
                     name
-                    avatar {base64 url}
+                    avatar {_id base64 url}
                 }
             }
-            avatar {base64 url}
-            hero {base64 url}
+            avatar {_id base64 url}
+            hero {_id base64 url}
             songs {
                 position
                 song {

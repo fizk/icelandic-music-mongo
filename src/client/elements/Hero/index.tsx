@@ -75,31 +75,31 @@ export default class extends React.Component<HeroProps> {
 
     componentWillReceiveProps(props: HeroProps) {
 
-        const hdLoaderImg = new Image();
-
-        hdLoaderImg.src = props.src.url!;
-
-        hdLoaderImg.addEventListener('load', () => {
-            this.ironImageHd!.setAttribute(
-                'style',
-                `background-image: url('${props.src.url}')`
-            );
-            this.ironImageHd!.classList.add('hero-image-fade-in');
-        });
+        // const hdLoaderImg = new Image();
+        //
+        // hdLoaderImg.src = props.src.url!;
+        //
+        // hdLoaderImg.addEventListener('load', () => {
+        //     this.ironImageHd!.setAttribute(
+        //         'style',
+        //         `background-image: url('${props.src.url}')`
+        //     );
+        //     this.ironImageHd!.classList.add('hero-image-fade-in');
+        // });
     }
 
     componentDidMount() {
         const hdLoaderImg = new Image();
 
-        hdLoaderImg.src = this.props.src.url!;
-
-        hdLoaderImg.addEventListener('load', () => {
-            this.ironImageHd!.setAttribute(
-                'style',
-                `background-image: url('${this.props.src.url}')`
-            );
-            this.ironImageHd!.classList.add('hero-image-fade-in');
-        });
+        // hdLoaderImg.src = this.props.src.url!;
+        //
+        // hdLoaderImg.addEventListener('load', () => {
+        //     this.ironImageHd!.setAttribute(
+        //         'style',
+        //         `background-image: url('${this.props.src.url}')`
+        //     );
+        //     this.ironImageHd!.classList.add('hero-image-fade-in');
+        // });
     };
 
     render() {
@@ -108,9 +108,10 @@ export default class extends React.Component<HeroProps> {
                 <div className="hero-image-loaded"
                     ref={imageLoadedElem => this.ironImageHd = imageLoadedElem}>
                 </div>
-                <div className="hero-image-preload"
-                    style={{ backgroundImage: `url('${this.props.src.base64}')` }}>
-                </div>
+                <div className="hero-image-preload" />
+                {/*<div className="hero-image-preload"*/}
+                    {/*style={{ backgroundImage: `url('${this.props.src.base64}')` }}>*/}
+                {/*</div>*/}
             </div>
         )
     }

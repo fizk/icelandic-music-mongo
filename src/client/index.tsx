@@ -15,6 +15,8 @@ const client = new ApolloClient({
     link: new HttpLink({uri: '/graphql'})
 });
 
+console.log('hey gaman');
+
 ReactDOM.hydrate(
     <ApolloProvider client={client}>
         <Router>

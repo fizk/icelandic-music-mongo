@@ -2,7 +2,6 @@ version: '3'
 
 services:
 
-
   master:
     container_name: icelandic-music-master
     build:
@@ -21,7 +20,6 @@ services:
       - web
       - image-server
 
-
   web:
     container_name: icelandic-music-web
     build: .
@@ -38,7 +36,6 @@ services:
       - search
     command: npm run dev:compile-watch
 
-
   database:
     container_name: icelandic-music-database
     image: mongo:3.4.19-jessie
@@ -46,7 +43,6 @@ services:
       - 27017:27017
     volumes:
       - ./data/mongo:/data/db
-
 
   image-server:
     container_name: icelandic-music-images

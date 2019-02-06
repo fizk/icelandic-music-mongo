@@ -9,7 +9,7 @@ export const artistQuery = gql`
         name
         releaseDates
         contentType {type subtype attribute}
-        avatar {base64 url}
+        avatar {_id base64 url}
     }
     
     fragment image on Image {
@@ -127,7 +127,7 @@ const artistAddCollection = gql`
         name
         releaseDates
         contentType {type subtype attribute}
-        avatar {base64 url}
+        avatar {_id base64 url}
     }
     
     mutation ArtistAddCollection ($artist: ID! $collection: ID! $collectionType: CollectionType!) {
@@ -155,7 +155,7 @@ const artistAddMember = gql`
             artist {
                 _id
                 name
-                avatar {base64 url}
+                avatar {_id base64 url}
             }
             uuid
         }
