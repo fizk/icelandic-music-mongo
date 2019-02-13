@@ -6,27 +6,45 @@ function anyNonNil(str: string) {
     return anyRegex.test(str);
 }
 
+// export default new GraphQLScalarType({
+//     name: 'GraphQLUUID',
+//     description: `UUID scalar type`,
+//     serialize: value => {
+//         return anyNonNil(value)
+//             ? value
+//             : null
+//     },
+//     parseValue: value => {
+//         if (anyNonNil(value)) {
+//             return value;
+//         }
+//         throw new GraphQLError('')
+//     },
+//     parseLiteral: ast => {
+//         if (ast.kind !== Kind.STRING) {
+//             throw new GraphQLError(`Type should be "String", found ${ast.kind}.`);
+//         }
+//         if (anyNonNil(ast.value)) {
+//             return ast.value;
+//         }
+//         throw new GraphQLError(`Invalid UUID literal.\n${ast.value} is not UUID.`);
+//     }
+// });
+
+
 export default new GraphQLScalarType({
     name: 'GraphQLUUID',
     description: `UUID scalar type`,
-    serialize: value => {
+    serialize: (value): string | null => {
         return anyNonNil(value)
             ? value
             : null
     },
-    parseValue: value => {
-        if (anyNonNil(value)) {
-            return value;
-        }
-        throw new GraphQLError('', [])
+    parseValue: (value): string |  null=> {
+        return anyNonNil(value) ? value : null;
+
     },
-    parseLiteral: ast => {
-        if (ast.kind !== Kind.STRING) {
-            throw new GraphQLError(`Type should be "String", found ${ast.kind}.`, [ast]);
-        }
-        if (anyNonNil(ast.value)) {
-            return ast.value;
-        }
-        throw new GraphQLError(`Invalid UUID literal.\n${ast.value} is not UUID.`, [ast]);
+    parseLiteral: (ast): string => {
+        return ast.kind
     }
 });

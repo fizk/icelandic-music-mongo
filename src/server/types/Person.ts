@@ -1,5 +1,11 @@
 import {GraphQLNonNull, GraphQLString, GraphQLList, GraphQLObjectType, GraphQLID} from "graphql";
-import {ReferenceUnit as DBReferenceUnit, Image as DBImage, Artist as DBArtist} from "../../../@types/database";
+import {
+    ReferenceUnit as DBReferenceUnit,
+    Image as DBImage,
+    Artist as DBArtist,
+    ArtistReference as DBArtistReference,
+    PictureReference as DBPictureReference
+} from "../../../@types/database";
 import {GraphQlContext} from "../../../@types";
 import {splitContentType, splitGenre} from "../utils/split";
 import Period from "./Period";
@@ -32,11 +38,10 @@ export const PersonAssociation = new GraphQLObjectType<DBReferenceUnit, GraphQlC
         uuid: {
             type: new GraphQLNonNull(GraphQLUUID),
             resolve: ({association, artistId}) => {
-                return association.__ref.find((item: any) => {
-                    return item._id.oid.equals(artistId) && item.__contentType === 'artist/person+member';
-                }).__uuid;
-
-
+                return 'hundur';
+                // return association.__ref.find((item: any) => {
+                //     return item._id.oid.equals(artistId) && item.__contentType === 'artist/person+member';
+                // }).__uuid;
             }
         }
     })
@@ -93,25 +98,25 @@ const Person = new GraphQLObjectType<DBArtist, GraphQlContext>({
             name: 'albums',
             type: new GraphQLList(CollectionConnection),
             resolve: root => root.__ref
-                .filter((item: DBReferenceUnit) => item.__contentType === 'collection/album')
+                .filter((item: DBArtistReference) => item.__contentType === 'collection/album')
         },
         compilations: {
             name: 'compilations',
             type: new GraphQLList(CollectionConnection),
             resolve: root => root.__ref
-                .filter((item: DBReferenceUnit) => item.__contentType === 'collection/album+compilation')
+                .filter((item: DBArtistReference) => item.__contentType === 'collection/album+compilation')
         },
         eps: {
             name: 'eps',
             type: new GraphQLList(CollectionConnection),
             resolve: root => root.__ref
-                .filter((item: DBReferenceUnit) => item.__contentType === 'collection/album+ep')
+                .filter((item: DBArtistReference) => item.__contentType === 'collection/album+ep')
         },
         singles: {
             name: 'singles',
             type: new GraphQLList(CollectionConnection),
             resolve: root => root.__ref
-                .filter((item: DBReferenceUnit) => item.__contentType === 'collection/album+single')
+                .filter((item: DBArtistReference) => item.__contentType === 'collection/album+single')
         },
         association: {
             name: 'association',
@@ -136,10 +141,10 @@ const Person = new GraphQLObjectType<DBArtist, GraphQlContext>({
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
                     .filter((item: any) => item.__contentType === 'image/avatar')
-                    .reduce((a: any, b: DBReferenceUnit|undefined) => b, undefined);
+                    .reduce((a: any, b: DBArtistReference|undefined) => b, undefined);
 
                 return imagesReference
-                    ? database.collection(imagesReference._id.namespace)
+                    ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
                         .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
                     : null;
@@ -151,10 +156,10 @@ const Person = new GraphQLObjectType<DBArtist, GraphQlContext>({
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
                     .filter((item: any) => item.__contentType === 'image/hero')
-                    .reduce((a: any, b: DBReferenceUnit|undefined) => b, undefined);
+                    .reduce((a: any, b: DBArtistReference|undefined) => b, undefined);
 
                 return imagesReference
-                    ? database.collection(imagesReference._id.namespace)
+                    ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
                         .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
                     : null;

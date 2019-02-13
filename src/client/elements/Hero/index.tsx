@@ -2,6 +2,7 @@ import * as React from 'react';
 import {GraphQLTypes} from "../../../../@types";
 import classVariations from "../../helpers/classVariations";
 import './_index.scss';
+import {SyntheticEvent} from "react";
 
 type Props = {
     src: string,
@@ -63,8 +64,6 @@ type HeroProps = {
 }
 
 export default class extends React.Component<HeroProps> {
-    ironImageHd: HTMLDivElement|undefined|null;
-
     static defaultProps = {
         src: {
             url: undefined,
@@ -73,46 +72,91 @@ export default class extends React.Component<HeroProps> {
         variations: [],
     };
 
-    componentWillReceiveProps(props: HeroProps) {
+    imageElement: HTMLImageElement | null | undefined;
 
-        // const hdLoaderImg = new Image();
-        //
-        // hdLoaderImg.src = props.src.url!;
-        //
-        // hdLoaderImg.addEventListener('load', () => {
-        //     this.ironImageHd!.setAttribute(
-        //         'style',
-        //         `background-image: url('${props.src.url}')`
-        //     );
-        //     this.ironImageHd!.classList.add('hero-image-fade-in');
-        // });
+    constructor(props: HeroProps) {
+        super(props);
+        this.loadImage = this.loadImage.bind(this);
     }
 
-    componentDidMount() {
-        const hdLoaderImg = new Image();
+    loadImage (event: any) {
+        event.target.classList.replace('hero-image__image--hidden', 'hero-image__image--visible')
+    }
 
-        // hdLoaderImg.src = this.props.src.url!;
-        //
-        // hdLoaderImg.addEventListener('load', () => {
-        //     this.ironImageHd!.setAttribute(
-        //         'style',
-        //         `background-image: url('${this.props.src.url}')`
-        //     );
-        //     this.ironImageHd!.classList.add('hero-image-fade-in');
-        // });
-    };
+    componentWillReceiveProps(props: HeroProps) {
+        if ((props.src.url !== this.props.src.url) && this.imageElement) {
+            this.imageElement.classList.replace('hero-image__image--visible', 'hero-image__image--hidden')
+        }
+    }
 
     render() {
         return (
-            <div className={classVariations('hero-image-container', this.props.variations)}>
-                <div className="hero-image-loaded"
-                    ref={imageLoadedElem => this.ironImageHd = imageLoadedElem}>
-                </div>
-                <div className="hero-image-preload" />
-                {/*<div className="hero-image-preload"*/}
-                    {/*style={{ backgroundImage: `url('${this.props.src.base64}')` }}>*/}
-                {/*</div>*/}
+            <div className="hero-image">
+                {this.props.src.url && (
+                    <img height={274}
+                         width={1024}
+                         ref={element => this.imageElement = element}
+                         onLoad={this.loadImage}
+                         className="hero-image__image hero-image__image--hidden"
+                         src={`/images/unsafe/1024x274/${this.props.src.url}`}
+                    />
+                )}
             </div>
         )
     }
 }
+
+// export default class extends React.Component<HeroProps> {
+//     ironImageHd: HTMLDivElement|undefined|null;
+//
+//     static defaultProps = {
+//         src: {
+//             url: undefined,
+//             base64: undefined,
+//         },
+//         variations: [],
+//     };
+//
+//     componentWillReceiveProps(props: HeroProps) {
+//
+//         // const hdLoaderImg = new Image();
+//         //
+//         // hdLoaderImg.src = props.src.url!;
+//         //
+//         // hdLoaderImg.addEventListener('load', () => {
+//         //     this.ironImageHd!.setAttribute(
+//         //         'style',
+//         //         `background-image: url('${props.src.url}')`
+//         //     );
+//         //     this.ironImageHd!.classList.add('hero-image-fade-in');
+//         // });
+//     }
+//
+//     componentDidMount() {
+//         const hdLoaderImg = new Image();
+//
+//         // hdLoaderImg.src = this.props.src.url!;
+//         //
+//         // hdLoaderImg.addEventListener('load', () => {
+//         //     this.ironImageHd!.setAttribute(
+//         //         'style',
+//         //         `background-image: url('${this.props.src.url}')`
+//         //     );
+//         //     this.ironImageHd!.classList.add('hero-image-fade-in');
+//         // });
+//     };
+//
+//     render() {
+//         return (
+//             <div className={classVariations('hero-image-container', this.props.variations)}>
+//                 <div className="hero-image-loaded"
+//                     ref={imageLoadedElem => this.ironImageHd = imageLoadedElem}>
+//                 </div>
+//                 <div className="hero-image-preload" />
+//                 {/*<div className="hero-image-preload"*/}
+//                     {/*style={{ backgroundImage: `url('${this.props.src.base64}')` }}>*/}
+//                 {/*</div>*/}
+//             </div>
+//         )
+//     }
+// }

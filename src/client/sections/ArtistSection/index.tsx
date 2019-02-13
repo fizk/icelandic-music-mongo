@@ -162,7 +162,37 @@ const artistAddMember = gql`
     }
 `;
 
+const updateArtistSectionModal = gql`
+  mutation updateArtistSectionModal($key: String, $value: Boolean) {
+    updateArtistSectionModal(key: $key, value: $value) @client
+  }
+`;
+
+const queryArtistSectionModal = gql`
+  query {
+    artistSectionModal @client {
+      album
+      single
+      ep
+      compilation
+    }
+  }
+`;
+
 export default compose(
+    graphql(queryArtistSectionModal, {
+        props: ({data: {artistSectionModal}}: any) => ({
+            isModals: artistSectionModal,
+        }),
+    }),
+    graphql(updateArtistSectionModal, {
+        props: ({ mutate }) => ({
+            toggleModal: (object: {[key: string]: boolean}) => {
+                const [key, value] = Object.entries(object)[0];
+                mutate!({ variables: { key, value } })
+            },
+        }),
+    }),
     graphql(artistAddMember, {
         props: ({mutate, ownProps}: {mutate?: any, ownProps: any}) => ({
             connectMember: (vars: any) => { //@todo fix any

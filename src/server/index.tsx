@@ -5,37 +5,35 @@ import {MongoClient} from 'mongodb';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import fetch from 'isomorphic-fetch';
-import { ApolloProvider, getDataFromTree } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
-import { createHttpLink } from 'apollo-link-http';
-import { StaticRouter } from 'react-router';
+import {ApolloProvider, getDataFromTree} from 'react-apollo';
+import {ApolloClient} from 'apollo-client';
+import {createHttpLink} from 'apollo-link-http';
+import {StaticRouter} from 'react-router';
 import {InMemoryCache, IntrospectionFragmentMatcher} from "apollo-cache-inmemory";
 import Application from "../client/components/App";
+import Html from "../client/components/Html";
 import introspectionQueryResultData from '../fragmentTypes';
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData});
-const cache = new InMemoryCache({fragmentMatcher});
+import * as elasticsearch from 'elasticsearch';
+import {withClientState} from "apollo-link-state";
+import {ApolloLink} from "apollo-link";
+import {defaults, mutations} from '../state'
 
 // Connection URL
 const mongoUrl = 'mongodb://database:27017';
 const port = 3000;
 
-function Html({ content, state }: any) {
-    return (
-        <html>
-        <head>
-            <link rel="stylesheet" type="text/css" href="/app.css"/>
-        </head>
-        <body>
-        <div data-react dangerouslySetInnerHTML={{ __html: content }} />
-        <script dangerouslySetInnerHTML={{
-            __html: `window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`,
-        }} />
-        <script src="/bundle.js" />
-        </body>
-        </html>
-    );
-}
+const elasticSearchClient = new elasticsearch.Client({
+    host: 'search:9200',
+    log: 'trace'
+});
+
+const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData});
+const cache = new InMemoryCache({fragmentMatcher});
+const stateLink = withClientState({
+    cache,
+    resolvers: {Mutation: mutations,},
+    defaults: defaults,
+});
 
 MongoClient.connect(mongoUrl, { useNewUrlParser: true }).then(database => {
     console.log(`Connecting to MongoDB on ${mongoUrl}`);
@@ -44,27 +42,27 @@ MongoClient.connect(mongoUrl, { useNewUrlParser: true }).then(database => {
         schema: schema,
         // rootValue: root,
         graphiql: true,
-        context: {database: database.db('icelandic-music')}
+        context: {database: database.db('icelandic-music'), search: elasticSearchClient}
     }));
     app.use(express.static('public')); //@todo serve from Apache or something
     app.use((request, response) => {
-        const client = new ApolloClient({
-            ssrMode: true,
-            cache,
-            // Remember that this is the interface the SSR server will use to connect to the
-            // API server, so we need to ensure it isn't firewalled, etc
-            link: createHttpLink({
+
+        const httpLink = createHttpLink({
                 uri: 'http://localhost:3000/graphql',
                 fetch: fetch,
                 credentials: 'same-origin',
                 headers: {
                     cookie: request.header('Cookie'),
                 },
-            }),
+            });
+
+        const client = new ApolloClient({
+            ssrMode: true,
+            cache,
+            link: ApolloLink.from([stateLink, httpLink]),
 
         });
 
-        // The client-side App will instead use <BrowserRouter>
         const App = (
             <ApolloProvider client={client}>
                 <StaticRouter location={request.url} context={{}}>

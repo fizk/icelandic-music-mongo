@@ -74,79 +74,81 @@ class Chrome extends React.Component<Props> {
 
     render() {
         return (
-            <div>
-                <header>
-                    <div style={{maxWidth: '1024px', margin: 'auto'}}>
-                        <Grid>
-                            <Row>
-                                <Column>
-                                    <Link to="/">
-                                        <IT/>
-                                    </Link>
-                                    {this.props.user.id && (
-                                        <span>
-                                            <img src={this.props.user.url} />
-                                            <span onClick={() => this.handleLogOut}>Logout</span>
-                                        </span>
+            <>
+                <nav></nav>
+                {this.props.children}
+                {/*<header>*/}
+                    {/*<div style={{maxWidth: '1024px', margin: 'auto'}}>*/}
+                        {/*<Grid>*/}
+                            {/*<Row>*/}
+                                {/*<Column>*/}
+                                    {/*<Link to="/">*/}
+                                        {/*<IT/>*/}
+                                    {/*</Link>*/}
+                                    {/*{this.props.user.id && (*/}
+                                        {/*<span>*/}
+                                            {/*<img src={this.props.user.url} />*/}
+                                            {/*<span onClick={() => this.handleLogOut}>Logout</span>*/}
+                                        {/*</span>*/}
 
-                                    )}
-                                    {!this.props.user.id && <span onClick={() => this.handleLogin}>Login</span>}
-                                </Column>
-                                <Column>
-                                    <div style={{display: 'flex', height: '100%', alignItems: 'center'}}>
-                                        {/*<OptionsWithKeyBinding*/}
-                                            {/*elastic={true}*/}
-                                            {/*onClear={this.props.onFullSearchClear}*/}
-                                            {/*onSelect={() => {}}*/}
-                                            {/*onChange={this.handleSearchOnChange}>*/}
-                                            {/*{this.props.searchResults.map(item => (*/}
-                                                {/*<OptionsItem key={`search-result-id-${item._id}`}>*/}
-                                                    {/*{{*/}
-                                                        {/*'artist': (*/}
-                                                            {/*<SuggestItemAvatar avatar={<Avatar*/}
-                                                                {/*src={item.avatar ? item.avatar.url : undefined}*/}
-                                                                {/*base64={item.avatar ? item.avatar.base64 : undefined}/>}>*/}
-                                                                {/*<Link to={`/listamenn/${item._id}`}>*/}
-                                                                    {/*{item.name}*/}
-                                                                {/*</Link>*/}
-                                                            {/*</SuggestItemAvatar>*/}
-                                                        {/*),*/}
-                                                        {/*'collection': (*/}
-                                                            {/*<SuggestItemAvatar avatar={<Poster*/}
-                                                                {/*src={item.avatar ? item.avatar.url : undefined}*/}
-                                                                {/*base64={item.avatar ? item.avatar.base64 : undefined}/>}>*/}
-                                                                {/*<Link to={`/verk/${item._id}`}>*/}
-                                                                    {/*{item.name}*/}
-                                                                {/*</Link>*/}
-                                                            {/*</SuggestItemAvatar>*/}
-                                                        {/*),*/}
-                                                        {/*'item': (*/}
-                                                            {/*<SuggestItem>*/}
-                                                                {/*<Link to={`/stak/${item._id}`}>*/}
-                                                                    {/*{item.name}*/}
-                                                                {/*</Link>*/}
-                                                            {/*</SuggestItem>*/}
-                                                        {/*),*/}
-                                                        {/*'no-result': (*/}
-                                                            {/*<SuggestCreateWithState term={item.term} />*/}
-                                                        {/*),*/}
-                                                    {/*}[item.contentType.type]}*/}
-                                                {/*</OptionsItem>*/}
-                                            {/*))}*/}
-                                        {/*</OptionsWithKeyBinding>*/}
-                                    </div>
-                                </Column>
-                            </Row>
-                        </Grid>
-                    </div>
-                </header>
-                <main role="main">
-                    <section>
-                        {this.props.children}
-                    </section>
-                </main>
+                                    {/*)}*/}
+                                    {/*{!this.props.user.id && <span onClick={() => this.handleLogin}>Login</span>}*/}
+                                {/*</Column>*/}
+                                {/*<Column>*/}
+                                    {/*<div style={{display: 'flex', height: '100%', alignItems: 'center'}}>*/}
+                                        {/*/!*<OptionsWithKeyBinding*!/*/}
+                                            {/*/!*elastic={true}*!/*/}
+                                            {/*/!*onClear={this.props.onFullSearchClear}*!/*/}
+                                            {/*/!*onSelect={() => {}}*!/*/}
+                                            {/*/!*onChange={this.handleSearchOnChange}>*!/*/}
+                                            {/*/!*{this.props.searchResults.map(item => (*!/*/}
+                                                {/*/!*<OptionsItem key={`search-result-id-${item._id}`}>*!/*/}
+                                                    {/*/!*{{*!/*/}
+                                                        {/*/!*'artist': (*!/*/}
+                                                            {/*/!*<SuggestItemAvatar avatar={<Avatar*!/*/}
+                                                                {/*/!*src={item.avatar ? item.avatar.url : undefined}*!/*/}
+                                                                {/*/!*base64={item.avatar ? item.avatar.base64 : undefined}/>}>*!/*/}
+                                                                {/*/!*<Link to={`/listamenn/${item._id}`}>*!/*/}
+                                                                    {/*/!*{item.name}*!/*/}
+                                                                {/*/!*</Link>*!/*/}
+                                                            {/*/!*</SuggestItemAvatar>*!/*/}
+                                                        {/*/!*),*!/*/}
+                                                        {/*/!*'collection': (*!/*/}
+                                                            {/*/!*<SuggestItemAvatar avatar={<Poster*!/*/}
+                                                                {/*/!*src={item.avatar ? item.avatar.url : undefined}*!/*/}
+                                                                {/*/!*base64={item.avatar ? item.avatar.base64 : undefined}/>}>*!/*/}
+                                                                {/*/!*<Link to={`/verk/${item._id}`}>*!/*/}
+                                                                    {/*/!*{item.name}*!/*/}
+                                                                {/*/!*</Link>*!/*/}
+                                                            {/*/!*</SuggestItemAvatar>*!/*/}
+                                                        {/*/!*),*!/*/}
+                                                        {/*/!*'item': (*!/*/}
+                                                            {/*/!*<SuggestItem>*!/*/}
+                                                                {/*/!*<Link to={`/stak/${item._id}`}>*!/*/}
+                                                                    {/*/!*{item.name}*!/*/}
+                                                                {/*/!*</Link>*!/*/}
+                                                            {/*/!*</SuggestItem>*!/*/}
+                                                        {/*/!*),*!/*/}
+                                                        {/*/!*'no-result': (*!/*/}
+                                                            {/*/!*<SuggestCreateWithState term={item.term} />*!/*/}
+                                                        {/*/!*),*!/*/}
+                                                    {/*/!*}[item.contentType.type]}*!/*/}
+                                                {/*/!*</OptionsItem>*!/*/}
+                                            {/*/!*))}*!/*/}
+                                        {/*/!*</OptionsWithKeyBinding>*!/*/}
+                                    {/*</div>*/}
+                                {/*</Column>*/}
+                            {/*</Row>*/}
+                        {/*</Grid>*/}
+                    {/*</div>*/}
+                {/*</header>*/}
+                {/*<main role="main">*/}
+                    {/*<section>*/}
+                        {/*{this.props.children}*/}
+                    {/*</section>*/}
+                {/*</main>*/}
                 <footer></footer>
-            </div>
+            </>
         );
     }
 }

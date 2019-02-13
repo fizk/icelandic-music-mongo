@@ -4,7 +4,8 @@ type ID = string;
 type UUID = string;
 
 export type GraphQlContext = {
-    database: Db
+    database: Db,
+    search: any
 }
 
 /**

@@ -1,55 +1,43 @@
-@import "../../config";
 @import "../../functions";
+@import "../../config";
 
-.poster-image-container {
+.poster-image {
+    width: 60px;
+    padding-top: 60px;
     background-color: map_get($color, disabled);
     position: relative;
-    width: 60px;
-    height: 60px;
-    overflow: hidden;
 }
 
-.poster-image-container--sm {
+.poster-image--sm {
     width: 30px;
-    height: 30px;
+    padding-top: 30px;
 }
 
-.poster-image-container--md {
+.poster-image--md {
     width: 60px;
-    height: 60px;
+    padding-top: 60px;
 }
 
-.poster-image-container--lg {
+.poster-image--lg {
     width: 120px;
-    height: 120px;
+    padding-top: 120px;
 }
 
-.poster-image-preload {
+.poster-image__image {
     position: absolute;
-    z-index: 1;
+    display: block;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-
-    background-size: cover;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: opacity .6s;
 }
 
-.poster-image-loaded {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    background-size: cover;
-
+.poster-image__image--hidden {
     opacity: 0;
-
-    transition: opacity 1s ease;
 }
-
-.poster-image-fade-in {
+.poster-image__image--visible {
     opacity: 1;
 }
+

@@ -1,0 +1,65 @@
+{
+    "_id" : ObjectId("5c6336b38c6b7ce4ebb368e8"),
+    "__contentType" : "image/hero",
+    "width" : 0,
+    "height" : 0,
+    "url" : "https://ichef.bbci.co.uk/images/ic/960x540/p056fxzs.jpg",
+    "base64" : "",
+    "updateTime" : ISODate("2019-02-12T00:00:00.000Z"),
+    "createTime" : ISODate("2019-02-12T00:00:00.000Z"),
+    "__ref" : []
+}
+{
+    "_id" : ObjectId("5c6336e88c6b7ce4ebb36905"),
+    "__contentType" : "image/avatar",
+    "width" : 0,
+    "height" : 0,
+    "url" : "https://img.discogs.com/izOOUp-YnMh4pgn8hKFk_IcXH1s=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-82730-1319532331.jpeg.jpg",
+    "base64" : "",
+    "name" : "some name",
+    "updateTime" : ISODate("2019-02-12T00:00:00.000Z"),
+    "createTime" : ISODate("2019-02-12T00:00:00.000Z"),
+    "__ref" : []
+}
+{
+    "_id" : ObjectId("5c6339cc8c6b7ce4ebb36a22"),
+    "url" : "https://upload.wikimedia.org/wikipedia/en/thumb/c/c0/PleasePleaseMe_audio_cover.jpg/220px-PleasePleaseMe_audio_cover.jpg",
+    "__contentType" : "image/avatar",
+    "width" : 0,
+    "height" : 0,
+    "base64" : "",
+    "name" : "some name",
+    "updateTime" : ISODate("2019-02-12T00:00:00.000Z"),
+    "createTime" : ISODate("2019-02-12T00:00:00.000Z"),
+    "__ref" : []
+}
+﻿{
+    "_id" : ObjectId("5c633a318c6b7ce4ebb36a4e"),
+    "url" : "http://4.bp.blogspot.com/-CxfZzmhWUms/UUxZ15_-cKI/AAAAAAAAGCk/1azXkLc-jBQ/s1600/beatles-w-album-please-please-me-_thumb1.jpg",
+    "__contentType" : "image/avatar",
+    "width" : 0,
+    "height" : 0,
+    "base64" : "",
+    "name" : "some name",
+    "updateTime" : ISODate("2019-02-12T00:00:00.000Z"),
+    "createTime" : ISODate("2019-02-12T00:00:00.000Z"),
+    "__ref" : []
+}
+﻿{
+    "_id" : ObjectId("5c6346988c6b7ce4ebb36f01"),
+    "__contentType" : "image/hero",
+    "width" : 0,
+    "height" : 0,
+    "url" : "http://www.johnlennon.com/wp-content/uploads/2018/02/Walls_Bridges_1974_Gruen_JohnLennon-home-slider-min.jpg",
+    "base64" : "",
+    "name" : "some name"
+}
+﻿{
+    "_id" : ObjectId("5c6346e28c6b7ce4ebb36f23"),
+    "__contentType" : "image/avatar",
+    "width" : 0,
+    "height" : 0,
+    "url" : "https://www.thefamouspeople.com/profiles/images/john-lennon-7.jpg",
+    "base64" : "",
+    "name" : "some name"
+}

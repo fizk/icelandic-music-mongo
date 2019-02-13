@@ -8,6 +8,7 @@ import Artist from '../../pages/Artist';
 import {Chrome} from "../Chrome";
 import './_index.scss';
 
+
 const App: StatelessComponent<{}> = () => (
     <Chrome>
         <Route exact={true} path="/" component={Index} />

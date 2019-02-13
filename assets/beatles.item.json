@@ -1,0 +1,51 @@
+{
+    "_id" : ObjectId("5c58e82ce5e125876945def8"),
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : [
+        {
+            "__contentType" : "participant/instrument",
+            "roles" : [
+                "singing",
+                "guitar"
+            ],
+            "_id" : {
+                "namespace" : "artist",
+                "oid" : ObjectId("5c5253a2952c8733a920cbf9")
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "40f50b70-2917-11e9-8fde-d663bd873d93"
+        },
+        {
+            "__contentType" : "participant/author",
+            "roles" : [
+                "lyrics"
+            ],
+            "_id" : {
+                "namespace" : "artist",
+                "oid" : ObjectId("5c5253a2952c8733a920cbf9")
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "40f50b71-2917-11e9-8fde-d663bd873d93"
+        },
+        {
+            "__contentType" : "participant/recording",
+            "roles" : [
+                "engenering"
+            ],
+            "_id" : {
+                "namespace" : "artist",
+                "oid" : ObjectId("5c5253a2952c8733a920cbf9")
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "40f50b72-2917-11e9-8fde-d663bd873d93"
+        }
+    ],
+    "__contentType" : "item/song",
+    "name" : "I Saw Her Standing There",
+    "description" : "I Saw Her Standing There\" is a song by the English rock band the Beatles credited to Paul McCartney and John Lennon, but written primarily by McCartney.",
+    "duration" : 153,
+    "genres" : [
+        "Rock and roll"
+    ]
+}

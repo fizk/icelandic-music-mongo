@@ -8,7 +8,7 @@ type Props = {
 
 export default class PublicationTable extends React.Component<Props> {
     static defaultProps = {
-        publication: [],
+        publications: [],
     };
 
     render() {
@@ -26,9 +26,7 @@ export default class PublicationTable extends React.Component<Props> {
                     {this.props.publications.map((publication, i) => (
                         <tr key={`publication-record-${i}`}>
                             <td>
-                                {publication.publishers.map((publisher: any) => ( //@todo fix any
-                                    <Link key={`publisher-${publisher._id}`} to={`/utgefandi/${publisher._id}`}>{publisher.name}</Link>
-                                ))}
+                                <Link key={`publisher-${publication.publisher._id}`} to={`/utgefandi/${publication.publisher._id}`}>{publication.publisher.name}</Link>
                             </td>
                             <td>{publication.catalogNumber}</td>
                             <td>{publication.formats.join(', ')}</td>
