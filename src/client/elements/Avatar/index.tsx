@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {GraphQLTypes} from "../../../../@types";
-import classVariations from '../../helpers/classVariations';
+import classVariations from "../../helpers/classVariations";
 import './_index.scss';
 
 type Props = {
@@ -17,46 +17,34 @@ export default class extends React.Component<Props> {
         variations: [],
     };
 
-    ironImageHd: HTMLDivElement|undefined|null;
+    imageElement: HTMLImageElement | null | undefined;
 
-    componentWillReceiveProps(props: Props) {
-        // const hdLoaderImg = new Image();
-        // hdLoaderImg.src = props.src.url!;
-        // hdLoaderImg!.addEventListener('load', () => {
-        //     this.ironImageHd!.setAttribute(
-        //         'style',
-        //         `background-image: url('${props.src.url}')`
-        //     );
-        //     this.ironImageHd!.classList.add('avatar-image-fade-in');
-        // });
+    constructor(props: Props) {
+        super(props);
+        this.loadImage = this.loadImage.bind(this);
     }
 
-    componentDidMount() {
-        // const hdLoaderImg = new Image();
-        // hdLoaderImg.src = this.props.src.url!;
-        // hdLoaderImg.addEventListener('load', () => {
-        //     this.ironImageHd!.setAttribute(
-        //         'style',
-        //         `background-image: url('${this.props.src.url}')`
-        //     );
-        //     this.ironImageHd!.classList.add('avatar-image-fade-in');
-        // });
-    };
+    loadImage (event: any) {
+        event.target.classList.replace('avatar-image__image--hidden', 'avatar-image__image--visible')
+    }
+
+    componentWillReceiveProps(props: Props) {
+        if ((props.src.url !== this.props.src.url) && this.imageElement) {
+            this.imageElement.classList.replace('avatar-image__image--visible', 'avatar-image__image--hidden')
+        }
+    }
 
     render() {
         return (
-            <div className={classVariations('avatar-image-container', this.props.variations)}>
-                <div
-                    className="avatar-image-loaded"
-                    ref={imageLoadedElem => this.ironImageHd = imageLoadedElem}>
-                </div>
-                <div className="avatar-image-preload" />
-                {/*<div*/}
-                    {/*className="avatar-image-preload"*/}
-                    {/*style={{ backgroundImage: `url('${this.props.src.base64}')` }}>*/}
-                {/*</div>*/}
+            <div className={classVariations('avatar-image', this.props.variations)}>
+                {this.props.src.url && (
+                    <img ref={element => this.imageElement = element}
+                         onLoad={this.loadImage}
+                         className="avatar-image__image avatar-image__image--hidden"
+                         src={`/images/unsafe/120x120/${this.props.src.url}`}
+                    />
+                )}
             </div>
         )
     }
 }
-

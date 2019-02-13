@@ -1,61 +1,45 @@
-@import "../../config";
 @import "../../functions";
+@import "../../config";
 
-.avatar-image-container {
+.avatar-image {
     @include circle;
-
+    width: 60px;
+    padding-top: 60px;
     background-color: map_get($color, disabled);
     position: relative;
-    width: 60px;
-    height: 60px;
-    overflow: hidden;
 }
 
-.avatar-image-container--sm {
+.avatar-image--sm {
     width: 30px;
-    height: 30px;
+    padding-top: 30px;
 }
 
-.avatar-image-container--md {
+.avatar-image--md {
     width: 60px;
-    height: 60px;
+    padding-top: 60px;
 }
 
-.avatar-image-container--lg {
+.avatar-image--lg {
     width: 120px;
-    height: 120px;
+    padding-top: 120px;
 }
 
-.avatar-image-preload {
+.avatar-image__image {
     @include circle;
-
     position: absolute;
-    z-index: 1;
+    display: block;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-
-    background-size: cover;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: opacity .6s;
 }
 
-.avatar-image-loaded {
-    @include circle;
-
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    background-size: cover;
-
+.avatar-image__image--hidden {
     opacity: 0;
-
-    transition: opacity 1s ease;
 }
-
-.avatar-image-fade-in {
+.avatar-image__image--visible {
     opacity: 1;
 }
+

@@ -3,7 +3,7 @@ import GraphQLDateTime from "./GraphQLDateTime";
 import Content from "./Content";
 
 export default new GraphQLInterfaceType({
-    name: 'Entity',
+    name: 'Unit',
     fields: {
         _id: {
             type: new GraphQLNonNull(GraphQLID)

@@ -1,5 +1,6 @@
 import {GraphQLString, GraphQLList, GraphQLInt, GraphQLNonNull} from "graphql";
 import Collection, {CollectionType} from '../types/Collection';
+import {GraphQlContext} from '../../../@types'
 
 export default {
     type: new GraphQLList(Collection),
@@ -17,7 +18,7 @@ export default {
             type: CollectionType
         }
     },
-    resolve (root: any, {term, type, limit = 10}: any, {database, search}: any) {
+    resolve (root: any, {term, type, limit = 10}: any, {database, search}: GraphQlContext) {
         const condition: any = {must: []};
 
         condition.must.push({
@@ -44,7 +45,7 @@ export default {
                     _id: item._id,
                     __ref: item._source.__ref.map((reference: any) => ({
                         ...reference,
-                        _id: database.doc(reference._id)
+                        _id: database.collection('collection').findOne({_id: reference._id})
                     }))
                 }
             });

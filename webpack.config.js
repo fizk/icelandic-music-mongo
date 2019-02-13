@@ -17,7 +17,7 @@ module.exports = {
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".json"]
+        extensions: [".ts", ".tsx", ".js", ".json", '.mjs']
     },
     plugins: [
         new MiniCssExtractPlugin({
@@ -25,7 +25,6 @@ module.exports = {
             // both options are optional
             filename: '[name].css'
         }),
-        new webpack.HotModuleReplacementPlugin(),
     ],
     module: {
         rules: [

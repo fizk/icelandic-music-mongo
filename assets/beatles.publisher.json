@@ -1,0 +1,9 @@
+{
+    "_id" : ObjectId("5c624b058c6b7ce4ebb36066"),
+    "__contentType" : "publisher/publisher",
+    "name" : "The Publisher",
+    "description" : "This amazing publisher",
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : []
+}

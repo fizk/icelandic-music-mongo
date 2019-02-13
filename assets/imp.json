@@ -1,0 +1,36 @@
+{
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : [
+        {
+            "_id" : {
+                "namespace" : "media",
+                "oid" : ObjectId("5c5b5113d47a9b3d1eac9678")
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "9b2d0ec6-259f-11e9-ab14-d663bd873d93",
+            "__contentType" : "image/hero"
+        },
+        {
+            "_id" : {
+                "namespace" : "media",
+                "oid" : ObjectId("5c5b70c4d47a9b3d1eaca1ca")
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "8b2d0ec6-259f-11e9-ab14-d663bd873d93",
+            "__contentType" : "image/avatar"
+        }
+    ],
+    "__contentType" : "artist/person",
+    "name" : "Now with dates",
+    "description" : "Lennon description",
+    "genres" : [
+        "pop",
+        "rock"
+    ],
+    "aka" : [
+        "John"
+    ],
+    "from" : ISODate("2013-11-20T23:32:18.000Z"),
+    "to" : ISODate("2013-11-20T23:32:18.000Z")
+}

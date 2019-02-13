@@ -5,4 +5,5 @@
     background-color: map_get($color, white);
     padding: map_get($space, md);
     @include shadow;
+    @include rounded-corners;
 }

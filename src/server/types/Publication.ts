@@ -3,8 +3,9 @@ import GraphQLDate from './GraphQLDate';
 import Publisher from './Publisher';
 import {Unit as DBUnit} from "../../../@types/database";
 import {transformSnapshot} from "../utils/transform";
+import {GraphQlContext} from '../../../@types'
 
-export default new GraphQLObjectType({
+export default new GraphQLObjectType<any, GraphQlContext>({
     name: 'Publication',
     fields: {
         catalogNumber: {
@@ -19,18 +20,11 @@ export default new GraphQLObjectType({
             name: 'date',
             type: GraphQLDate,
         },
-        publishers: {
-            name: 'publishers',
-            type: new GraphQLList(Publisher),
-            resolve(root) {
-                return [];
-                // const referenceUnits: Promise<DocumentSnapshot>[] = root.__ref
-                //     .filter((item: D.ReferenceUnit) => item.__contentType === 'publisher/publication')
-                //     .map(item => item._id.get());
-                //
-                // return Promise.all(referenceUnits).then((items: DocumentSnapshot[]) => {
-                //     return items.map(transformSnapshot)
-                // });
+        publisher: {
+            name: 'publisher',
+            type: Publisher,
+            resolve(root, _, {database}) {
+                return database.collection('publisher').findOne({_id: root._id.oid})
             }
         },
     }

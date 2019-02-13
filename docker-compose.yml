@@ -43,6 +43,7 @@ services:
       - 27017:27017
     volumes:
       - ./data/mongo:/data/db
+      - ./assets:/home
 
   image-server:
     container_name: icelandic-music-images

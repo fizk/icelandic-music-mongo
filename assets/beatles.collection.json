@@ -1,0 +1,71 @@
+{
+    "_id" : ObjectId("5c5253a1234c8733a920cbf9"),
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : [
+        {
+            "_id" : {
+                "oid" : ObjectId("5c58e82ce5e125876945def8"),
+                "namespace" : "item"
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "8be73896-28e6-11e9-b210-d663bd873d93",
+            "__contentType" : "item/song"
+        },
+        {
+            "_id" : {
+                "oid" : ObjectId("5c6339cc8c6b7ce4ebb36a22"),
+                "namespace" : "media"
+            },
+            "__contentType" : "image/avatar",
+            "__uuid": "536d1132-2c49-11e9-b210-d663bd873d93"
+        },
+        {
+            "_id" : {
+                "oid" : ObjectId("5c633a318c6b7ce4ebb36a4e"),
+                "namespace" : "media"
+            },
+            "__contentType" : "image/hero",
+            "__uuid": "536d1272-2c49-11e9-b210-d663bd873d93"
+        },
+        {
+            "_id" : {
+                "oid" : ObjectId("5c624b058c6b7ce4ebb36066"),
+                "namespace" : "publisher"
+            },
+            "__created" : ISODate("2013-11-20T23:32:18.000Z"),
+            "__uuid" : "12373896-28e6-11e9-b210-d663bd873d93",
+            "__contentType" : "publisher/publication",
+            "catalogNumber": "TB-001",
+            "formats": ["LP"],
+            "date": ISODate("2013-11-20T23:32:18.000Z")
+        }
+    ],
+    "__contentType" : "collection/album",
+    "name" : "Please Please Me",
+    "releaseDates" : ISODate("1963-09-04T23:32:18.000Z"),
+    "description" : "Please Please Me is the debut studio album by the English rock band the Beatles.",
+    "genres" : [
+        "Merseybeat",
+        "rock and roll",
+        "rock",
+        "pop"
+    ],
+    "aka" : []
+}
+{
+    "_id" : ObjectId("6c5253a1234c8733a921cbf9"),
+    "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "createTime" : ISODate("2013-11-20T23:32:18.000Z"),
+    "__ref" : [],
+    "__contentType" : "collection/album",
+    "name" : "With the Beatles",
+    "releaseDates" : ISODate("1963-09-04T23:32:18.000Z"),
+    "description" : "With the Beatles is the second studio album by the English rock band the Beatles.",
+    "genres" : [
+        "rock and roll",
+        "rock",
+        "pop"
+    ],
+    "aka" : []
+}

@@ -10,11 +10,14 @@
 }
 
 .artist-header__headline {
+    max-width: 1024px;
     display: flex;
     margin-top: -60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: map_get($space, md);
     position: relative;
     padding: 0 map_get($space, md);
-    margin-bottom: map_get($space, md);
 }
 
 .artist-header__avatar {

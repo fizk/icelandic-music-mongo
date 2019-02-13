@@ -1,11 +1,10 @@
 import {GraphQLObjectType, GraphQLString, GraphQLID, GraphQLNonNull} from "graphql";
+import {Image as DBImage, PictureReference as DBPictureReference} from "../../../@types/database";
 import Image from './Image';
-import {Image as DBImage, ReferenceUnit as DBReferenceUnit, Unit as DBUnit} from "../../../@types/database";
 import UnitInterface from "./Unit";
 import Content from "./Content";
 import {splitContentType} from "../utils/split";
 import GraphQLDateTime from "./GraphQLDateTime";
-import {transformSnapshot} from "../utils/transform";
 
 export default new GraphQLObjectType({
     name: 'Publisher',
@@ -32,7 +31,7 @@ export default new GraphQLObjectType({
         contentType: {
             name: 'contentType',
             type: Content,
-            // resolve: (root) => splitContentType(root.__contentType)
+            resolve: (root) => splitContentType(root.__contentType)
         },
         avatar: {
             name: 'avatar',
@@ -40,10 +39,10 @@ export default new GraphQLObjectType({
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
                     .filter((item: any) => item.__contentType === 'image/avatar')
-                    .reduce((a: any, b: DBReferenceUnit|undefined) => b, undefined);
+                    .reduce((a: any, b: DBPictureReference|undefined) => b, undefined);
 
                 return imagesReference
-                    ? database.collection(imagesReference._id.namespace)
+                    ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
                         .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
                     : null;
@@ -55,10 +54,10 @@ export default new GraphQLObjectType({
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
                     .filter((item: any) => item.__contentType === 'image/hero')
-                    .reduce((a: any, b: DBReferenceUnit|undefined) => b, undefined);
+                    .reduce((a: any, b: DBPictureReference|undefined) => b, undefined);
 
                 return imagesReference
-                    ? database.collection(imagesReference._id.namespace)
+                    ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
                         .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
                     : null;

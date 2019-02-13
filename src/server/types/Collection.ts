@@ -1,5 +1,12 @@
 import {GraphQLID, GraphQLNonNull, GraphQLString, GraphQLObjectType, GraphQLList, GraphQLInputObjectType, GraphQLInt, GraphQLEnumType} from 'graphql';
-import {Collection as DBCollection, Unit as DBUnit, ReferenceUnit as DBReferenceUnit, Image as DBImage} from "../../../@types/database";
+import {
+    Collection as DBCollection,
+    Unit as DBUnit,
+    ReferenceUnit as DBReferenceUnit,
+    ArtistReference as DBArtistReference,
+    Image as DBImage,
+    PictureReference as DBPictureReference
+} from "../../../@types/database";
 import GraphQLDate from './GraphQLDate';
 import Item from './Item';
 import Image from './Image';
@@ -38,7 +45,7 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
         genres: {
             name: 'genres',
             type: new GraphQLList(Genre),
-            resolve(root: DBCollection) {
+            resolve(root) {
                 return (root.genres || []).map(splitGenre)
             }
         },
@@ -77,12 +84,14 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
                     .filter((item: any) => item.__contentType === 'image/avatar')
-                    .reduce((a: any, b: DBReferenceUnit|undefined) => b, undefined);
+                    .reduce((a: any, b: DBArtistReference|undefined) => b, undefined);
 
                 return imagesReference
-                    ? database.collection(imagesReference._id.namespace)
+                    ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
-                        .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
+                        .then((data: DBImage) => {
+                            return {...data, dimensions: {height: data.height, width: data.width}}
+                        })
                     : null;
             }
         },
@@ -92,12 +101,14 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
                     .filter((item: any) => item.__contentType === 'image/hero')
-                    .reduce((a: any, b: DBReferenceUnit|undefined) => b, undefined);
+                    .reduce((a: any, b: DBArtistReference|undefined) => b, undefined);
 
                 return imagesReference
-                    ? database.collection(imagesReference._id.namespace)
+                    ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
-                        .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
+                        .then((data: DBImage) => {
+                            return {...data, dimensions: {height: data.height, width: data.width}}
+                        })
                     : null;
             }
         },
@@ -105,7 +116,7 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
             name: 'songs',
             type: new GraphQLList(new GraphQLObjectType({
                 name: 'song',
-                fields: {
+                fields: () => ({
                     position: {
                         name: 'position',
                         type: GraphQLInt,
@@ -115,22 +126,17 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
                         type: Item,
                         resolve: (root: DBReferenceUnit, _, {database}) => database.collection('item').findOne({_id: root._id.oid})
                     }
-                }
+                })
             })),
             resolve (root) {
                 return root.__ref.filter(item => item.__contentType === 'item/song');
             }
         },
         publications: {
-            name: 'publication',
+            name: 'publications',
             type: new GraphQLList(Publication),
             resolve(root) {
-                return [];
-                // const referenceUnits: Promise<DocumentSnapshot>[] = root.__ref
-                //     .filter((item: D.ReferenceUnit) => item.__contentType === 'publisher/publication')
-                //     .map(item => item._id.get());
-                //
-                // return Promise.all(referenceUnits).then((items: DocumentSnapshot[]) => items.map(transformSnapshot));
+                return root.__ref.filter(item => item.__contentType === 'publisher/publication');
             }
         },
         performers: {
@@ -156,28 +162,23 @@ export default Collection;
 
 export const CollectionInput = new GraphQLInputObjectType({
     name: 'CollectionInput',
-    fields: () => ({
+    fields: {
         name: {
-            name: 'name',
             type: new GraphQLNonNull(GraphQLString)
         },
         aka: {
-            name: 'aka',
             type: new GraphQLList(GraphQLString),
         },
         description: {
-            name: 'description',
             type: GraphQLString,
         },
         releaseDates: {
-            name: 'releaseDates',
             type: GraphQLDate,
         },
         genres: {
-            name: 'genre',
             type: new GraphQLList(GenreInput),
         },
-    }),
+    },
 });
 
 export const CollectionType = new GraphQLEnumType({

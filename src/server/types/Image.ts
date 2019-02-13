@@ -6,7 +6,7 @@ export default new GraphQLObjectType({
     description: 'Image with base64 pre-loader string',
     fields: () => ({
         _id: {
-            type: new GraphQLNonNull(GraphQLID)
+            type: new GraphQLNonNull(GraphQLID),
         },
         name: {
             type: GraphQLString
@@ -19,6 +19,6 @@ export default new GraphQLObjectType({
         },
         dimensions: {
             type: Dimensions
-        }
+        },
     })
 });

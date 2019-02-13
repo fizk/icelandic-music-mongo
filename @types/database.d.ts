@@ -8,7 +8,7 @@ export interface ReferenceUnit {
         namespace: string;
         oid: ObjectID;
         db?: string;
-    }
+    } | null
     __created?: Date
     __uuid: UUID
     __contentType: string
@@ -65,11 +65,19 @@ export interface Artist extends Unit {
 //
 // ////////////////////////////////////////////////////
 
-export interface CollectionReferenceSong extends ReferenceUnit {
-    __contentType: 'item/song'
+export interface CollectionReferencePublication extends ReferenceUnit {
+    __contentType: 'publisher/publication'
+    catalogNumber: string
+    formats: string[]
+    date: string
 }
 
-type CollectionReference = PictureReference | CollectionReferenceSong
+export interface CollectionReferenceSong extends ReferenceUnit {
+    __contentType: 'item/song'
+    position: number
+}
+
+type CollectionReference = PictureReference | CollectionReferenceSong | CollectionReferencePublication
 
 export interface Collection extends Unit {
     __contentType: 'collection/album' | 'collection/album+single' | 'collection/album+ep' | 'collection/album+compilation'
@@ -120,4 +128,16 @@ export interface Image extends Unit {
     url?: string
     base64?: string
     name?: string
+}
+
+
+// ////////////////////////////////////////////////////
+//
+// PUBLISHER
+//
+// ////////////////////////////////////////////////////
+export interface Publisher extends Unit {
+    __contentType: 'publisher/publisher'
+    name: string
+    description: string
 }

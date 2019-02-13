@@ -18,7 +18,7 @@ export const collectionQuery = gql`
                 catalogNumber
                 date
                 formats
-                publishers {
+                publisher {
                     _id
                     name
                 }
