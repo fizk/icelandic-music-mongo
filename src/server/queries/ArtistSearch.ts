@@ -1,5 +1,7 @@
 import {GraphQLString, GraphQLList, GraphQLInt, GraphQLNonNull} from "graphql";
-import Artist, {ArtistType} from '../types/Artist';
+import {ArtistType, Artist} from '../types/Artist';
+import {GraphQlContext} from '../../../@types'
+import {ObjectID} from "bson";
 
 export default {
     type: new GraphQLList(Artist),
@@ -16,33 +18,24 @@ export default {
             type: GraphQLInt
         },
     },
-    resolve (root: any, {term, limit = 10}: any, {database, search}: any) {
+    resolve (root: any, {term, limit = 10}: any, {database, search}: GraphQlContext) {
         return search.search({
-            index: 'it_artists',
+            index: 'artist',
             body: {
                 query: {
                     bool: {
                         must: [
                             {
                                 fuzzy: {
-                                    "name": {value: term, boost: 1}
+                                    name: {value: term, boost: 1}
                                 }
                             }
                         ]
                     }
                 }
             },
-        }).then((data: any) => {
-            return data.hits.hits.map((item: any) => {
-                return {
-                    ...item._source,
-                    _id: item._id,
-                    __ref: item._source.__ref.map((reference: any) => ({
-                        ...reference,
-                        _id: database.doc(reference._id)
-                    }))
-                }
-            });
-        });
+        }).then((data: any) => (
+            data.hits.hits.map((item: any) => ({...item._source, _id: new ObjectID(item._id)}))
+        ));
     }
 };

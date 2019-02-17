@@ -1,10 +1,10 @@
 import {GraphQLUnionType} from "graphql";
-import Group from "./Group";
-import Person from "./Person";
-import Collection from "./Collection";
-import Item from "./Item";
+import {Group} from "./Group";
+import {Person} from "./Person";
+import {Collection} from "./Collection";
+import {Item} from "./Item";
 
-export default new GraphQLUnionType({
+export const SearchResult = new GraphQLUnionType({
     name: 'SearchResult',
     types: [Group, Person, Collection, Item],
     resolveType: data => {

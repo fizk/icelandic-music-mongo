@@ -1,30 +1,22 @@
 import {GraphQLID, GraphQLNonNull, GraphQLString, GraphQLObjectType, GraphQLList, GraphQLInputObjectType, GraphQLInt, GraphQLEnumType} from 'graphql';
-import {
-    Collection as DBCollection,
-    Unit as DBUnit,
-    ReferenceUnit as DBReferenceUnit,
-    ArtistReference as DBArtistReference,
-    Image as DBImage,
-    PictureReference as DBPictureReference
-} from "../../../@types/database";
-import GraphQLDate from './GraphQLDate';
-import Item from './Item';
-import Image from './Image';
-import Publication from './Publication';
-import Content from './Content'
-import Artist from './Artist';
-import Genre, {GenreInput} from "./Genre";
-import {splitContentType, splitGenre} from '../utils/split'
-import UnitInterface from "./Unit";
-import GraphQLDateTime from "./GraphQLDateTime";
-import GraphQLUUID from "./GraphQLUUID";
+import {GraphQLDateTime, GraphQLDate} from "graphql-iso-date";
 import {GraphQlContext} from "../../../@types";
-import {ObjectID} from "mongodb";
+import {DataSource} from "../../../@types/database";
+import {Unit} from "./Unit";
+import {splitContentType, splitGenre} from "../utils/split";
+import {Genre, GenreInput} from "./Genre";
+import {Artist} from "./Artist";
+import {ObjectID} from "bson";
+import {Image} from "./Image";
+import {ContentType} from "./ContentType";
+import Publication from "./Publication";
+import {GraphQLUUID} from "./GraphQLUUID";
+import {Item} from "./Item";
 
-const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQlContext>({
+export const Collection: GraphQLObjectType = new GraphQLObjectType<DataSource.Collection, GraphQlContext>({
     name: 'Collection',
     description: 'A single collection',
-    interfaces: [UnitInterface],
+    interfaces: [Unit],
     fields: () => ({
         _id: {
             name: '_id',
@@ -63,8 +55,8 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
         },
         contentType: {
             name: 'contentType',
-            type: Content,
-            resolve: (root: DBUnit) => splitContentType(root.__contentType)
+            type: ContentType,
+            resolve: (root) => splitContentType(root.__contentType)
         },
         artists: {
             name: 'artists',
@@ -83,15 +75,12 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType === 'image/avatar')
-                    .reduce((a: any, b: DBArtistReference|undefined) => b, undefined);
+                    .filter((item: any) => item.__contentType ===  "image/avatar")
+                    .reduce((a: any, b: any) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
-                        .then((data: DBImage) => {
-                            return {...data, dimensions: {height: data.height, width: data.width}}
-                        })
                     : null;
             }
         },
@@ -100,15 +89,12 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType === 'image/hero')
-                    .reduce((a: any, b: DBArtistReference|undefined) => b, undefined);
+                    .filter((item: any) => item.__contentType ===  "image/hero")
+                    .reduce((a: any, b: any) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
-                        .then((data: DBImage) => {
-                            return {...data, dimensions: {height: data.height, width: data.width}}
-                        })
                     : null;
             }
         },
@@ -124,7 +110,7 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
                     song: {
                         name: 'song',
                         type: Item,
-                        resolve: (root: DBReferenceUnit, _, {database}) => database.collection('item').findOne({_id: root._id.oid})
+                        resolve: (root, _, {database}) => database.collection('item').findOne({_id: root._id.oid})
                     }
                 })
             })),
@@ -158,8 +144,6 @@ const Collection: GraphQLObjectType = new GraphQLObjectType<DBCollection, GraphQ
     })
 });
 
-export default Collection;
-
 export const CollectionInput = new GraphQLInputObjectType({
     name: 'CollectionInput',
     fields: {
@@ -191,17 +175,21 @@ export const CollectionType = new GraphQLEnumType({
     }
 });
 
-export const CollectionConnection: GraphQLObjectType = new GraphQLObjectType<DBReferenceUnit, GraphQlContext>({
-    name: 'CollectionConnection',
+export const CollectionAssociation = new GraphQLObjectType<any, GraphQlContext>({
+    name: 'CollectionAssociation',
     fields: () => ({
         collection: {
+            name: 'collection',
             type: Collection,
-            resolve: (root, _, {database}) => database.collection('collection').findOne({_id: root._id.oid})
+            resolve: ({collection}) => collection
         },
         uuid: {
             type: new GraphQLNonNull(GraphQLUUID),
-            resolve: ({__uuid}) => __uuid
+            resolve: ({collection, itemId}) => {
+                return collection.__ref.find((item: any) => {
+                    return item._id.oid.equals(itemId) && item.__contentType === 'item/song';
+                }).__uuid;
+            }
         }
     })
 });
-

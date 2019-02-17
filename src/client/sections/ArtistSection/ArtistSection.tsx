@@ -141,13 +141,13 @@ export default class ArtistSection extends React.Component<Props> {
                                         {({
                                             'Person': (
                                                 <Fragment>
-                                                    {(this.props.artist.association || []).map(artist => (
-                                                        <ArtistListItem key={`artist-${artist.group._id}`} artist={artist.group}>
-                                                            {artist.periods.map((period, i) => (
-                                                                <PeriodYear key={`${artist.group._id}-${period.from}-${i}`} from={period.from} to={period.to} />
-                                                            ))}
-                                                        </ArtistListItem>
-                                                    ))}
+                                                    {/*{(this.props.artist.association || []).map(artist => (*/}
+                                                        {/*<ArtistListItem key={`artist-${artist.group._id}`} artist={artist.group}>*/}
+                                                            {/*{artist.period.map((period, i) => (*/}
+                                                                {/*<PeriodYear key={`${artist.group._id}-${period.from}-${i}`} from={period.from} to={period.to} />*/}
+                                                            {/*))}*/}
+                                                        {/*</ArtistListItem>*/}
+                                                    {/*))}*/}
                                                 </Fragment>
                                             ),
                                             'Group': (
@@ -155,7 +155,7 @@ export default class ArtistSection extends React.Component<Props> {
                                                     {/*<ArtistSearch type="person" onSelect={this.props.connectMember} />*/}
                                                     {(this.props.artist.members || []).map(artist => (
                                                         <ArtistListItem key={`artist-${artist.artist._id}`} artist={artist.artist}>
-                                                            {artist.periods.map((period, i) => (
+                                                            {(artist.periods || []).map((period, i) => (
                                                                 <PeriodYear key={`${artist.artist._id}-${period.from}-${i}`} from={period.from} to={period.to} />
                                                             ))}
                                                         </ArtistListItem>
@@ -172,7 +172,10 @@ export default class ArtistSection extends React.Component<Props> {
                                     <div style={{width: '100%'}}>
                                         <div style={{float: 'right', width: '50%', maxWidth: 200, backgroundColor: 'white', padding: 16, marginLeft: 16, marginBottom: 16}}>
                                             <ListGenres genres={this.props.artist.genres}/>
-                                            <ListPeriods periods={this.props.artist.periods}/>
+                                            {({
+                                                'Person': (<div>period</div>),
+                                                'Group': (<ListPeriods periods={this.props.artist.periods || undefined}/>),
+                                            } as any)[this.props.artist.__typename]}
                                         </div>
                                         <ReactMarkdown className="mark-down-container" source={this.props.artist.description || ''} />
                                     </div>

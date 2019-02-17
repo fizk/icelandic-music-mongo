@@ -1,11 +1,10 @@
 import {GraphQLObjectType, GraphQLString, GraphQLInputObjectType, GraphQLList} from "graphql";
-import GraphQLDate from './GraphQLDate';
-import Publisher from './Publisher';
-import {Unit as DBUnit} from "../../../@types/database";
-import {transformSnapshot} from "../utils/transform";
-import {GraphQlContext} from '../../../@types'
+import {GraphQlContext} from "../../../@types";
+import {DataSource} from "../../../@types/database";
+import {GraphQLDate} from "graphql-iso-date";
+import {Publisher} from "./Publisher";
 
-export default new GraphQLObjectType<any, GraphQlContext>({
+export default new GraphQLObjectType<DataSource.CollectionReferencePublication, GraphQlContext>({
     name: 'Publication',
     fields: {
         catalogNumber: {
@@ -30,7 +29,7 @@ export default new GraphQLObjectType<any, GraphQlContext>({
     }
 });
 
-export const ContentTypeInput = new GraphQLInputObjectType({
+export const PublicationInput = new GraphQLInputObjectType({
     name: 'PublicationInput',
     description: 'ContentTypeInput',
     fields: {

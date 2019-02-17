@@ -1,5 +1,5 @@
-import {GraphQLNonNull, GraphQLString} from "graphql";
-import Artist from '../types/Artist';
+import {GraphQLID, GraphQLNonNull} from "graphql";
+import {Artist} from '../types/Artist';
 import {ObjectID,} from 'mongodb'
 import {GraphQlContext} from '../../../@types'
 
@@ -12,7 +12,7 @@ export default {
     args: {
         id: {
             name: 'id',
-            type: new GraphQLNonNull(GraphQLString)
+            type: new GraphQLNonNull(GraphQLID)
         }
     },
     resolve (root: root, {id}: params, {database}: context) {

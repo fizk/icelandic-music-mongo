@@ -9,120 +9,94 @@ export const artistQuery = gql`
         name
         releaseDates
         contentType {type subtype attribute}
-        avatar {_id base64 url}
+        avatar {... image}
     }
-    
+
+    fragment collectionConnection on CollectionConnection {
+        collection {...collection}
+        uuid
+    }
+
     fragment image on Image {
         _id
         url
         base64
     }
-    
-    query ($id: String!) {
+
+    fragment period on Period {
+        from
+        to
+    }
+
+    fragment person on Person {
+        aka
+        genres {type style}
+        period {... period}
+        avatar {...image}
+        hero {...image}
+        albums {... collectionConnection}
+        compilations {... collectionConnection}
+        eps {... collectionConnection}
+        singles {... collectionConnection}
+        association {
+            uuid
+            periods {... period}
+            group{
+                _id
+                name
+                avatar {...image}
+            }
+            periods {... period}
+        }
+    }
+
+    fragment group on Group {
+        aka
+        genres {type style}
+        periods {... period}
+        avatar {...image}
+        hero {...image}
+        albums {...collectionConnection}
+        compilations {...collectionConnection}
+        eps {...collectionConnection}
+        singles {...collectionConnection}
+        members {
+            uuid
+            periods {... period}
+            artist{
+                _id
+                name
+                avatar {...image}
+            }
+            periods {... period}
+        }
+    }
+
+    fragment unit on Unit {
+        _id
+        name
+        description
+        contentType {type subtype attribute}
+    }
+
+    query ($id: ID!) {
         Artist(id: $id) {
             __typename
+            ... on Unit {
+                ... unit
+            }
             ... on Group {
-                _id
-                name
-                aka
-                description
-                genres {type style}
-                periods {from to}
-                contentType {type subtype attribute}
-                avatar {...image}
-                hero {base64 url}
-                albums {
-                    uuid
-                    collection {
-                        ...collection
-                    }
-                }
-                compilations {
-                    uuid
-                    collection {
-                        ...collection
-                    }
-                }
-                eps {
-                    uuid
-                    collection {
-                        ...collection
-                    }
-                }
-                singles {
-                    uuid
-                    collection {
-                        ...collection
-                    }
-                }
-                members {
-                    uuid
-                    periods {from to}
-                    artist{
-                        _id
-                        name
-                        avatar {...image}
-                    }
-                    periods {
-                        from
-                        to
-                    }
-                }
+                ... group
             }
             ... on Person {
-                _id
-                name
-                aka
-                description
-                genres {type style}
-                periods {from to}
-                contentType {type subtype attribute}
-                avatar {...image}
-                hero {...image}
-                albums {
-                    uuid
-                    collection {
-                        ...collection
-                    }
-                }
-                compilations {
-                    uuid
-                    collection {
-                        ...collection
-                    }
-                }
-                eps {
-                    uuid
-                    collection {
-                        ...collection
-                    }
-                }
-                singles {
-                    uuid
-                    collection {
-                        ...collection
-                    }
-                }
-                association {
-                    uuid
-                    periods {from to}
-                    group{
-                        _id
-                        name
-                        avatar {...image}
-                    }
-                    periods {
-                        from
-                        to
-                    }
-                }
+                ... person
             }
         }
     }
 `;
 
 const artistAddCollection = gql`
-    fragment collection on Collection {
+    fragment album on Collection {
         _id
         name
         releaseDates
@@ -134,16 +108,36 @@ const artistAddCollection = gql`
         ArtistAddCollection (artist: $artist collection: $collection collectionType: $collectionType) {
             __typename
             ... on Group {
-                albums {...collection}
-                eps {...collection}
-                singles {...collection}
-                compilations {...collection}
+                albums {
+                    uuid 
+                    collection {... album}
+                }
+                eps {
+                    uuid 
+                    collection {... album}
+                }
+                singles {
+                    uuid 
+                    collection {... album}
+                }
+                compilations {
+                    uuid 
+                    collection {... album}
+                }
             }
             ... on Person {
-                albums {...collection}
-                eps {...collection}
-                singles {...collection}
-                compilations {...collection}
+                albums {
+                    uuid collection {... album}
+                }
+                eps {
+                    uuid collection {... album}
+                }
+                singles {
+                    uuid collection {... album}
+                }
+                compilations {
+                    uuid collection {... album}
+                }
             }
         }
     }`;
@@ -220,16 +214,67 @@ export default compose(
                         collection: vars._id,
                         collectionType: vars.contentType.attribute ? vars.contentType.attribute : 'album'
                     },
+                    // optimisticResponse: {
+                    //     __typename: "Mutation",
+                    //     ArtistAddCollection: {
+                    //         __typename: "Group",
+                    //         _id: null,
+                    //         albums: [{
+                    //             uuid: 'null',
+                    //             collection: {
+                    //                 __typename: "Collection",
+                    //                 _id: 'null',
+                    //                 name: vars.name,
+                    //                 releaseDates: null,
+                    //                 contentType: {...vars.contentType, __typename: "ContentType",},
+                    //                 avatar: {
+                    //                     __typename: "Image",
+                    //                     _id: 'null',
+                    //                     base64: '',
+                    //                     url: 'undefined'
+                    //                 }
+                    //             },
+                    //             __typename: "CollectionConnection",
+                    //         }],
+                    //         eps: [],
+                    //         singles: [],
+                    //         compilations: [],
+                    //
+                    //     },
+                    // },
                     update: (store: any, {data: {ArtistAddCollection}}: any) => { //@todo fix any
-                        const data = store.readQuery({query: artistQuery, variables: {id: ownProps.id}});
+                        // if (ArtistAddCollection._id === null) {
+                        //     const data = store.readQuery({query: artistQuery, variables: {id: ownProps.id}});
+                        //
+                        //     const contentType = vars.contentType.attribute ? vars.contentType.attribute : 'album';
+                        //
+                        //     switch (contentType) {
+                        //         case 'album':
+                        //             data.Artist.albums.push(ArtistAddCollection.albums[0]);
+                        //             break;
+                        //         case 'single':
+                        //             data.Artist.singles.push(ArtistAddCollection.albums[0]);
+                        //             break;
+                        //         case 'ep':
+                        //             data.Artist.eps.push(ArtistAddCollection.albums[0]);
+                        //             break;
+                        //         case 'compilation':
+                        //             data.Artist.compilations.push(ArtistAddCollection.albums[0]);
+                        //             break;
+                        //     }
+                        //
+                        //     store.writeQuery({ query: artistQuery, data, });
+                        // } else {
+                            const data = store.readQuery({query: artistQuery, variables: {id: ownProps.id}});
 
-                        data.Artist.albums = ArtistAddCollection.albums;
-                        data.Artist.singles = ArtistAddCollection.singles;
-                        data.Artist.eps = ArtistAddCollection.eps;
-                        data.Artist.compilations = ArtistAddCollection.compilations;
+                            data.Artist.albums = ArtistAddCollection.albums;
+                            data.Artist.singles = ArtistAddCollection.singles;
+                            data.Artist.eps = ArtistAddCollection.eps;
+                            data.Artist.compilations = ArtistAddCollection.compilations;
 
-                        store.writeQuery({ query: artistQuery, data, });
-                    },
+                            store.writeQuery({ query: artistQuery, data, });
+                        // }
+                    }
                 })
             },
         }),

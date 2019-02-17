@@ -1,20 +1,14 @@
-import {
-    GraphQLNonNull,
-    GraphQLString,
-    GraphQLList,
-    GraphQLInputObjectType,
-    GraphQLUnionType,
-    GraphQLEnumType
-} from "graphql";
-import {PeriodTypeInput} from './Period';
-import Group from "./Group";
-import Person from "./Person";
+import {GraphQLInputObjectType, GraphQLUnionType, GraphQLNonNull, GraphQLString, GraphQLList, GraphQLEnumType} from "graphql";
+import {Group} from './Group';
+import {Person} from './Person';
+import {PeriodTypeInput} from "./Period";
 
-export default new GraphQLUnionType({
+export const Artist = new GraphQLUnionType({
     name: 'Artist',
     types: [Person, Group],
     resolveType: data => data.__contentType === 'artist/person' ? Person : Group,
 });
+
 
 export const ArtistInput = new GraphQLInputObjectType({
     name: 'ArtistInput',

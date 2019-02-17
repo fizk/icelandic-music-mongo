@@ -1,5 +1,5 @@
 import {GraphQLNonNull, GraphQLID} from "graphql";
-import Collection from '../types/Collection';
+import {Collection} from '../types/Collection';
 import {ObjectID} from "mongodb";
 import {GraphQlContext} from '../../../@types'
 

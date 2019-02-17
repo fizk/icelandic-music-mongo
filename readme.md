@@ -22,6 +22,11 @@ $ docker-compose logs -ft --tail="all" master web
 
 the open [http://localhost](http://localhost)
 
+All in one could look something like:
+```
+$ docker-compose up -d master && docker-compose logs -ft --tail="all" master web search 
+```
+
 
 
 ![icelandicmusicschema](https://user-images.githubusercontent.com/386336/52309706-1a828b00-29f5-11e9-8108-9e1221b6f0e5.png)

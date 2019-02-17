@@ -1,6 +1,7 @@
 import {GraphQLString, GraphQLList, GraphQLInt, GraphQLNonNull} from "graphql";
-import Collection, {CollectionType} from '../types/Collection';
+import {CollectionType, Collection} from '../types/Collection';
 import {GraphQlContext} from '../../../@types'
+import {ObjectID} from "bson";
 
 export default {
     type: new GraphQLList(Collection),
@@ -18,38 +19,25 @@ export default {
             type: CollectionType
         }
     },
-    resolve (root: any, {term, type, limit = 10}: any, {database, search}: GraphQlContext) {
-        const condition: any = {must: []};
-
-        condition.must.push({
-            fuzzy: {'name.raw': {value: term}}
-        });
-
-        if (type) {
-            condition.must.push({
-                match: {'__contentType': `collection/${type}`}
-            });
-        }
-
+    resolve (root: any, {term, limit = 10}: any, {database, search}: GraphQlContext) {
         return search.search({
-            index: 'it_collections',
+            index: 'collection',
             body: {
                 query: {
-                    bool: condition
+                    bool: {
+                        must: [
+                            {
+                                fuzzy: {
+                                    name: {value: term, boost: 1}
+                                }
+                            }
+                        ]
+                    }
                 }
             },
-        }).then((data: any) => {
-            return data.hits.hits.map((item: any) => {
-                return {
-                    ...item._source,
-                    _id: item._id,
-                    __ref: item._source.__ref.map((reference: any) => ({
-                        ...reference,
-                        _id: database.collection('collection').findOne({_id: reference._id})
-                    }))
-                }
-            });
-        });
+        }).then((data: any) => (
+            data.hits.hits.map((item: any) => ({...item._source, _id: new ObjectID(item._id)}))
+        ));
     }
 };
 

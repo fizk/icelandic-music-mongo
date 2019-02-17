@@ -1,5 +1,5 @@
 import {GraphQLString, GraphQLList} from "graphql";
-import SearchResult from "../types/SearchResult";
+import {SearchResult} from "../types/SearchResult";
 
 export default {
     type: new GraphQLList(SearchResult),

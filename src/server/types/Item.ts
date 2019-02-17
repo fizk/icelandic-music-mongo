@@ -1,22 +1,28 @@
-import {GraphQLID, GraphQLNonNull, GraphQLString, GraphQLObjectType, GraphQLInt, GraphQLList, GraphQLInputObjectType, GraphQLEnumType} from "graphql";
-import ArtistRole from './ArtistRole';
-import {Item as DBItem, ReferenceUnit as DBReferenceUnit, Unit as DBUnit} from "../../../@types/database";
-import Genre, {GenreInput} from "./Genre";
+import {
+    GraphQLID,
+    GraphQLNonNull,
+    GraphQLString,
+    GraphQLObjectType,
+    GraphQLList,
+    GraphQLInt,
+    GraphQLEnumType,
+    GraphQLInputObjectType
+} from 'graphql';
+import {Unit} from "./Unit";
+import {GraphQLDateTime} from "graphql-iso-date";
+import {DataSource} from '../../../@types/database';
+import {GraphQlContext} from '../../../@types';
+import {ContentType} from "./ContentType";
 import {splitContentType, splitGenre} from "../utils/split";
-import UnitInterface from "./Unit";
-import Content from "./Content";
-import GraphQLDateTime from "./GraphQLDateTime";
-import {ObjectID} from "mongodb";
-import {GraphQlContext} from "../../../@types";
-import Collection from './Collection';
-import Period from "./Period";
-import Group from "./Group";
-import GraphQLUUID from "./GraphQLUUID";
+import {Genre, GenreInput} from "./Genre";
+import {CollectionAssociation} from "./Collection";
+import {ObjectID} from "bson";
+import {ArtistRole} from "./ArtistRole";
 
-export default new GraphQLObjectType<DBItem, GraphQlContext>({
+export const Item = new GraphQLObjectType<DataSource.Item, GraphQlContext>({
     name: 'Item',
     description: 'A part of a collection',
-    interfaces: [UnitInterface],
+    interfaces: [Unit],
     fields: () => ({
         _id: {
             type: new GraphQLNonNull(GraphQLID)
@@ -38,7 +44,7 @@ export default new GraphQLObjectType<DBItem, GraphQlContext>({
         },
         contentType: {
             name: 'contentType',
-            type: Content,
+            type: ContentType,
             resolve: (root) => splitContentType(root.__contentType)
         },
         genres: {
@@ -83,24 +89,11 @@ export default new GraphQLObjectType<DBItem, GraphQlContext>({
     })
 });
 
-
-export const CollectionAssociation = new GraphQLObjectType<DBReferenceUnit, GraphQlContext>({
-    name: 'CollectionAssociation',
-    fields: () => ({
-        collection: {
-            name: 'collection',
-            type: Collection,
-            resolve: ({collection}) => collection
-        },
-        uuid: {
-            type: new GraphQLNonNull(GraphQLUUID),
-            resolve: ({collection, itemId}) => {
-                return collection.__ref.find((item: any) => {
-                    return item._id.oid.equals(itemId) && item.__contentType === 'item/song';
-                }).__uuid;
-            }
-        }
-    })
+export const ItemType = new GraphQLEnumType({
+    name: 'ItemType',
+    values: {
+        song: {value: 'song'},
+    }
 });
 
 export const ItemInput = new GraphQLInputObjectType({
@@ -119,11 +112,4 @@ export const ItemInput = new GraphQLInputObjectType({
             type: new GraphQLList(GenreInput)
         }
     })
-});
-
-export const ItemType = new GraphQLEnumType({
-    name: 'ItemType',
-    values: {
-        song: {value: 'song'},
-    }
 });

@@ -1,9 +1,9 @@
 import {GraphQLObjectType, GraphQLString, GraphQLList} from "graphql";
-import {ItemReferenceParticipant} from '../../../@types/database';
-import {GraphQlContext} from '../../../@types';
-import Artist from './Artist';
+import {DataSource} from "../../../@types/database";
+import {GraphQlContext} from "../../../@types";
+import {Artist} from "./Artist";
 
-export default new GraphQLObjectType<ItemReferenceParticipant, GraphQlContext>({
+export const ArtistRole = new GraphQLObjectType<DataSource.ItemReferenceParticipant, GraphQlContext>({
     name: 'ArtistRole',
     fields: () => ({
         artist: {

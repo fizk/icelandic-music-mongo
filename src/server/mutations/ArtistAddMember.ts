@@ -1,10 +1,12 @@
-import {GraphQLList, GraphQLID, GraphQLNonNull} from 'graphql';
-import {GroupMember} from '../types/Group';
-// import {v4 as uuid} from 'uuid';
+import {GraphQLList, GraphQLID, GraphQLNonNull, GraphQLError} from 'graphql';
+import {Artist} from '../types/Artist';
+import {v4 as uuid} from 'uuid';
 import {PeriodTypeInput} from "../types/Period";
+import {GraphQlContext} from "../../../@types";
+import {ObjectID} from "bson";
 
 export default {
-    type: GroupMember,
+    type: Artist,
     args: {
         artist: {
             name: 'artist',
@@ -19,22 +21,29 @@ export default {
             type: new GraphQLList(PeriodTypeInput)
         }
     },
-    // resolve (root, {artist, member, periods = []}, {database}) {
-    //     return database.doc(`/artists/${artist}`).get()
-    //         .then((snapshot: QueryDocumentSnapshot) => {
-    //             const data = snapshot.data();
-    //             const reference: D.ReferenceUnit = {
-    //                 __contentType: 'artist/person+member',
-    //                 _id: database.doc(`artists/${member}`),
-    //                 __created: new Date(),
-    //                 __uuid: uuid(),
-    //                 periods: periods.map(item => ({
-    //                     from: new Date(item.from),
-    //                     to: new Date(item.to)
-    //                 }))
-    //             };
-    //             return snapshot.ref.update('__ref', [...data.__ref, reference]).then(() => reference)
-    //         });
-    //
-    // }
+    resolve (root: any, {artist, member, periods = []}: any, {database, event}: GraphQlContext) { //@todo fix any
+        return database.collection('artist').findOneAndUpdate(
+            {_id: new ObjectID(artist)},
+            { $push: {__ref: {
+                        __contentType: `artist/person+member`,
+                        _id: {
+                            namespace: 'artist',
+                            oid: new ObjectID(member),
+                        },
+                        __created: new Date(),
+                        __updated: new Date(),
+                        __uuid: uuid(),
+                        periods: periods
+                    }
+                }
+            },
+            {returnOriginal: false}
+        ).then(result => {
+            if (result.ok) {
+                event.emit('update', 'artist', result.value);
+                return result.value
+            }
+            throw new GraphQLError(`Couldn't add Member(${member}) to Artist(${artist})`);
+        });
+    }
 };

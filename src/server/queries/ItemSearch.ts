@@ -1,5 +1,5 @@
 import {GraphQLString, GraphQLList, GraphQLInt, GraphQLNonNull} from "graphql";
-import Item from '../types/Item';
+import {Item} from '../types/Item';
 
 export default {
     type: new GraphQLList(Item),

@@ -1,7 +1,7 @@
 import {GraphQLID, GraphQLNonNull, GraphQLString, GraphQLObjectType} from "graphql";
-import Dimensions from './Dimensions';
+import {DataSource} from '../../../@types/database'
 
-export default new GraphQLObjectType({
+export const Image = new GraphQLObjectType<DataSource.Image, any>({
     name: 'Image',
     description: 'Image with base64 pre-loader string',
     fields: () => ({
@@ -16,9 +16,6 @@ export default new GraphQLObjectType({
         },
         url: {
             type: GraphQLString
-        },
-        dimensions: {
-            type: Dimensions
         },
     })
 });

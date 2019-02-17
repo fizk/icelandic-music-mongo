@@ -10,7 +10,7 @@ import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import introspectionQueryResultData from '../fragmentTypes';
 import  {withClientState} from 'apollo-link-state';
 import {ApolloLink} from 'apollo-link';
-import {mutations, defaults} from '../state'
+import {mutations, defaults} from '../state';
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData});
 const cache = new InMemoryCache({fragmentMatcher});

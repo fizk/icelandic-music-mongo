@@ -1,7 +1,7 @@
 import {GraphQLObjectType, GraphQLInputObjectType} from "graphql";
-import GraphQLDate from './GraphQLDate';
+import {GraphQLDate} from 'graphql-iso-date';
 
-export default new GraphQLObjectType({
+export const Period = new GraphQLObjectType({
     name: 'Period',
     description: 'Range between two dates',
     fields: {

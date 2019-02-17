@@ -1,36 +1,42 @@
-import {GraphQLObjectType, GraphQLNonNull, GraphQLString, GraphQLList,GraphQLID} from "graphql";
-import {
-    Artist as DBArtist,
-    Image as DBImage,
-    ArtistReference as DBArtistReference,
-    ReferenceUnit as DBReferenceUnit,
-    PictureReference as DBPictureReference
-} from "../../../@types/database";
-import {GraphQlContext} from "../../../@types";
-import Period from "./Period";
-import Image from "./Image";
-import Genre from "./Genre";
-import Content from "./Content";
-import Person from "./Person";
-import {splitContentType, splitGenre} from '../utils/split';
-import UnitInterface from "./Unit";
-import GraphQLDateTime from "./GraphQLDateTime";
-import GraphQLUUID from './GraphQLUUID';
-import {CollectionConnection} from "./Collection";
+import {GraphQLID, GraphQLNonNull, GraphQLObjectType, GraphQLString, GraphQLList} from "graphql";
+import {GraphQLDateTime} from "graphql-iso-date";
+import {Unit} from './Unit'
+import {GraphQlContext} from '../../../@types'
+import {DataSource} from '../../../@types/database'
+import {ContentType} from "./ContentType";
+import {splitContentType, splitGenre} from "../utils/split";
+import {Genre} from "./Genre";
+import {Period} from "./Period";
+import {GraphQLUUID} from "./GraphQLUUID";
+import {Person} from "./Person";
+import {Image} from "./Image";
+import {Collection} from "./Collection";
 
-export const GroupMember = new GraphQLObjectType<DBReferenceUnit, GraphQlContext>({
+export const CollectionConnection: GraphQLObjectType<DataSource.ArtistReferenceCollection, GraphQlContext> = new GraphQLObjectType<DataSource.ArtistReferenceCollection, GraphQlContext>({
+    name: 'CollectionConnection',
+    fields: () => ({
+        collection: {
+            type: Collection,
+            resolve: ({_id}, _, {database}) => database.collection('collection').findOne({_id: _id!.oid})
+        },
+        uuid: {
+            type: new GraphQLNonNull(GraphQLUUID),
+            resolve: ({__uuid}) => __uuid
+        }
+    })
+});
+
+export const GroupMember: GraphQLObjectType<DataSource.ArtistReferenceMember, GraphQlContext> = new GraphQLObjectType<DataSource.ArtistReferenceMember, GraphQlContext>({
     name: 'GroupMember',
     fields: () => ({
         periods: {
             type: new GraphQLList(Period),
-            resolve(root) {
-                return root.period || []
-            },
+            resolve: ({periods}) => periods || [],
         },
         artist: {
             name: 'Person',
             type: Person,
-            resolve: (root, _, {database}) => database.collection('artist').findOne({_id: root._id.oid})
+            resolve: ({_id}, _, {database}) => database.collection('artist').findOne({_id: _id!.oid})
         },
         uuid: {
             type: new GraphQLNonNull(GraphQLUUID),
@@ -39,18 +45,23 @@ export const GroupMember = new GraphQLObjectType<DBReferenceUnit, GraphQlContext
     })
 });
 
-const Group: GraphQLObjectType = new GraphQLObjectType<any, GraphQlContext>({
+export const Group = new GraphQLObjectType<DataSource.Artist, GraphQlContext>({
     name: 'Group',
-    description: 'A single Group (or artists)',
-    interfaces: [UnitInterface],
+    description: 'A single Group of artists (or artists)',
+    interfaces: [Unit],
     fields: () => ({
         _id: {
-            name: '_id',
             type: new GraphQLNonNull(GraphQLID)
         },
         name: {
-            name: 'name',
-            type: new GraphQLNonNull(GraphQLString)
+            type: GraphQLString
+        },
+        description: {
+            type: GraphQLString
+        },
+        contentType: {
+            type: ContentType,
+            resolve: root => splitContentType(root.__contentType)
         },
         createTime: {
             type: GraphQLDateTime,
@@ -58,94 +69,73 @@ const Group: GraphQLObjectType = new GraphQLObjectType<any, GraphQlContext>({
         updateTime: {
             type: GraphQLDateTime,
         },
-        description: {
-            name: 'description',
-            type: GraphQLString,
-        },
         aka: {
-            name: 'aka',
             type: new GraphQLList(GraphQLString),
         },
         genres: {
-            name: 'genres',
             type: new GraphQLList(Genre),
             resolve: (root) => (root.genres || []).map(splitGenre)
         },
         periods: {
-            name: 'periods',
             type: new GraphQLList(Period),
-            resolve: (root) => ([{
-                from: root.from,
-                to: root.to,
-            }])
-        },
-        contentType: {
-            name: 'contentType',
-            type: Content,
-            resolve: root => splitContentType(root.__contentType)
         },
         albums: {
             name: 'albums',
             type: new GraphQLList(CollectionConnection),
             resolve: root => root.__ref
-                .filter((item: DBArtistReference) => item.__contentType === 'collection/album')
+                .filter((item: DataSource.ArtistReference) => item.__contentType === 'collection/album')
         },
         compilations: {
             name: 'compilations',
             type: new GraphQLList(CollectionConnection),
             resolve: root => root.__ref
-                .filter((item: DBArtistReference) => item.__contentType === 'collection/album+compilation')
+                .filter((item: DataSource.ArtistReference) => item.__contentType === 'collection/album+compilation')
         },
         eps: {
             name: 'eps',
             type: new GraphQLList(CollectionConnection),
             resolve: root => root.__ref
-                .filter((item: DBArtistReference) => item.__contentType === 'collection/album+ep')
+                .filter((item: DataSource.ArtistReference) => item.__contentType === "collection/album+ep")
         },
         singles: {
             name: 'singles',
             type: new GraphQLList(CollectionConnection),
             resolve: root => root.__ref
-                .filter((item: DBArtistReference) => item.__contentType === 'collection/album+single')
+                .filter((item: DataSource.ArtistReference) => item.__contentType === 'collection/album+single')
         },
         members: {
             name: 'members',
             type: new GraphQLList(GroupMember),
-            resolve: (root) => {
-                return root.__ref.filter((item: DBArtistReference) => item.__contentType === 'artist/person+member');
-            },
+            resolve: root => root.__ref
+                .filter((item: DataSource.ArtistReference) => item.__contentType === "artist/person+member")
         },
-        // avatar: {
-        //     name: 'avatar',
-        //     type: Image,
-        //     resolve (root, _, {database}) {
-        //         const imagesReference = root.__ref
-        //             .filter((item: any) => item.__contentType === 'image/avatar')
-        //             .reduce((a: any, b: DBArtistReference|undefined) => b, undefined);
-        //
-        //         return imagesReference
-        //             ? database.collection('media')
-        //                 .findOne({_id: imagesReference._id.oid})
-        //                 .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
-        //             : null;
-        //     }
-        // },
-        // hero: {
-        //     name: 'hero',
-        //     type: Image,
-        //     resolve (root, _, {database}) {
-        //         const imagesReference = root.__ref
-        //             .filter((item: any) => item.__contentType === 'image/hero')
-        //             .reduce((a: any, b: DBReferenceUnit|undefined) => b, undefined);
-        //
-        //         return imagesReference
-        //             ? database.collection('media')
-        //                 .findOne({_id: imagesReference._id.oid})
-        //                 .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
-        //             : null;
-        //     }
-        // },
+        avatar: {
+            name: 'avatar',
+            type: Image,
+            resolve (root, _, {database}) {
+                const imagesReference = root.__ref
+                    .filter((item: any) => item.__contentType ===  "image/avatar")
+                    .reduce((a: any, b: any) => b, undefined);
+
+                return imagesReference
+                    ? database.collection('media')
+                        .findOne({_id: imagesReference._id.oid})
+                    : null;
+            }
+        },
+        hero: {
+            name: 'hero',
+            type: Image,
+            resolve (root, _, {database}) {
+                const imagesReference = root.__ref
+                    .filter((item: any) => item.__contentType ===  "image/hero")
+                    .reduce((a: any, b: any) => b, undefined);
+
+                return imagesReference
+                    ? database.collection('media')
+                        .findOne({_id: imagesReference._id.oid})
+                    : null;
+            }
+        },
     })
 });
-
-export default Group;

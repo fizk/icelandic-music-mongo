@@ -1,8 +1,8 @@
 import {GraphQLID, GraphQLInterfaceType, GraphQLNonNull, GraphQLString} from "graphql";
-import GraphQLDateTime from "./GraphQLDateTime";
-import Content from "./Content";
+import {GraphQLDateTime} from "graphql-iso-date";
+import {ContentType} from "./ContentType";
 
-export default new GraphQLInterfaceType({
+export const Unit = new GraphQLInterfaceType({
     name: 'Unit',
     fields: {
         _id: {
@@ -15,7 +15,7 @@ export default new GraphQLInterfaceType({
             type: GraphQLString
         },
         contentType: {
-            type: Content,
+            type: ContentType,
         },
         createTime: {
             type: GraphQLDateTime,

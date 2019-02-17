@@ -5,7 +5,8 @@ type UUID = string;
 
 export type GraphQlContext = {
     database: Db,
-    search: any
+    search: any,
+    event: any
 }
 
 /**
@@ -43,9 +44,9 @@ declare namespace GraphQLTypes {
     }
 
     export interface ContentType {
-        type: string
-        subtype: string
-        attribute: string
+        type?: string
+        subtype?: string
+        attribute?: string
     }
 
     export interface PublicationType {
@@ -85,6 +86,7 @@ declare namespace GraphQLTypes {
         eps?: CollectionConnectionType[]
         singles?: CollectionConnectionType[]
         periods?: PeriodType[]
+        period?: PeriodType
         avatar?: ImageType
         hero?: ImageType
     }
@@ -122,3 +124,6 @@ declare namespace GraphQLTypes {
 //         }
 //     }
 // }
+
+
+

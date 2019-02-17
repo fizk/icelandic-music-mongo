@@ -1,7 +1,7 @@
 import {GraphQLObjectType, GraphQLString, GraphQLInputObjectType} from "graphql";
 
-export default new GraphQLObjectType({
-    name: 'Content',
+export const ContentType = new GraphQLObjectType({
+    name: 'ContentType',
     fields: {
         type: {type: GraphQLString},
         subtype: {type: GraphQLString},

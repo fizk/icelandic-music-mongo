@@ -1,23 +1,19 @@
-import ArtistHighlighted from './ArtistHighlighted';
-import ArtistMultiple from './ArtistMultiple';
+import Artist from './Artist';
+import Artists from './Artists';
 import ArtistSearch from './ArtistSearch';
-import ArtistSingle from './ArtistSingle';
-import CollectionMultiple from './CollectionMultiple';
+import Collection from './Collection';
+import Collections from './Collections';
 import CollectionSearch from './CollectionSearch';
-import CollectionSingle from './CollectionSingle';
+import Item from './Item';
 import ItemSearch from './ItemSearch';
-import ItemSingle from './ItemSingle';
-import SearchesMultiple from './SearchesMultiple';
 
 export default {
-    ArtistHighlighted,
-    Artists: ArtistMultiple,
+    Artist,
+    Artists,
     ArtistSearch,
-    Artist: ArtistSingle,
-    Collections: CollectionMultiple,
+    Collection,
+    Collections,
     CollectionSearch,
-    Collection: CollectionSingle,
+    Item,
     ItemSearch,
-    Item: ItemSingle,
-    SearchesMultiple,
 }

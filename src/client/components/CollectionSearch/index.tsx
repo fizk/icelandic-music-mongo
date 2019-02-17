@@ -1,3 +1,4 @@
+import {Fragment} from 'react';
 import * as React from 'react';
 import AutoCompleteCollection from "../../elements/AutoComplete/AutoCompleteCollection";
 import AutoCompleteCreateCollection from "../../elements/AutoComplete/AutoCompleteCreateCollection";
@@ -9,6 +10,7 @@ import {FetchResult} from "apollo-link";
 import {ApolloQueryResult} from "apollo-client";
 import {artistQuery} from '../../sections/ArtistSection';
 import './_index.scss';
+import {ApolloConsumer} from 'react-apollo'
 
 type Props = {
     id: string
@@ -27,7 +29,7 @@ export default class CollectionSearch extends React.Component<Props, State, {cli
     static defaultProps = {
         id: undefined,
         type: 'album',
-        onSelect: (item: any) => {}
+        onSelect: () => {}
     };
 
     static contextTypes = {
@@ -41,20 +43,20 @@ export default class CollectionSearch extends React.Component<Props, State, {cli
         isCreate: false,
     };
 
-    constructor(props: Props, context: any) { //@fix any
-        super(props, context);
+    constructor(props: Props) {
+        super(props);
 
         this.handleSearch = debounce(1000, this.handleSearch.bind(this));
         this.handleCreateCollection = this.handleCreateCollection.bind(this)
     }
 
-    handleSearch(term: string)  {
+    handleSearch(client: any, term: string)  {
         if (term.length === 0) {
             return;
         }
 
         this.setState({isSearching: true, term: term});
-        this.context.client.query({
+        client.query({
             query: collectionSearchQuery,
             variables: {term: term, type: this.props.type},
         }).then((result: ApolloQueryResult<any>) => {
@@ -109,14 +111,24 @@ export default class CollectionSearch extends React.Component<Props, State, {cli
 
     render() {
         return (
-            <AutoComplete loading={this.state.isSearching} onType={this.handleSearch} onSelect={this.props.onSelect} onClear={this.handleOnClear}>
-                {this.state.items.map((item: any) => ( //@todo fix any
-                    <AutoCompleteCollection key={item._id} value={item} />
-                ))}
-                {this.state.isCreate && (
-                    <AutoCompleteCreateCollection onCreate={this.handleCreateCollection} />
+            <ApolloConsumer>
+                {client => (
+                    <AutoComplete
+                        loading={this.state.isSearching}
+                        onType={(term: string) => this.handleSearch(client, term)}
+                        onSelect={this.props.onSelect}
+                        onClear={this.handleOnClear}
+                    >
+                        {this.state.items.map((item: any) => ( //@todo fix any
+                            <AutoCompleteCollection key={item._id} value={item} />
+                        ))}
+
+                        {this.state.isCreate && (
+                            <AutoCompleteCreateCollection onCreate={this.handleCreateCollection} />
+                        )}
+                    </AutoComplete>
                 )}
-            </AutoComplete>
+            </ApolloConsumer>
         );
     }
 }

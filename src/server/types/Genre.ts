@@ -1,6 +1,6 @@
 import {GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLInputObjectType} from "graphql";
 
-export default new GraphQLObjectType({
+export const Genre = new GraphQLObjectType({
     name: 'Genre',
     fields: {
         type: {type: new GraphQLNonNull(GraphQLString)},

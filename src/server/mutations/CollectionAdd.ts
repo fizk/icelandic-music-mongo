@@ -1,8 +1,7 @@
-import {GraphQLNonNull} from 'graphql';
-import Collection, {CollectionInput, CollectionType} from '../types/Collection';
-import {transformSnapshot} from "../utils/transform";
-import {GraphQlContext} from '../../../@types'
-import {CollectionReference} from "../../../@types/database";
+import {GraphQLError, GraphQLNonNull} from 'graphql';
+import {Collection, CollectionInput, CollectionType} from '../types/Collection';
+import {GraphQlContext} from "../../../@types";
+import {DataSource} from "../../../@types/database";
 
 export default {
     type: Collection,
@@ -15,32 +14,29 @@ export default {
             type: new GraphQLNonNull(CollectionType)
         },
     },
-
-    resolve (root: any, {values, type}: any, {database,}: GraphQlContext) {
-        return database.collection('collection').insertOne({
+    resolve (root: any, {values, type}: any, {database, event}: GraphQlContext) { //@todo fix any
+        const data: DataSource.Artist = Object.assign({
             __contentType: `collection/${type}`,
-            name: values.name,
-            releaseDates: new Date(),
-            description: new Date(),
-            genres: [],
-            aka: [],
             __ref: [],
-        }).then((result: any) => {
-            console.log(result, 'hey');
+            aka: [],
+            description: null,
+            genres: [],
+            periods: [],
+            updateTime: new Date(),
+            createTime: new Date(),
+        }, values);
 
-            return result.ops[0];
-        })
-        // const data: D.CollectionType = Object.assign({
-        //     __contentType: `collection/${type}`,
-        //     __ref: [],
-        //     aka: [],
-        //     description: null,
-        //     genres: [],
-        //     releaseDates: null
-        // }, values);
-        //
-        // return database.collection('collections').add(data)
-        //     .then(doc => doc.get())
-        //     .then(transformSnapshot);
+        return database.collection('collection').insertOne(data).then(result => {
+            if (result.insertedCount > 0) {
+                if (result.result.ok) {
+                    event.emit('create', 'collection', result.ops[0]);
+                    return result.ops[0];
+                }
+
+                throw new GraphQLError('Could\'t create Collection')
+
+            }
+
+        });
     }
 };

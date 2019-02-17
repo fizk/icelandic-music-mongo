@@ -1,15 +1,16 @@
-import {GraphQLObjectType, GraphQLString, GraphQLID, GraphQLNonNull} from "graphql";
-import {Image as DBImage, PictureReference as DBPictureReference} from "../../../@types/database";
-import Image from './Image';
-import UnitInterface from "./Unit";
-import Content from "./Content";
+import {GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLID} from "graphql";
+import {GraphQLDateTime} from "graphql-iso-date";
+import {Unit} from "./Unit";
 import {splitContentType} from "../utils/split";
-import GraphQLDateTime from "./GraphQLDateTime";
+import {ContentType} from "./ContentType";
+import {Image} from "./Image";
+import {DataSource} from '../../../@types/database';
+import {GraphQlContext} from '../../../@types';
 
-export default new GraphQLObjectType({
+export const Publisher = new GraphQLObjectType<DataSource.Publisher, GraphQlContext>({
     name: 'Publisher',
     description: 'publisher of a collection',
-    interfaces: [UnitInterface],
+    interfaces: [Unit],
     fields: {
         _id: {
             type: new GraphQLNonNull(GraphQLID)
@@ -30,21 +31,20 @@ export default new GraphQLObjectType({
         },
         contentType: {
             name: 'contentType',
-            type: Content,
-            resolve: (root) => splitContentType(root.__contentType)
+            type: ContentType,
+            resolve: ({__contentType}) => splitContentType(__contentType)
         },
         avatar: {
             name: 'avatar',
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType === 'image/avatar')
-                    .reduce((a: any, b: DBPictureReference|undefined) => b, undefined);
+                    .filter((item: any) => item.__contentType ===  "image/avatar")
+                    .reduce((a: any, b: any) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
-                        .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
                     : null;
             }
         },
@@ -53,13 +53,12 @@ export default new GraphQLObjectType({
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType === 'image/hero')
-                    .reduce((a: any, b: DBPictureReference|undefined) => b, undefined);
+                    .filter((item: any) => item.__contentType ===  "image/hero")
+                    .reduce((a: any, b: any) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')
                         .findOne({_id: imagesReference._id.oid})
-                        .then((data: DBImage) => ({...data, dimensions: {height: data.height, width: data.width}}))
                     : null;
             }
         },
