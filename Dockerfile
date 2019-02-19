@@ -7,6 +7,7 @@ COPY tsconfig.json ./
 COPY "@types/*" "./@types/"
 COPY .babelrc ./
 COPY webpack.config.js ./
+COPY jest/* ./jest/
 
 RUN npm i
 

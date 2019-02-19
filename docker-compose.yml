@@ -36,6 +36,14 @@ services:
       - search
     command: npm run dev:compile-watch
 
+  test:
+    container_name: icelandic-music-web
+    build: .
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./public:/usr/src/app/public
+    command: npm test
+
   database:
     container_name: icelandic-music-database
     image: mongo:3.4.19-jessie

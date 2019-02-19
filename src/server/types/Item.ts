@@ -15,7 +15,7 @@ import {GraphQlContext} from '../../../@types';
 import {ContentType} from "./ContentType";
 import {splitContentType, splitGenre} from "../utils/split";
 import {Genre, GenreInput} from "./Genre";
-import {CollectionAssociation} from "./Collection";
+import {Collection, CollectionAssociation} from "./Collection";
 import {ObjectID} from "bson";
 import {ArtistRole} from "./ArtistRole";
 
@@ -55,37 +55,48 @@ export const Item = new GraphQLObjectType<DataSource.Item, GraphQlContext>({
         instruments: {
             type: new GraphQLList(ArtistRole),
             resolve(root) {
-                return root.__ref.filter(item => item.__contentType == 'participant/instrument');
+                return root.__ref.filter(item => item.__contentType === 'participant/instrument');
             }
         },
         authors: {
             type: new GraphQLList(ArtistRole),
             resolve(root) {
-                return root.__ref.filter(item => item.__contentType == 'participant/author');
+                return root.__ref.filter(item => item.__contentType === 'participant/author');
             }
         },
         engineers: {
             type: new GraphQLList(ArtistRole),
             resolve(root) {
-                return root.__ref.filter(item => item.__contentType == 'participant/recording');
+                return root.__ref.filter(item => item.__contentType === 'participant/recording');
             }
         },
         appearsOn: {
-            type: new GraphQLList(CollectionAssociation),
+            type: new GraphQLList(Collection),
             resolve(root, params, {database}) {
                 return database.collection('collection').find({"__ref": {
                         "$elemMatch": {
                             "_id.oid": new ObjectID(root._id),
                             "__contentType": "item/song"
                         }
-                    }}).toArray().then(collections => {
-                    return collections.map(collection => ({
-                        collection,
-                        itemId: root._id
-                    }));
-                });
+                    }}).toArray();
             }
         }
+        // appearsOn: {
+        //     type: new GraphQLList(CollectionAssociation),
+        //     resolve(root, params, {database}) {
+        //         return database.collection('collection').find({"__ref": {
+        //                 "$elemMatch": {
+        //                     "_id.oid": new ObjectID(root._id),
+        //                     "__contentType": "item/song"
+        //                 }
+        //             }}).toArray().then(collections => {
+        //             return collections.map(collection => ({
+        //                 collection,
+        //                 itemId: root._id
+        //             }));
+        //         });
+        //     }
+        // }
     })
 });
 

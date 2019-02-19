@@ -70,7 +70,7 @@ export const Person = new GraphQLObjectType<DataSource.Artist, GraphQlContext>({
         period: {
             name: 'period',
             type: Period,
-            resolve: () => []
+            resolve: ({periods}) =>  periods.length === null ? {from: null, to: null} : periods[0]
         },
         genres: {
             name: 'genres',
@@ -146,6 +146,5 @@ export const Person = new GraphQLObjectType<DataSource.Artist, GraphQlContext>({
                     : null;
             }
         },
-
     })
 });

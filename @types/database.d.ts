@@ -51,7 +51,7 @@ export declare namespace DataSource {
     type ArtistReference = ArtistReferenceCollection | ArtistReferenceMember | PictureReference
 
     export interface Artist extends Unit {
-        __contentType: 'artist/person' | 'artist/group' | 'artist/person+member'
+        __contentType: 'artist/person' | 'artist/group' // | 'artist/person+member'
         name: string
         description?: string
         genres?: string[]
@@ -119,7 +119,7 @@ export declare namespace DataSource {
 // ////////////////////////////////////////////////////
 
     export interface PictureReference extends ReferenceUnit{
-        __contentType: '﻿image/avatar' | '﻿image/hero'
+        __contentType: 'image/avatar' | 'image/hero'
     }
 
     export interface Image extends Unit {

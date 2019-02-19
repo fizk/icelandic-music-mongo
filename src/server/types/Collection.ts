@@ -125,22 +125,22 @@ export const Collection: GraphQLObjectType = new GraphQLObjectType<DataSource.Co
                 return root.__ref.filter(item => item.__contentType === 'publisher/publication');
             }
         },
-        performers: {
-            type: new GraphQLList(Artist),
-            resolve(root, params, {database, }) {
-                return [];
-                // return new Promise((pass, fail) => {
-                //     database.find({'__ref._id': new ObjectID(root._id)}).toArray((error, items) => {
-                //         if (error) {
-                //             fail(error)
-                //         } else {
-                //             pass(items);
-                //         }
-                //     });
-                // });
-
-            }
-        },
+        // performers: {
+        //     type: new GraphQLList(Artist),
+        //     resolve(root, params, {database, }) {
+        //         return [];
+        //         // return new Promise((pass, fail) => {
+        //         //     database.find({'__ref._id': new ObjectID(root._id)}).toArray((error, items) => {
+        //         //         if (error) {
+        //         //             fail(error)
+        //         //         } else {
+        //         //             pass(items);
+        //         //         }
+        //         //     });
+        //         // });
+        //
+        //     }
+        // },
     })
 });
 

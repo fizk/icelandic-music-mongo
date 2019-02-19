@@ -26,12 +26,12 @@ declare namespace GraphQLTypes {
 
     export interface PeriodType {
         from: string
-        to: string
+        to: string | undefined | null
     }
 
     export interface GenreType {
         type: string
-        style: string
+        style: string | undefined | null
     }
 
     export interface ImageType {
@@ -46,11 +46,28 @@ declare namespace GraphQLTypes {
     export interface ContentType {
         type?: string
         subtype?: string
-        attribute?: string
+        attribute?: string | undefined | null
+    }
+
+    export interface ArtistRoleType {
+        artist?: ArtistType
+        roles?: string[]
+    }
+
+    export interface Publisher extends UnitType {
+        name: string
+        description?: string
+        contentType?: ContentType
+        avatar?: ImageType | null
+        hero?: ImageType | null
     }
 
     export interface PublicationType {
         [key: string]: any
+        catalogNumber: string
+        formats: string[]
+        date: string
+        publisher: Publisher
     }
 
     export interface PersonAssociationType {
@@ -70,40 +87,37 @@ declare namespace GraphQLTypes {
         collection: CollectionType
     }
 
-    export interface ArtistType extends UnitType{
+    export interface ArtistType extends UnitType {
         contentType?: ContentType
-        __typename: string
         name: string
         description?: string
         genres?: GenreType[]
         aka?: string[]
-        from?: Date
-        to?: Date
-        association?: PersonAssociationType[],
-        members?: GroupMemberType[],
+        association?: PersonAssociationType[],  //Artist
+        members?: GroupMemberType[],            //Group
         albums?: CollectionConnectionType[]
         compilations?: CollectionConnectionType[]
         eps?: CollectionConnectionType[]
         singles?: CollectionConnectionType[]
-        periods?: PeriodType[]
-        period?: PeriodType
-        avatar?: ImageType
-        hero?: ImageType
+        period?: PeriodType                     //Artist
+        periods?: PeriodType[]                  //Group
+        avatar?: ImageType | null
+        hero?: ImageType | null
     }
 
     export interface ItemType extends UnitType {
         name: string
+        contentType?: ContentType
         description?: string
         duration?: number
-        genres?: string[]
-        instruments?: ArtistType[]
-        authors?: ArtistType[]
-        engineers?: ArtistType[]
-        appearsOn?: CollectionType
+        genres?: GenreType[]
+        instruments?: ArtistRoleType[]
+        authors?: ArtistRoleType[]
+        engineers?: ArtistRoleType[]
+        appearsOn?: CollectionType[]
     }
 
     export interface CollectionType extends UnitType {
-        __typename: string,
         contentType?: ContentType
         genres?: GenreType[]
         name: string
@@ -113,6 +127,7 @@ declare namespace GraphQLTypes {
         from?: Date
         to?: Date
         songs?: {song: ItemType, position: number}[]
+        publications?: PublicationType[]
     }
 }
 //
