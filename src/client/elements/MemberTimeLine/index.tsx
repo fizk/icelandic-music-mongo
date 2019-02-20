@@ -6,10 +6,10 @@ import {GraphQLTypes} from "../../../../@types";
 import './_index.scss';
 
 interface Props {
-    albums: GraphQLTypes.CollectionType[];
+    albums: GraphQLTypes.Collection[];
     artists: {
-        artist: GraphQLTypes.ArtistType;
-        periods: GraphQLTypes.PeriodType[];
+        artist: GraphQLTypes.Artist;
+        periods: GraphQLTypes.Period[];
     }[];
 }
 

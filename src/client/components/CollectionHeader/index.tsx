@@ -5,7 +5,7 @@ import {GraphQLTypes} from "../../../../@types";
 import './_index.scss';
 
 interface Props {
-    collection: GraphQLTypes.CollectionType;
+    collection: GraphQLTypes.Collection;
 }
 
 export default class CollectionHeader extends React.Component<Props> {

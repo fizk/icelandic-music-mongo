@@ -9,7 +9,7 @@ import './_auto-complete-artist.scss';
 interface Props {
     variations?: string[];
     onSelect?: (value: any) => void;
-    value?: GraphQLTypes.ArtistType;
+    value?: GraphQLTypes.Artist;
     active?: boolean;
 }
 

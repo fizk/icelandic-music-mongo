@@ -5,7 +5,7 @@ import Avatar from '../../elements/Avatar';
 import {GraphQLTypes} from "../../../../@types";
 
 interface Props {
-    artist: GraphQLTypes.ArtistType;
+    artist: GraphQLTypes.Artist;
 }
 
 export default class ArtistListItem extends React.Component<Props > {

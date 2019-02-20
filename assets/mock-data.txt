@@ -1,4 +1,4 @@
-// ArtistType
+// Artist
 {
     "_id" : ObjectId("5c5253a2952c8733a920cbf9"),
     "updateTime" : ISODate("2013-11-20T23:32:18.000Z"),
@@ -170,7 +170,7 @@
 }
 
 
-// CollectionType
+// Collection
 {
     "_id" : ObjectId("5c5253a1234c8733a920cbf9"),
     "updateTime": ISODate("2013-11-20T23:32:18.000Z"),

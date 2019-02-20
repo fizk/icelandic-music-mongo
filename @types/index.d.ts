@@ -24,27 +24,17 @@ declare namespace GraphQLTypes {
         [key: string]: any
     }
 
-    export interface PeriodType {
+    export interface Period {
         from: string
         to: string | undefined | null
     }
 
-    export interface PeriodInputType {
-        from: string
-        to: string
-    }
-
-    export interface GenreType {
+    export interface Genre {
         type: string
         style: string | undefined | null
     }
 
-    export interface GenreInputType {
-        type: string
-        style: string | undefined | null
-    }
-
-    export interface ImageType {
+    export interface Image {
         _id?: ID
         name?: string
         width?: number
@@ -59,93 +49,96 @@ declare namespace GraphQLTypes {
         attribute?: string | undefined | null
     }
 
-    export interface ArtistRoleType {
-        artist?: ArtistType
+    export interface ArtistRole {
+        artist?: Artist
         roles?: string[]
     }
 
-    export interface Publisher extends Unit {
-        name: string
-        description?: string
-        contentType?: ContentType
-        avatar?: ImageType | null
-        hero?: ImageType | null
-    }
-
-    export interface PublicationType {
-        [key: string]: any
+    export interface Publication {
         catalogNumber: string
         formats: string[]
         date: string
         publisher: Publisher
     }
 
-    export interface PersonAssociationType {
-        periods: PeriodType[]
+    export interface PersonAssociation {
+        periods: Period[]
         uuid: UUID
-        group: ArtistType
+        group: Artist
     }
 
-    export interface GroupMemberType {
-        periods: PeriodType[]
+    export interface GroupMember {
+        periods: Period[]
         uuid: UUID
-        artist: ArtistType
+        artist: Artist
     }
 
-    export interface CollectionConnectionType {
+    export interface CollectionConnection {
         uuid: string
-        collection: CollectionType
+        collection: Collection
     }
 
-    export interface ArtistType extends Unit {
+    export interface ItemConnection {
+        uuid: string
+        position: string
+        song: Item
+    }
+
+    export interface Artist extends Unit {
         contentType?: ContentType
         name: string
         description?: string
-        genres?: GenreType[]
+        genres?: Genre[]
         aka?: string[]
-        association?: PersonAssociationType[],  //Artist
-        members?: GroupMemberType[],            //Group
-        albums?: CollectionConnectionType[]
-        compilations?: CollectionConnectionType[]
-        eps?: CollectionConnectionType[]
-        singles?: CollectionConnectionType[]
-        period?: PeriodType                     //Artist
-        periods?: PeriodType[]                  //Group
-        avatar?: ImageType | null
-        hero?: ImageType | null
+        association?: PersonAssociation[],  //Artist
+        members?: GroupMember[],            //Group
+        albums?: CollectionConnection[]
+        compilations?: CollectionConnection[]
+        eps?: CollectionConnection[]
+        singles?: CollectionConnection[]
+        period?: Period                     //Artist
+        periods?: Period[]                  //Group
+        avatar?: Image | null
+        hero?: Image | null
     }
 
-    export interface ItemType extends Unit {
+    export interface Item extends Unit {
         name: string
         contentType?: ContentType
         description?: string
         duration?: number
-        genres?: GenreType[]
-        instruments?: ArtistRoleType[]
-        authors?: ArtistRoleType[]
-        engineers?: ArtistRoleType[]
-        appearsOn?: CollectionType[]
+        genres?: Genre[]
+        instruments?: ArtistRole[]
+        authors?: ArtistRole[]
+        engineers?: ArtistRole[]
+        appearsOn?: Collection[]
     }
 
-    export interface CollectionType extends Unit {
+    export interface Collection extends Unit {
         contentType?: ContentType
-        genres?: GenreType[]
+        genres?: Genre[]
         name: string
         releaseDates?: string
         description?: string
         aka?: string[]
-        from?: Date
-        to?: Date
-        songs?: {song: ItemType, position: number}[]
-        publications?: PublicationType[]
+        songs?: {song: Item, position: number}[]
+        publications?: Publication[]
+    }
+
+    export interface Publisher extends Unit {
+        name: string
+        description?: string
+        contentType?: ContentType
+        avatar?: Image | null
+        hero?: Image | null
     }
     
-    export interface ArtistInputType {
+    export interface ArtistInput {
         name: string
         aka?: string[]
         description?: string
         genres?: string[]
-        periods?: PeriodInputType[]
+        periods?: PeriodInput[]
     }
     
     export interface CollectionInput {
@@ -153,7 +146,17 @@ declare namespace GraphQLTypes {
         aka?: string[]
         description?: string
         releaseDates: string
-        genres: GenreInputType[]
+        genres: GenreInput[]
+    }
+
+    export interface PeriodInput {
+        from: string
+        to: string
+    }
+
+    export interface GenreInput {
+        type: string
+        style: string | undefined | null
     }
 }
 //

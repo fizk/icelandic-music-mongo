@@ -124,3 +124,19 @@ export const ItemInput = new GraphQLInputObjectType({
         }
     })
 });
+
+export const ItemConnection = new GraphQLObjectType<DataSource.CollectionReferenceSong>({
+    name: 'ItemConnection',
+    fields: () => ({
+        position: {
+            type: GraphQLInt,
+        },
+        label: {
+            type: GraphQLString,
+        },
+        song: {
+            type: Item,
+            resolve: (root, _, {database}) => database.collection('item').findOne({_id: root._id.oid})
+        }
+    })
+});

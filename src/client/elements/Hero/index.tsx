@@ -59,7 +59,7 @@ export class Hero extends React.Component<Props> {
 
 
 interface HeroProps {
-    src: GraphQLTypes.ImageType;
+    src: GraphQLTypes.Image;
     variations?: string[];
 }
 

@@ -9,7 +9,7 @@ import './_auto-complete-collection.scss';
 interface Props {
     variations?: string[];
     onSelect?: (value: any) => void;
-    value?: GraphQLTypes.CollectionType;
+    value?: GraphQLTypes.Collection;
     active?: boolean;
 }
 

@@ -4,7 +4,7 @@ import classVariations from "../../helpers/classVariations";
 import './_index.scss';
 
 interface Props {
-    src: GraphQLTypes.ImageType;
+    src: GraphQLTypes.Image;
     variations?: string[];
 }
 

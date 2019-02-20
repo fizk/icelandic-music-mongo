@@ -11,7 +11,7 @@ type PartialImage = Partial<DataSource.Image>;
 type PartialArtist = Partial<DataSource.Artist>;
 type PartialPublisher = Partial<DataSource.Publisher>;
 
-type PartialGQLCollection = Partial<GraphQLTypes.CollectionType>;
+type PartialGQLCollection = Partial<GraphQLTypes.Collection>;
 
 describe('DataSource.Collection', () => {
 
@@ -33,6 +33,7 @@ describe('DataSource.Collection', () => {
         description: 'Collection description',
         __ref: [{
             __contentType: 'item/song',
+            label: '',
             _id: {
                 namespace: 'item',
                 oid: itemID

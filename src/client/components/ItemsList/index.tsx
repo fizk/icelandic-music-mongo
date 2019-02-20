@@ -7,7 +7,7 @@ import {GraphQLTypes} from "../../../../@types";
 interface Props {
     items: {
         position: number|undefined;
-        song: GraphQLTypes.ItemType;
+        song: GraphQLTypes.Item;
     }[] | undefined;
 }
 

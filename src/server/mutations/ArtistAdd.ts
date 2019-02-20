@@ -4,7 +4,7 @@ import {DataSource} from "../../../@types/database";
 import {GraphQlContext, GraphQLTypes} from "../../../@types";
 
 interface Params {
-    value: GraphQLTypes.ArtistInputType;
+    value: GraphQLTypes.ArtistInput;
     type: 'person' | 'group';
 }
 

@@ -8,7 +8,7 @@ type Partial<T> = { [P in keyof T]?: T[P]; };
 type PartialCollection = Partial<DataSource.Collection>;
 type PartialItem = Partial<DataSource.Item>;
 type PartialArtist = Partial<DataSource.Artist>;
-type ItemGQLCollection = Partial<GraphQLTypes.ItemType>;
+type ItemGQLCollection = Partial<GraphQLTypes.Item>;
 
 describe('DataSource.Item', () => {
 

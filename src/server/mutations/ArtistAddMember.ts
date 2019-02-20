@@ -8,7 +8,7 @@ import {ObjectID} from "bson";
 interface Params {
     artist: string;
     member: string;
-    periods: GraphQLTypes.PeriodInputType[];
+    periods: GraphQLTypes.PeriodInput[];
 }
 
 export default {

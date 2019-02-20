@@ -58,14 +58,14 @@ export const ListItemNumbered: StatelessComponent<{action?: string}> = ({childre
     </li>
 );
 
-export const ListGenres: StatelessComponent<{genres?: GraphQLTypes.GenreType[]}> = ({genres = []}) => (
+export const ListGenres: StatelessComponent<{genres?: GraphQLTypes.Genre[]}> = ({genres = []}) => (
     <List>
         {genres.map((genre, i) => (
             <li key={`genre-${genre.type}-${genre.style}-${i}`}>{genre.type}/{genre.style}</li>
         ))}
     </List>
 );
-export const ListPeriods: StatelessComponent<{periods?: GraphQLTypes.PeriodType[]}> = ({periods = []}) => (
+export const ListPeriods: StatelessComponent<{periods?: GraphQLTypes.Period[]}> = ({periods = []}) => (
     <List>
         {periods.map((period, i) => (
             <li key={`periods-${i}`}>

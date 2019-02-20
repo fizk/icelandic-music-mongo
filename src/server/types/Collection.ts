@@ -1,4 +1,4 @@
-import {GraphQLID, GraphQLNonNull, GraphQLString, GraphQLObjectType, GraphQLList, GraphQLInputObjectType, GraphQLInt, GraphQLEnumType} from 'graphql';
+import {GraphQLID, GraphQLNonNull, GraphQLString, GraphQLObjectType, GraphQLList, GraphQLInputObjectType, GraphQLEnumType} from 'graphql';
 import {GraphQLDateTime, GraphQLDate} from "graphql-iso-date";
 import {GraphQlContext} from "../../../@types";
 import {DataSource} from "../../../@types/database";
@@ -11,7 +11,7 @@ import {Image} from "./Image";
 import {ContentType} from "./ContentType";
 import Publication from "./Publication";
 import {GraphQLUUID} from "./GraphQLUUID";
-import {Item} from "./Item";
+import {ItemConnection} from "./Item";
 
 export const Collection: GraphQLObjectType = new GraphQLObjectType<DataSource.Collection, GraphQlContext>({
     name: 'Collection',
@@ -100,20 +100,7 @@ export const Collection: GraphQLObjectType = new GraphQLObjectType<DataSource.Co
         },
         songs: {
             name: 'songs',
-            type: new GraphQLList(new GraphQLObjectType({
-                name: 'song',
-                fields: () => ({
-                    position: {
-                        name: 'position',
-                        type: GraphQLInt,
-                    },
-                    song: {
-                        name: 'song',
-                        type: Item,
-                        resolve: (root, _, {database}) => database.collection('item').findOne({_id: root._id.oid})
-                    }
-                })
-            })),
+            type: new GraphQLList(ItemConnection),
             resolve (root) {
                 return root.__ref.filter(item => item.__contentType === 'item/song');
             }

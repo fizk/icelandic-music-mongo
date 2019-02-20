@@ -16,7 +16,7 @@ export const splitContentType = (contentType: string): {
     }
 };
 
-export const splitGenre = (genre: string): GraphQLTypes.GenreType => {
+export const splitGenre = (genre: string): GraphQLTypes.Genre => {
     const genreArray = genre.split('/');
     return {
         type: genreArray[0],

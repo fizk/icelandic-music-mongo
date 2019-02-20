@@ -76,6 +76,7 @@ export declare namespace DataSource {
     export interface CollectionReferenceSong extends ReferenceUnit {
         __contentType: 'item/song'
         position: number
+        label: string
     }
 
     export type CollectionReference = PictureReference | CollectionReferenceSong | CollectionReferencePublication

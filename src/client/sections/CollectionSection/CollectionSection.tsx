@@ -13,7 +13,7 @@ import ItemSearch from "../../components/ItemSearch";
 import '../../elements/MarkDownContainer/_index.scss';
 
 interface Props {
-    album: GraphQLTypes.CollectionType;
+    album: GraphQLTypes.Collection;
     loading: boolean;
     connectItem?: () => void;
 }

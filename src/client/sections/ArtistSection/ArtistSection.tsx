@@ -18,7 +18,7 @@ import '../../elements/MarkDownContainer/_index.scss';
 
 interface Props {
     id: string;
-    artist: GraphQLTypes.ArtistType;
+    artist: GraphQLTypes.Artist;
     loading: boolean;
     isFound?: boolean;
     edit?: boolean;

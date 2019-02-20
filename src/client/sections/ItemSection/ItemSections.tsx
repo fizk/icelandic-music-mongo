@@ -10,7 +10,7 @@ import Paper from '../../elements/Paper';
 import {GraphQLTypes} from "../../../../@types";
 
 interface Props {
-    item: GraphQLTypes.ItemType;
+    item: GraphQLTypes.Item;
 }
 
 export default class Item extends React.Component<Props> {

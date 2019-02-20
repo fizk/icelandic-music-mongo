@@ -76,8 +76,8 @@ export default class CollectionSearch extends React.Component<Props, State, {cli
             variables: {type: this.props.type, values: {name: this.state.term}},
             // update: (store, {data: {CollectionAdd}}) => {
             //     const data = store.readQuery({query: artistQuery, variables: {id: this.props.id}});
-            //     console.log(data.ArtistType);
-            //     data.ArtistType.albums.push(CollectionAdd);
+            //     console.log(data.Artist);
+            //     data.Artist.albums.push(CollectionAdd);
             //     store.writeQuery({ query: artistQuery, data});
             // },
             // optimisticResponse: {
@@ -91,7 +91,7 @@ export default class CollectionSearch extends React.Component<Props, State, {cli
             //         },
             //         name: this.state.term,
             //         releaseDates: null,
-            //         __typename: "CollectionType",
+            //         __typename: "Collection",
             //         _id: "tmp-id",
             //     }
             // }

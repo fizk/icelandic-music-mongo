@@ -5,7 +5,7 @@ import {GraphQLTypes} from "../../../../@types";
 import './_index.scss';
 
 interface Props {
-    artist: GraphQLTypes.ArtistType;
+    artist: GraphQLTypes.Artist;
 }
 
 export default class ArtistHeader extends React.Component<Props> {

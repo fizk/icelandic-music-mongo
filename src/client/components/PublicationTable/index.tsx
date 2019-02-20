@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {GraphQLTypes} from "../../../../@types";
 
 interface Props {
-    publications: GraphQLTypes.PublicationType[];
+    publications: GraphQLTypes.Publication[];
 }
 
 export default class PublicationTable extends React.Component<Props> {

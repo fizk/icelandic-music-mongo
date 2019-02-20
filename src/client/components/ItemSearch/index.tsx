@@ -79,7 +79,7 @@ export default class ItemSearch extends React.Component<Props, State, {client: A
             //         position: null,
             //         song : ItemAdd
             //     };
-            //     data.CollectionType.songs = [...data.CollectionType.songs, stuff];
+            //     data.Collection.songs = [...data.Collection.songs, stuff];
             //     store.writeQuery({ query: collectionQuery, data});
             // },
             // optimisticResponse: {

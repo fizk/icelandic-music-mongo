@@ -9,7 +9,7 @@ interface Params {
 }
 
 interface SearchSource { //@todo fixme
-    _source: object;
+    _source: DataSource.Unit;
     _id: string;
 }
 
