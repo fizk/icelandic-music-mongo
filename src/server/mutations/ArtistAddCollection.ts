@@ -5,6 +5,12 @@ import {v4 as uuid} from 'uuid';
 import {Artist} from "../types/Artist";
 import {ObjectID} from "bson";
 
+interface Params {
+    artist: string;
+    collection: string;
+    collectionType: 'album' | 'ep' | 'single' | 'compilation';
+}
+
 export default {
     type: Artist,
     args: {
@@ -21,20 +27,20 @@ export default {
             type: new GraphQLNonNull(CollectionType)
         }
     },
-    resolve (root: any, {artist, collection, collectionType = 'album'}: any, {database, event}: GraphQlContext) { //@todo fix any
+    resolve (root: null, {artist, collection, collectionType = 'album'}: any, {database, event}: GraphQlContext) {// eslint-disable-line @typescript-eslint/no-explicit-any
         return database.collection('artist').findOneAndUpdate(
             {_id: new ObjectID(artist)},
             { $push: {__ref: {
-                        __contentType: `collection/${collectionType}`,
-                        _id: {
-                            namespace: 'collection',
-                            oid: new ObjectID(collection),
-                        },
-                        __created: new Date(),
-                        __updated: new Date(),
-                        __uuid: uuid()
-                    }
-                }
+                __contentType: `collection/${collectionType}`,
+                _id: {
+                    namespace: 'collection',
+                    oid: new ObjectID(collection),
+                },
+                __created: new Date(),
+                __updated: new Date(),
+                __uuid: uuid()
+            }
+            }
             },
             {returnOriginal: false}
         ).then(result => {

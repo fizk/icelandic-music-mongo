@@ -4,17 +4,17 @@ import {OptionsListContainer} from './OptionsListContainer';
 import {OptionsList} from './OptionsList';
 import {SyntheticEvent} from "react";
 
-type Props = {
-    placeholder?: string
-    onSelect: () => void,
-    onFocus: () => void,
-    onBlur: () => void,
-    onChange: (value: any) => void,
-    onClear: (event: any) => void,
-    value: any,
-    isSearching: boolean,
-    elastic: boolean,
-    index: number,
+interface Props {
+    placeholder?: string;
+    onSelect: () => void;
+    onFocus: () => void;
+    onBlur: () => void;
+    onChange: (value: any) => void;
+    onClear: (event: any) => void;
+    value: any;
+    isSearching: boolean;
+    elastic: boolean;
+    index: number;
 }
 
 class Options extends React.Component<Props> {
@@ -62,12 +62,12 @@ class Options extends React.Component<Props> {
         //     };
         //
         // } else {
-            this.dimensions = {
-                top: 0,
-                left: 0,
-                width: 0,
-                height: 0,
-            };
+        this.dimensions = {
+            top: 0,
+            left: 0,
+            width: 0,
+            height: 0,
+        };
         // }
     }
 

@@ -1,7 +1,12 @@
 import {GraphQLError, GraphQLNonNull} from 'graphql';
 import {Artist, ArtistInput, ArtistType} from '../types/Artist'
 import {DataSource} from "../../../@types/database";
-import {GraphQlContext} from "../../../@types";
+import {GraphQlContext, GraphQLTypes} from "../../../@types";
+
+interface Params {
+    value: GraphQLTypes.ArtistInputType;
+    type: 'person' | 'group';
+}
 
 export default {
     type: Artist,
@@ -14,7 +19,7 @@ export default {
             type: new GraphQLNonNull(ArtistType)
         },
     },
-    resolve (root: any, {values, type}: any, {database, event}: GraphQlContext) { //@todo fix any
+    resolve (root: null, {values, type}: any, {database, event}: GraphQlContext) {// eslint-disable-line @typescript-eslint/no-explicit-any
         const data: DataSource.Artist = Object.assign({
             __contentType: `artist/${type}`,
             __ref: [],
@@ -22,7 +27,6 @@ export default {
             description: null,
             genres: [],
             periods: [],
-
             updateTime: new Date(),
             createTime: new Date(),
         }, values);

@@ -78,7 +78,7 @@ export declare namespace DataSource {
         position: number
     }
 
-    type CollectionReference = PictureReference | CollectionReferenceSong | CollectionReferencePublication
+    export type CollectionReference = PictureReference | CollectionReferenceSong | CollectionReferencePublication
 
     export interface Collection extends Unit {
         __contentType: 'collection/album' | 'collection/album+single' | 'collection/album+ep' | 'collection/album+compilation'
@@ -137,9 +137,12 @@ export declare namespace DataSource {
 // PUBLISHER
 //
 // ////////////////////////////////////////////////////
+    type PublisherReference = PictureReference
+
     export interface Publisher extends Unit {
         __contentType: 'publisher/publisher'
         name: string
         description: string
+        __ref: PublisherReference[]
     }
 }

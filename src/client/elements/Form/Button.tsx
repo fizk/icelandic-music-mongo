@@ -4,7 +4,7 @@ import {StatelessComponent} from "react";
 import './_button.scss';
 
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
-    variations?: string[]
+    variations?: string[];
 }
 
 const Button: StatelessComponent<Props> =  ({children, variations = [], ...rest}) => {

@@ -2,8 +2,8 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {GraphQLTypes} from "../../../../@types";
 
-type Props = {
-    publications: GraphQLTypes.PublicationType[],
+interface Props {
+    publications: GraphQLTypes.PublicationType[];
 }
 
 export default class PublicationTable extends React.Component<Props> {

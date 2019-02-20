@@ -6,11 +6,11 @@ import {GraphQLTypes} from "../../../../@types";
 import {validDate} from '../../helpers/date';
 import './_auto-complete-artist.scss';
 
-type Props = {
-    variations?: string[],
-    onSelect?: (value: any) => void,
-    value?: GraphQLTypes.ArtistType,
-    active?: boolean
+interface Props {
+    variations?: string[];
+    onSelect?: (value: any) => void;
+    value?: GraphQLTypes.ArtistType;
+    active?: boolean;
 }
 
 const AutoCompleteArtist: StatelessComponent<Props> = (
@@ -23,7 +23,7 @@ const AutoCompleteArtist: StatelessComponent<Props> = (
 
     return (
         <div className={classVariations('auto-complete-artist', active ? [...variations, 'active'] : variations )}
-             onClick={() => onSelect(value)}>
+            onClick={() => onSelect(value)}>
             <div className="auto-complete-artist__icon">
                 <Avatar src={value!.avatar || undefined} variations={['sm']} />
             </div>

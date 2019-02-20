@@ -12,17 +12,17 @@ import {artistQuery} from '../../sections/ArtistSection';
 import './_index.scss';
 import {ApolloConsumer} from 'react-apollo'
 
-type Props = {
-    id: string
-    type?: string
-    onSelect: (item: any) => void
+interface Props {
+    id: string;
+    type?: string;
+    onSelect: (item: any) => void;
 }
 
-type State = {
-    items: any[]
-    term: string|undefined
-    isSearching: boolean
-    isCreate: boolean
+interface State {
+    items: any[];
+    term: string|undefined;
+    isSearching: boolean;
+    isCreate: boolean;
 }
 
 export default class CollectionSearch extends React.Component<Props, State, {client: ApolloClient<any>}> {
@@ -66,7 +66,7 @@ export default class CollectionSearch extends React.Component<Props, State, {cli
                 isCreate: result.data.CollectionSearch.length === 0 && term.length > 4
             });
         });
-    };
+    }
 
     handleCreateCollection() {
         this.handleOnClear();

@@ -39,8 +39,8 @@ export const Publisher = new GraphQLObjectType<DataSource.Publisher, GraphQlCont
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType ===  "image/avatar")
-                    .reduce((a: any, b: any) => b, undefined);
+                    .filter(item => item.__contentType ===  "image/avatar")
+                    .reduce((a: DataSource.PublisherReference | undefined, b: DataSource.PublisherReference | undefined) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')
@@ -53,8 +53,8 @@ export const Publisher = new GraphQLObjectType<DataSource.Publisher, GraphQlCont
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType ===  "image/hero")
-                    .reduce((a: any, b: any) => b, undefined);
+                    .filter(item => item.__contentType ===  "image/hero")
+                    .reduce((a: DataSource.PublisherReference | undefined, b: DataSource.PublisherReference | undefined) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')

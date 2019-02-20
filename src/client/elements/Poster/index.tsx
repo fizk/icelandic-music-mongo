@@ -3,9 +3,9 @@ import {GraphQLTypes} from "../../../../@types";
 import classVariations from "../../helpers/classVariations";
 import './_index.scss';
 
-type Props = {
-    src: GraphQLTypes.ImageType
-    variations?: string[]
+interface Props {
+    src: GraphQLTypes.ImageType;
+    variations?: string[];
 }
 
 export default class extends React.Component<Props> {
@@ -39,9 +39,9 @@ export default class extends React.Component<Props> {
             <div className={classVariations('poster-image', this.props.variations)}>
                 {this.props.src.url && (
                     <img ref={element => this.imageElement = element}
-                         onLoad={this.loadImage}
-                         className="poster-image__image poster-image__image--hidden"
-                         src={`/images/unsafe/120x120/${this.props.src.url}`}
+                        onLoad={this.loadImage}
+                        className="poster-image__image poster-image__image--hidden"
+                        src={`/images/unsafe/120x120/${this.props.src.url}`}
                     />
                 )}
             </div>

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import classVariations from '../../helpers/classVariations';
 
-type Props = {
-    onSelect: (value: any) => void,
-    value: any,
-    isSelected: boolean,
-    variations: string[],
+interface Props {
+    onSelect: (value: any) => void;
+    value: any;
+    isSelected: boolean;
+    variations: string[];
 }
 
 class OptionsItem extends React.Component<Props> {

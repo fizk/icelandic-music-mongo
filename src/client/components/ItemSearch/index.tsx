@@ -10,17 +10,17 @@ import {ApolloQueryResult} from "apollo-client";
 import {collectionQuery} from '../../sections/CollectionSection';
 import './_index.scss';
 
-type Props = {
-    id: string
-    type?: string
-    onSelect: (item: any) => void
+interface Props {
+    id: string;
+    type?: string;
+    onSelect: (item: any) => void;
 }
 
-type State = {
-    items: any[]
-    term: string|undefined
-    isSearching: boolean
-    isCreate: boolean
+interface State {
+    items: any[];
+    term: string|undefined;
+    isSearching: boolean;
+    isCreate: boolean;
 }
 
 export default class ItemSearch extends React.Component<Props, State, {client: ApolloClient<any>}> {
@@ -64,7 +64,7 @@ export default class ItemSearch extends React.Component<Props, State, {client: A
                 isCreate: result.data.ItemSearch.length === 0 && term.length > 4
             });
         });
-    };
+    }
 
     handleCreateItem() {
         this.handleOnClear();

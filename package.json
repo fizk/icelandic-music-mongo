@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "jest",
+    "lint": "./node_modules/.bin/eslint \"./src/**/*.ts\"",
     "typescript": "./node_modules/.bin/tsc -w",
     "nodemon": "nodemon --watch ./dist ./dist/server/index.js",
     "build-server": "./node_modules/.bin/babel ./src --out-dir ./dist --extensions '.ts,.tsx'",
@@ -86,6 +87,10 @@
     "webpack": "^4.29.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.4.0",
+    "@typescript-eslint/parser": "^1.4.0",
+    "eslint": "^5.14.1",
+    "eslint-plugin-react": "^7.12.4",
     "nodemon": "^1.18.9",
     "webpack-cli": "^3.2.1"
   },

@@ -4,8 +4,8 @@ import Poster from '../../elements/Poster';
 import {GraphQLTypes} from "../../../../@types";
 import './_index.scss';
 
-type Props = {
-    collection: GraphQLTypes.CollectionType,
+interface Props {
+    collection: GraphQLTypes.CollectionType;
 }
 
 export default class CollectionHeader extends React.Component<Props> {

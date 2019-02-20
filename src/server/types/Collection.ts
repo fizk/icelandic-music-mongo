@@ -63,11 +63,11 @@ export const Collection: GraphQLObjectType = new GraphQLObjectType<DataSource.Co
             type: new GraphQLList(Artist),
             resolve(root, params, {database}) {
                 return database.collection('artist').find({"__ref": {
-                        "$elemMatch": {
-                            "_id.oid": new ObjectID(root._id),
-                            "__contentType": root.__contentType
-                        }
-                    }}).toArray();
+                    "$elemMatch": {
+                        "_id.oid": new ObjectID(root._id),
+                        "__contentType": root.__contentType
+                    }
+                }}).toArray();
             },
         },
         avatar: {
@@ -75,8 +75,8 @@ export const Collection: GraphQLObjectType = new GraphQLObjectType<DataSource.Co
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType ===  "image/avatar")
-                    .reduce((a: any, b: any) => b, undefined);
+                    .filter(item => item.__contentType ===  "image/avatar")
+                    .reduce((a: DataSource.CollectionReference | undefined, b: DataSource.CollectionReference | undefined) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')
@@ -89,8 +89,8 @@ export const Collection: GraphQLObjectType = new GraphQLObjectType<DataSource.Co
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType ===  "image/hero")
-                    .reduce((a: any, b: any) => b, undefined);
+                    .filter(item => item.__contentType ===  "image/hero")
+                    .reduce((a: DataSource.CollectionReference | undefined, b: DataSource.CollectionReference | undefined) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')
@@ -175,7 +175,7 @@ export const CollectionType = new GraphQLEnumType({
     }
 });
 
-export const CollectionAssociation = new GraphQLObjectType<any, GraphQlContext>({
+export const CollectionAssociation = new GraphQLObjectType<{collection: DataSource.Collection; itemId: ObjectID}, GraphQlContext>({ //todo fix object
     name: 'CollectionAssociation',
     fields: () => ({
         collection: {
@@ -186,9 +186,11 @@ export const CollectionAssociation = new GraphQLObjectType<any, GraphQlContext>(
         uuid: {
             type: new GraphQLNonNull(GraphQLUUID),
             resolve: ({collection, itemId}) => {
-                return collection.__ref.find((item: any) => {
+                const reference = collection.__ref.find((item: DataSource.ReferenceUnit) => {
                     return item._id.oid.equals(itemId) && item.__contentType === 'item/song';
-                }).__uuid;
+                });
+
+                return reference && reference.__uuid;
             }
         }
     })

@@ -17,7 +17,7 @@ export const CollectionConnection: GraphQLObjectType<DataSource.ArtistReferenceC
     fields: () => ({
         collection: {
             type: Collection,
-            resolve: ({_id}, _, {database}) => database.collection('collection').findOne({_id: _id!.oid})
+            resolve: ({_id}, _, {database}) => database.collection('collection').findOne({_id: _id.oid})
         },
         uuid: {
             type: new GraphQLNonNull(GraphQLUUID),
@@ -36,7 +36,7 @@ export const GroupMember: GraphQLObjectType<DataSource.ArtistReferenceMember, Gr
         artist: {
             name: 'Person',
             type: Person,
-            resolve: ({_id}, _, {database}) => database.collection('artist').findOne({_id: _id!.oid})
+            resolve: ({_id}, _, {database}) => database.collection('artist').findOne({_id: _id.oid})
         },
         uuid: {
             type: new GraphQLNonNull(GraphQLUUID),
@@ -114,8 +114,8 @@ export const Group = new GraphQLObjectType<DataSource.Artist, GraphQlContext>({
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType ===  "image/avatar")
-                    .reduce((a: any, b: any) => b, undefined);
+                    .filter(item => item.__contentType ===  "image/avatar")
+                    .reduce((a: DataSource.ArtistReference | undefined, b: DataSource.ArtistReference | undefined) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')
@@ -128,8 +128,8 @@ export const Group = new GraphQLObjectType<DataSource.Artist, GraphQlContext>({
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType ===  "image/hero")
-                    .reduce((a: any, b: any) => b, undefined);
+                    .filter(item => item.__contentType ===  "image/hero")
+                    .reduce((a: DataSource.ArtistReference | undefined, b: DataSource.ArtistReference | undefined) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')

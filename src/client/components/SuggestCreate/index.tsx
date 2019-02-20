@@ -2,20 +2,20 @@ import * as React from 'react';
 import {Button} from '../../elements/Form';
 import {Redirect} from 'react-router-dom';
 
-type Props = {
-    term: string,
-    unit: any,
+interface Props {
+    term: string;
+    unit: any;
     onCreate: (contentType: any, name: string) => void;
 }
 
-type State = {
-    screen: string,
+interface State {
+    screen: string;
     contentType: {
-        type: string|undefined,
-        subtype: string|undefined,
-        attribute: string|undefined,
-    },
-    name: string
+        type: string|undefined;
+        subtype: string|undefined;
+        attribute: string|undefined;
+    };
+    name: string;
 }
 
 class SuggestCreate extends React.Component<Props, State> {
@@ -112,57 +112,57 @@ class SuggestCreate extends React.Component<Props, State> {
 
     createResourcePathFromUnit(unit: any) { //@todo fix any
         switch (unit.contentType.type) {
-        case 'collection':
-            return `/verk/${unit._id}`;
-        case 'artist':
-            return `/listamenn/${unit._id}`;
-        default:
-            return '';
+            case 'collection':
+                return `/verk/${unit._id}`;
+            case 'artist':
+                return `/listamenn/${unit._id}`;
+            default:
+                return '';
         }
     }
 
     render() {
         return (
             <div>{this.props.unit && <Redirect to={this.createResourcePathFromUnit(this.props.unit)} />}
-            {/*{*/}
                 {/*{*/}
-                    {/*'index': (*/}
-                        {/*<div>*/}
-                            {/*Maybe you should just create {this.props.term}*/}
-                            {/*<Button variations={['primary']} onClick={this.handleSelectUnit}>OK</Button>*/}
-                        {/*</div>*/}
-                    {/*),*/}
-                    {/*'unit-select': (*/}
-                        {/*<div>*/}
-                            {/*Is it an*/}
-                            {/*<Button variations={['primary', ]} onClick={this.handleSelectArtist}>Artist</Button> or an*/}
-                            {/*<Button variations={['primary', ]} onClick={this.handleSelectAlbum}>Album</Button>?*/}
-                        {/*</div>*/}
-                    {/*),*/}
-                    {/*'artist-select': (*/}
-                        {/*<div>*/}
-                            {/*Is it a*/}
-                            {/*<Button variations={['primary', ]} onClick={this.handleSelectBand}>Band</Button> or a*/}
-                            {/*<Button variations={['primary', ]} onClick={this.handleSelectPerson}>Person</Button>?*/}
-                        {/*</div>*/}
-                    {/*),*/}
-                    {/*'album-select': (*/}
-                        {/*<div>*/}
-                            {/*is it a*/}
-                            {/*<ul>*/}
-                                {/*<li><input name="album-type" value="" type="radio" onClick={this.handleSelectAlbumType}/> Good old Album</li>*/}
-                                {/*<li><input name="album-type" value="compilation" type="radio" onClick={this.handleSelectAlbumType}/> a Compilation</li>*/}
-                                {/*<li><input name="album-type" value="single" type="radio" onClick={this.handleSelectAlbumType}/> a Single</li>*/}
-                                {/*<li><input name="album-type" value="ep" type="radio" onClick={this.handleSelectAlbumType}/> or an EP</li>*/}
-                            {/*</ul>*/}
-                        {/*</div>*/}
-                    {/*),*/}
-                    {/*'got-it': (*/}
-                        {/*<div>*/}
-                            {/*Got it... and the name is <input value={this.state.name} onChange={event => this.setState({name: event.target.value})}/>*/}
-                            {/*<Button variations={['primary']} onClick={this.handleCreate}>Create</Button>*/}
-                        {/*</div>*/}
-                    {/*),*/}
+                {/*{*/}
+                {/*'index': (*/}
+                {/*<div>*/}
+                {/*Maybe you should just create {this.props.term}*/}
+                {/*<Button variations={['primary']} onClick={this.handleSelectUnit}>OK</Button>*/}
+                {/*</div>*/}
+                {/*),*/}
+                {/*'unit-select': (*/}
+                {/*<div>*/}
+                {/*Is it an*/}
+                {/*<Button variations={['primary', ]} onClick={this.handleSelectArtist}>Artist</Button> or an*/}
+                {/*<Button variations={['primary', ]} onClick={this.handleSelectAlbum}>Album</Button>?*/}
+                {/*</div>*/}
+                {/*),*/}
+                {/*'artist-select': (*/}
+                {/*<div>*/}
+                {/*Is it a*/}
+                {/*<Button variations={['primary', ]} onClick={this.handleSelectBand}>Band</Button> or a*/}
+                {/*<Button variations={['primary', ]} onClick={this.handleSelectPerson}>Person</Button>?*/}
+                {/*</div>*/}
+                {/*),*/}
+                {/*'album-select': (*/}
+                {/*<div>*/}
+                {/*is it a*/}
+                {/*<ul>*/}
+                {/*<li><input name="album-type" value="" type="radio" onClick={this.handleSelectAlbumType}/> Good old Album</li>*/}
+                {/*<li><input name="album-type" value="compilation" type="radio" onClick={this.handleSelectAlbumType}/> a Compilation</li>*/}
+                {/*<li><input name="album-type" value="single" type="radio" onClick={this.handleSelectAlbumType}/> a Single</li>*/}
+                {/*<li><input name="album-type" value="ep" type="radio" onClick={this.handleSelectAlbumType}/> or an EP</li>*/}
+                {/*</ul>*/}
+                {/*</div>*/}
+                {/*),*/}
+                {/*'got-it': (*/}
+                {/*<div>*/}
+                {/*Got it... and the name is <input value={this.state.name} onChange={event => this.setState({name: event.target.value})}/>*/}
+                {/*<Button variations={['primary']} onClick={this.handleCreate}>Create</Button>*/}
+                {/*</div>*/}
+                {/*),*/}
                 {/*}[this.state.screen]}*/}
             </div>
         );

@@ -16,7 +16,7 @@ export type GraphQlContext = {
  */
 declare namespace GraphQLTypes {
 
-    export interface UnitType {
+    export interface Unit {
         _id?: ID
         __typename?: string,
         updateTime?: string
@@ -29,7 +29,17 @@ declare namespace GraphQLTypes {
         to: string | undefined | null
     }
 
+    export interface PeriodInputType {
+        from: string
+        to: string
+    }
+
     export interface GenreType {
+        type: string
+        style: string | undefined | null
+    }
+
+    export interface GenreInputType {
         type: string
         style: string | undefined | null
     }
@@ -54,7 +64,7 @@ declare namespace GraphQLTypes {
         roles?: string[]
     }
 
-    export interface Publisher extends UnitType {
+    export interface Publisher extends Unit {
         name: string
         description?: string
         contentType?: ContentType
@@ -87,7 +97,7 @@ declare namespace GraphQLTypes {
         collection: CollectionType
     }
 
-    export interface ArtistType extends UnitType {
+    export interface ArtistType extends Unit {
         contentType?: ContentType
         name: string
         description?: string
@@ -105,7 +115,7 @@ declare namespace GraphQLTypes {
         hero?: ImageType | null
     }
 
-    export interface ItemType extends UnitType {
+    export interface ItemType extends Unit {
         name: string
         contentType?: ContentType
         description?: string
@@ -117,7 +127,7 @@ declare namespace GraphQLTypes {
         appearsOn?: CollectionType[]
     }
 
-    export interface CollectionType extends UnitType {
+    export interface CollectionType extends Unit {
         contentType?: ContentType
         genres?: GenreType[]
         name: string
@@ -128,6 +138,22 @@ declare namespace GraphQLTypes {
         to?: Date
         songs?: {song: ItemType, position: number}[]
         publications?: PublicationType[]
+    }
+    
+    export interface ArtistInputType {
+        name: string
+        aka?: string[]
+        description?: string
+        genres?: string[]
+        periods?: PeriodInputType[]
+    }
+    
+    export interface CollectionInput {
+        name: string
+        aka?: string[]
+        description?: string
+        releaseDates: string
+        genres: GenreInputType[]
     }
 }
 //

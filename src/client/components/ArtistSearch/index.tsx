@@ -9,16 +9,16 @@ import {FetchResult} from "apollo-link";
 import {ApolloQueryResult} from "apollo-client";
 import './_index.scss';
 
-type Props = {
-    type?: string
-    onSelect: (item: any) => void
+interface Props {
+    type?: string;
+    onSelect: (item: any) => void;
 }
 
-type State = {
-    items: any[]
-    term: string|undefined
-    isSearching: boolean
-    isCreate: boolean
+interface State {
+    items: any[];
+    term: string|undefined;
+    isSearching: boolean;
+    isCreate: boolean;
 }
 
 export default class ArtistSearch extends React.Component<Props, State, {client: ApolloClient<any>}> {
@@ -61,7 +61,7 @@ export default class ArtistSearch extends React.Component<Props, State, {client:
                 isCreate: result.data.ArtistSearch.length === 0 && term.length > 5
             });
         });
-    };
+    }
 
     handleCreateArtist() {
         this.handleOnClear();
@@ -85,9 +85,9 @@ export default class ArtistSearch extends React.Component<Props, State, {client:
     render() {
         return (
             <AutoComplete loading={this.state.isSearching}
-                          onType={this.handleSearch}
-                          onSelect={this.props.onSelect}
-                          onClear={this.handleOnClear}>
+                onType={this.handleSearch}
+                onSelect={this.props.onSelect}
+                onClear={this.handleOnClear}>
                 {this.state.items.map((item: any) => ( //@todo fix any
                     <AutoCompleteArtist key={item._id} value={item} />
                 ))}

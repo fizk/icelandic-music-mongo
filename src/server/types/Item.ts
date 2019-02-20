@@ -15,7 +15,7 @@ import {GraphQlContext} from '../../../@types';
 import {ContentType} from "./ContentType";
 import {splitContentType, splitGenre} from "../utils/split";
 import {Genre, GenreInput} from "./Genre";
-import {Collection, CollectionAssociation} from "./Collection";
+import {Collection} from "./Collection";
 import {ObjectID} from "bson";
 import {ArtistRole} from "./ArtistRole";
 
@@ -74,11 +74,11 @@ export const Item = new GraphQLObjectType<DataSource.Item, GraphQlContext>({
             type: new GraphQLList(Collection),
             resolve(root, params, {database}) {
                 return database.collection('collection').find({"__ref": {
-                        "$elemMatch": {
-                            "_id.oid": new ObjectID(root._id),
-                            "__contentType": "item/song"
-                        }
-                    }}).toArray();
+                    "$elemMatch": {
+                        "_id.oid": new ObjectID(root._id),
+                        "__contentType": "item/song"
+                    }
+                }}).toArray();
             }
         }
         // appearsOn: {

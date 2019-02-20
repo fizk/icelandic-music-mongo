@@ -16,16 +16,16 @@ import ArtistSearch from "../../components/ArtistSearch";
 import SectionLoading from '../../elements/SectionLoading'
 import '../../elements/MarkDownContainer/_index.scss';
 
-type Props = {
-    id: string
-    artist: GraphQLTypes.ArtistType,
-    loading: boolean,
-    isFound?: boolean,
-    edit?: boolean,
-    connectCollection?: () => void
-    connectMember?: () => void,
-    isModals: {[key: string]: boolean},
-    toggleModal: (object: {[key: string]: boolean}) => void,
+interface Props {
+    id: string;
+    artist: GraphQLTypes.ArtistType;
+    loading: boolean;
+    isFound?: boolean;
+    edit?: boolean;
+    connectCollection?: () => void;
+    connectMember?: () => void;
+    isModals: {[key: string]: boolean};
+    toggleModal: (object: {[key: string]: boolean}) => void;
 }
 
 export default class ArtistSection extends React.Component<Props> {
@@ -142,11 +142,11 @@ export default class ArtistSection extends React.Component<Props> {
                                             'Person': (
                                                 <Fragment>
                                                     {/*{(this.props.artist.association || []).map(artist => (*/}
-                                                        {/*<ArtistListItem key={`artist-${artist.group._id}`} artist={artist.group}>*/}
-                                                            {/*{artist.period.map((period, i) => (*/}
-                                                                {/*<PeriodYear key={`${artist.group._id}-${period.from}-${i}`} from={period.from} to={period.to} />*/}
-                                                            {/*))}*/}
-                                                        {/*</ArtistListItem>*/}
+                                                    {/*<ArtistListItem key={`artist-${artist.group._id}`} artist={artist.group}>*/}
+                                                    {/*{artist.period.map((period, i) => (*/}
+                                                    {/*<PeriodYear key={`${artist.group._id}-${period.from}-${i}`} from={period.from} to={period.to} />*/}
+                                                    {/*))}*/}
+                                                    {/*</ArtistListItem>*/}
                                                     {/*))}*/}
                                                 </Fragment>
                                             ),

@@ -1,7 +1,12 @@
 import {GraphQLError, GraphQLNonNull} from 'graphql';
 import {Collection, CollectionInput, CollectionType} from '../types/Collection';
-import {GraphQlContext} from "../../../@types";
+import {GraphQlContext, GraphQLTypes} from "../../../@types";
 import {DataSource} from "../../../@types/database";
+
+interface Params {
+    value: GraphQLTypes.CollectionInput;
+    type: 'album' | 'album+ep' | 'album+single' | 'album+compilation';
+}
 
 export default {
     type: Collection,
@@ -14,7 +19,7 @@ export default {
             type: new GraphQLNonNull(CollectionType)
         },
     },
-    resolve (root: any, {values, type}: any, {database, event}: GraphQlContext) { //@todo fix any
+    resolve (root: null, {values, type}: any, {database, event}: GraphQlContext) {// eslint-disable-line @typescript-eslint/no-explicit-any
         const data: DataSource.Artist = Object.assign({
             __contentType: `collection/${type}`,
             __ref: [],

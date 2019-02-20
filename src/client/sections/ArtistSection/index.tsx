@@ -188,7 +188,7 @@ export default compose(
         }),
     }),
     graphql(artistAddMember, {
-        props: ({mutate, ownProps}: {mutate?: any, ownProps: any}) => ({
+        props: ({mutate, ownProps}: {mutate?: any; ownProps: any}) => ({
             connectMember: (vars: any) => { //@todo fix any
                 mutate({
                     variables: {
@@ -206,7 +206,7 @@ export default compose(
         }),
     }),
     graphql(artistAddCollection, {
-        props: ({mutate, ownProps}: {mutate?: any, ownProps: any}) => ({
+        props: ({mutate, ownProps}: {mutate?: any; ownProps: any}) => ({
             connectCollection: (vars: any) => { //@todo fix any
                 mutate({
                     variables: {
@@ -265,14 +265,14 @@ export default compose(
                         //
                         //     store.writeQuery({ query: artistQuery, data, });
                         // } else {
-                            const data = store.readQuery({query: artistQuery, variables: {id: ownProps.id}});
+                        const data = store.readQuery({query: artistQuery, variables: {id: ownProps.id}});
 
-                            data.Artist.albums = ArtistAddCollection.albums;
-                            data.Artist.singles = ArtistAddCollection.singles;
-                            data.Artist.eps = ArtistAddCollection.eps;
-                            data.Artist.compilations = ArtistAddCollection.compilations;
+                        data.Artist.albums = ArtistAddCollection.albums;
+                        data.Artist.singles = ArtistAddCollection.singles;
+                        data.Artist.eps = ArtistAddCollection.eps;
+                        data.Artist.compilations = ArtistAddCollection.compilations;
 
-                            store.writeQuery({ query: artistQuery, data, });
+                        store.writeQuery({ query: artistQuery, data, });
                         // }
                     }
                 })

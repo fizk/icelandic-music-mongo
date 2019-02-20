@@ -67,7 +67,7 @@ const collectionAddItem = gql`
 
 export default compose(
     graphql(collectionAddItem, {
-        props: ({mutate, ownProps}: {mutate?: any, ownProps: any}) => ({
+        props: ({mutate, ownProps}: {mutate?: any; ownProps: any}) => ({
             connectItem: (vars: any) => { //@todo fix any
                 mutate({
                     variables: {

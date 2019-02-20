@@ -2,8 +2,14 @@ import {GraphQLList, GraphQLID, GraphQLNonNull, GraphQLError} from 'graphql';
 import {Artist} from '../types/Artist';
 import {v4 as uuid} from 'uuid';
 import {PeriodTypeInput} from "../types/Period";
-import {GraphQlContext} from "../../../@types";
+import {GraphQlContext, GraphQLTypes} from "../../../@types";
 import {ObjectID} from "bson";
+
+interface Params {
+    artist: string;
+    member: string;
+    periods: GraphQLTypes.PeriodInputType[];
+}
 
 export default {
     type: Artist,
@@ -21,21 +27,21 @@ export default {
             type: new GraphQLList(PeriodTypeInput)
         }
     },
-    resolve (root: any, {artist, member, periods = []}: any, {database, event}: GraphQlContext) { //@todo fix any
+    resolve (root: null, {artist, member, periods = []}: any, {database, event}: GraphQlContext) {// eslint-disable-line @typescript-eslint/no-explicit-any
         return database.collection('artist').findOneAndUpdate(
             {_id: new ObjectID(artist)},
             { $push: {__ref: {
-                        __contentType: `artist/person+member`,
-                        _id: {
-                            namespace: 'artist',
-                            oid: new ObjectID(member),
-                        },
-                        __created: new Date(),
-                        __updated: new Date(),
-                        __uuid: uuid(),
-                        periods: periods
-                    }
-                }
+                __contentType: `artist/person+member`,
+                _id: {
+                    namespace: 'artist',
+                    oid: new ObjectID(member),
+                },
+                __created: new Date(),
+                __updated: new Date(),
+                __uuid: uuid(),
+                periods: periods
+            }
+            }
             },
             {returnOriginal: false}
         ).then(result => {

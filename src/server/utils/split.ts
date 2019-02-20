@@ -1,7 +1,12 @@
-import {GraphQLTypes} from '../../../@types'
-export const splitContentType = (contentType: string): any => {
+import {GraphQLTypes} from '../../../@types';
+
+export const splitContentType = (contentType: string): {
+    type?: string | null | undefined;
+    subtype?: string | null | undefined;
+    attribute?: string | null | undefined;
+} => {
     // tslint:disable-next-line
-    const [a, type, b, subtype, c, attr] = (contentType || '')
+    const [, type, , subtype, , attr] = (contentType || '')
         .match(/^([a-z]*)(\/([a-z]*))?(\+([a-z]*))?$/) ||
         [undefined, undefined, undefined, undefined, undefined, undefined];
     return {

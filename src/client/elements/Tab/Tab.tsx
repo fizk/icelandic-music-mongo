@@ -1,9 +1,9 @@
 import * as React from 'react';
 import classVariations from '../../helpers/classVariations';
 
-type Props = {
-    onSelect?: () => void
-    active?: boolean
+interface Props {
+    onSelect?: () => void;
+    active?: boolean;
 }
 
 class Tab extends React.Component<Props> {

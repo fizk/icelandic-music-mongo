@@ -76,13 +76,13 @@ MongoClient.connect(mongoUrl, { useNewUrlParser: true }).then(database => {
     app.use((request, response) => {
 
         const httpLink = createHttpLink({
-                uri: 'http://web:3000/graphql',
-                fetch: fetch,
-                credentials: 'same-origin',
-                headers: {
-                    cookie: request.header('Cookie'),
-                },
-            });
+            uri: 'http://web:3000/graphql',
+            fetch: fetch,
+            credentials: 'same-origin',
+            headers: {
+                cookie: request.header('Cookie'),
+            },
+        });
 
         const client = new ApolloClient({
             ssrMode: true,

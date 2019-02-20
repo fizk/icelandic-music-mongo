@@ -1,5 +1,23 @@
 import {GraphQLString, GraphQLList, GraphQLInt, GraphQLNonNull} from "graphql";
+import {GraphQlContext} from '../../../@types'
 import {Item} from '../types/Item';
+import {DataSource} from "../../../@types/database";
+
+interface Params {
+    term: string;
+    limit?: number;
+}
+
+interface SearchSource { //@todo fixme
+    _source: DataSource.Unit;
+    _id: string;
+}
+
+interface SearchResult {
+    hits: {
+        hits: SearchSource[];
+    };
+}
 
 export default {
     type: new GraphQLList(Item),
@@ -13,7 +31,7 @@ export default {
             type: GraphQLInt
         },
     },
-    resolve (root: any, {term, limit = 10}: any, {database, search}: any) {
+    resolve (root: DataSource.Unit, {term}: any, {search}: GraphQlContext) {// eslint-disable-line @typescript-eslint/no-explicit-any
         return search.search({
             index: 'it_items',
             body: {
@@ -37,14 +55,14 @@ export default {
                     }
                 }
             },
-        }).then((data: any) => {
-            return data.hits.hits.map((item: any) => {
+        }).then((data: SearchResult) => {
+            return data.hits.hits.map(item => {
                 return {
                     ...item._source,
                     _id: item._id,
-                    __ref: item._source.__ref.map((reference: any) => ({
+                    __ref: item._source.__ref.map(reference => ({
                         ...reference,
-                        _id: database.doc(reference._id)
+                        // _id: database.doc(reference._id)
                     }))
                 }
             });

@@ -12,15 +12,17 @@ import {GraphQLUUID} from "./GraphQLUUID";
 import {ObjectID} from "bson";
 import {GraphQlContext} from "../../../@types";
 
-export const PersonAssociation: GraphQLObjectType<{association: DataSource.Artist, artistId: ObjectID}, GraphQlContext> = new GraphQLObjectType<{association: DataSource.Artist, artistId: ObjectID}, GraphQlContext>({
+export const PersonAssociation: GraphQLObjectType<{association: DataSource.Artist; artistId: ObjectID}, GraphQlContext> = new GraphQLObjectType<{association: DataSource.Artist; artistId: ObjectID}, GraphQlContext>({
     name: 'PersonAssociation',
     fields: () => ({
         periods: {
             type: new GraphQLList(Period),
             resolve: ({association, artistId}) => {
-                return association.__ref.find((item: any) => {
+                const reference = association.__ref.find(item => {
                     return item._id.oid.equals(artistId) && item.__contentType === 'artist/person+member';
-                })!.periods;
+                });
+
+                return reference && reference.periods;
             },
         },
         group: {
@@ -31,9 +33,11 @@ export const PersonAssociation: GraphQLObjectType<{association: DataSource.Artis
         uuid: {
             type: new GraphQLNonNull(GraphQLUUID),
             resolve: ({association, artistId}) => {
-                return association.__ref.find((item: any) => {
+                const reference = association.__ref.find(item => {
                     return item._id.oid.equals(artistId) && item.__contentType === 'artist/person+member';
-                })!.__uuid;
+                });
+
+                return reference && reference.__uuid;
             }
         }
     })
@@ -106,11 +110,11 @@ export const Person = new GraphQLObjectType<DataSource.Artist, GraphQlContext>({
             type: new GraphQLList(PersonAssociation),
             resolve(root, params, {database}) {
                 return database.collection('artist').find({"__ref": {
-                        "$elemMatch": {
-                            "_id.oid": new ObjectID(root._id),
-                            "__contentType": "artist/person+member"
-                        }
-                    }}).toArray().then((associations: DataSource.Artist[]) => {
+                    "$elemMatch": {
+                        "_id.oid": new ObjectID(root._id),
+                        "__contentType": "artist/person+member"
+                    }
+                }}).toArray().then((associations: DataSource.Artist[]) => {
                     return associations.map(association => ({
                         association,
                         artistId: root._id
@@ -123,8 +127,8 @@ export const Person = new GraphQLObjectType<DataSource.Artist, GraphQlContext>({
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType ===  "image/avatar")
-                    .reduce((a: any, b: any) => b, undefined);
+                    .filter(item => item.__contentType ===  "image/avatar")
+                    .reduce((a: DataSource.ArtistReference | undefined, b: DataSource.ArtistReference | undefined) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')
@@ -137,8 +141,8 @@ export const Person = new GraphQLObjectType<DataSource.Artist, GraphQlContext>({
             type: Image,
             resolve (root, _, {database}) {
                 const imagesReference = root.__ref
-                    .filter((item: any) => item.__contentType ===  "image/hero")
-                    .reduce((a: any, b: any) => b, undefined);
+                    .filter(item => item.__contentType ===  "image/hero")
+                    .reduce((a: DataSource.ArtistReference | undefined, b: DataSource.ArtistReference | undefined) => b, undefined);
 
                 return imagesReference
                     ? database.collection('media')

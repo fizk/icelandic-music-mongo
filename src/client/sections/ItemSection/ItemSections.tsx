@@ -9,8 +9,8 @@ import {ListFooter} from '../../elements/List';
 import Paper from '../../elements/Paper';
 import {GraphQLTypes} from "../../../../@types";
 
-type Props = {
-    item: GraphQLTypes.ItemType
+interface Props {
+    item: GraphQLTypes.ItemType;
 }
 
 export default class Item extends React.Component<Props> {
@@ -49,52 +49,52 @@ export default class Item extends React.Component<Props> {
                             <h3>Authors</h3>
                             <List>
                                 {/*{this.props.item.authors.map(role => (*/}
-                                    {/*<ArtistListItem key={`authors-${role.artist._id}`} artist={role.artist}>*/}
-                                        {/*<p>{role.roles.join(', ')}</p>*/}
-                                    {/*</ArtistListItem>*/}
+                                {/*<ArtistListItem key={`authors-${role.artist._id}`} artist={role.artist}>*/}
+                                {/*<p>{role.roles.join(', ')}</p>*/}
+                                {/*</ArtistListItem>*/}
                                 {/*))}*/}
                             </List>
                             {/*{this.props.user.id && <ListFooter>*/}
-                                {/*<ArtistSearchWithState*/}
-                                    {/*section="authors"*/}
-                                    {/*type="person"*/}
-                                    {/*onSelect={artist => this.handleAddArtistForRole(artist, 'authors')}*/}
-                                    {/*onCreate={value => this.handleCreateArtistForRole(value, 'authors')}*/}
-                                {/*/>*/}
+                            {/*<ArtistSearchWithState*/}
+                            {/*section="authors"*/}
+                            {/*type="person"*/}
+                            {/*onSelect={artist => this.handleAddArtistForRole(artist, 'authors')}*/}
+                            {/*onCreate={value => this.handleCreateArtistForRole(value, 'authors')}*/}
+                            {/*/>*/}
                             {/*</ListFooter>}*/}
 
                             <h3>Instruments</h3>
                             <List>
                                 {/*{this.props.item.instruments.map(role => (*/}
-                                    {/*<ArtistListItem key={`instruments-${role.artist._id}`} artist={role.artist}>*/}
-                                        {/*<p>{role.roles.join(', ')}</p>*/}
-                                    {/*</ArtistListItem>*/}
+                                {/*<ArtistListItem key={`instruments-${role.artist._id}`} artist={role.artist}>*/}
+                                {/*<p>{role.roles.join(', ')}</p>*/}
+                                {/*</ArtistListItem>*/}
                                 {/*))}*/}
                             </List>
                             {/*{this.props.user.id && <ListFooter>*/}
-                                {/*<ArtistSearchWithState*/}
-                                    {/*section="instruments"*/}
-                                    {/*type="person"*/}
-                                    {/*onSelect={artist => this.handleAddArtistForRole(artist, 'instruments')}*/}
-                                    {/*onCreate={value => this.handleCreateArtistForRole(value, 'instruments')}*/}
-                                {/*/>*/}
+                            {/*<ArtistSearchWithState*/}
+                            {/*section="instruments"*/}
+                            {/*type="person"*/}
+                            {/*onSelect={artist => this.handleAddArtistForRole(artist, 'instruments')}*/}
+                            {/*onCreate={value => this.handleCreateArtistForRole(value, 'instruments')}*/}
+                            {/*/>*/}
                             {/*</ListFooter>}*/}
 
                             <h3>Engineers</h3>
                             <List>
                                 {/*{this.props.item.engineers.map(role => (*/}
-                                    {/*<ArtistListItem key={`engineers-${role.artist._id}`} artist={role.artist}>*/}
-                                        {/*<p>{role.roles.join(', ')}</p>*/}
-                                    {/*</ArtistListItem>*/}
+                                {/*<ArtistListItem key={`engineers-${role.artist._id}`} artist={role.artist}>*/}
+                                {/*<p>{role.roles.join(', ')}</p>*/}
+                                {/*</ArtistListItem>*/}
                                 {/*))}*/}
                             </List>
                             {/*{this.props.user.id && <ListFooter>*/}
-                                {/*<ArtistSearchWithState*/}
-                                    {/*section="engineers"*/}
-                                    {/*type="person"*/}
-                                    {/*onSelect={artist => this.handleAddArtistForRole(artist, 'engineers')}*/}
-                                    {/*onCreate={value => this.handleCreateArtistForRole(value, 'engineers')}*/}
-                                {/*/>*/}
+                            {/*<ArtistSearchWithState*/}
+                            {/*section="engineers"*/}
+                            {/*type="person"*/}
+                            {/*onSelect={artist => this.handleAddArtistForRole(artist, 'engineers')}*/}
+                            {/*onCreate={value => this.handleCreateArtistForRole(value, 'engineers')}*/}
+                            {/*/>*/}
                             {/*</ListFooter>}*/}
                         </Paper>
                     </Column>

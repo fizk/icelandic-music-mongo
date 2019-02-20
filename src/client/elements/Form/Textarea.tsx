@@ -10,8 +10,8 @@ const Textarea = (props: any) => { //@todo fix any
 
 export {Textarea};
 
-type Props = {
-    variations?: string[]
+interface Props {
+    variations?: string[];
 }
 
 const TextArea: StatelessComponent<Props> = ({variations = [], ...rest}) => (

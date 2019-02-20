@@ -12,10 +12,10 @@ import {GraphQLTypes} from "../../../../@types";
 import ItemSearch from "../../components/ItemSearch";
 import '../../elements/MarkDownContainer/_index.scss';
 
-type Props = {
-    album: GraphQLTypes.CollectionType,
-    loading: boolean,
-    connectItem?: () => void
+interface Props {
+    album: GraphQLTypes.CollectionType;
+    loading: boolean;
+    connectItem?: () => void;
 }
 
 export default class CollectionSection extends React.Component<Props> {

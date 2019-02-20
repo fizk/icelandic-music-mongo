@@ -15,7 +15,7 @@ export const ListFooter = ({children}: any) => (  //@todo fix any
     <div className="list-footer">{children}</div>
 );
 
-export const ListItemAvatar: StatelessComponent<{avatar: any, action?: string}> = ({children, avatar, action = undefined}) => (
+export const ListItemAvatar: StatelessComponent<{avatar: any; action?: string}> = ({children, avatar, action = undefined}) => (
     <li className="list-item">
         <div className="list-item__avatar">{avatar}</div>
         <div className="list-item__content">
@@ -25,10 +25,10 @@ export const ListItemAvatar: StatelessComponent<{avatar: any, action?: string}> 
     </li>
 );
 
-type ListItemAvatarSelectProps = {
-    avatar: any
-    active?: boolean
-    onSelect?: (event: any) => void
+interface ListItemAvatarSelectProps {
+    avatar: any;
+    active?: boolean;
+    onSelect?: (event: any) => void;
 }
 
 export const ListItemAvatarSelect: StatelessComponent<ListItemAvatarSelectProps> = ({children, avatar, active = false, onSelect = () => {}}) => (

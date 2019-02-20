@@ -2,8 +2,8 @@ import * as React from 'react';
 import classVariations from '../../helpers/classVariations';
 import './_index.scss';
 
-type Props = {
-    loading: boolean,
+interface Props {
+    loading: boolean;
 }
 
 export default class LoadingStrip extends React.Component<Props> {

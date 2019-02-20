@@ -4,15 +4,15 @@ import classVariations from "../../helpers/classVariations";
 import './_index.scss';
 import {SyntheticEvent} from "react";
 
-type Props = {
-    src: string,
-    base64: string,
-    width?: string | number
-    height?: string | number
+interface Props {
+    src: string;
+    base64: string;
+    width?: string | number;
+    height?: string | number;
 }
 
 export class Hero extends React.Component<Props> {
-    img : any;
+    img: any;
 
     static defaultProps = {
         src: undefined,
@@ -58,9 +58,9 @@ export class Hero extends React.Component<Props> {
 }
 
 
-type HeroProps = {
-    src: GraphQLTypes.ImageType
-    variations?: string[]
+interface HeroProps {
+    src: GraphQLTypes.ImageType;
+    variations?: string[];
 }
 
 export default class extends React.Component<HeroProps> {
@@ -94,11 +94,11 @@ export default class extends React.Component<HeroProps> {
             <div className="hero-image">
                 {this.props.src.url && (
                     <img height={274}
-                         width={1024}
-                         ref={element => this.imageElement = element}
-                         onLoad={this.loadImage}
-                         className="hero-image__image hero-image__image--hidden"
-                         src={`/images/unsafe/1024x274/${this.props.src.url}`}
+                        width={1024}
+                        ref={element => this.imageElement = element}
+                        onLoad={this.loadImage}
+                        className="hero-image__image hero-image__image--hidden"
+                        src={`/images/unsafe/1024x274/${this.props.src.url}`}
                     />
                 )}
             </div>

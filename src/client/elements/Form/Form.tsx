@@ -3,9 +3,9 @@ import classVariations from '../../helpers/classVariations';
 import {StatelessComponent} from "react";
 import './_form.scss';
 
-type Props = {
-    variations?: string[],
-    onSubmit?: () => void
+interface Props {
+    variations?: string[];
+    onSubmit?: () => void;
 }
 
 class Form extends React.Component<Props> {

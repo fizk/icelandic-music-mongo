@@ -1,9 +1,9 @@
 import ApolloClient from "apollo-client/ApolloClient";
 
-type apolloContext<T> = {cache: ApolloClient<T>}
+interface ApolloContext<T> {cache: ApolloClient<T>}
 
 export const mutations = {
-    updateArtistSectionModal: (_:any, {key, value}: any, {cache}: apolloContext<any>) => {
+    updateArtistSectionModal: (_: null, {key, value}: {key: string; value: string}, {cache}: ApolloContext<object>) => { //@todo fix object
         const data = {
             artistSectionModal: {
                 __typename: 'ArtistSectionModal',

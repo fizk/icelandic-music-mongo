@@ -5,8 +5,8 @@ import Poster from '../../elements/Poster';
 import {Time} from '../../elements/Time';
 import {GraphQLTypes} from "../../../../@types";
 
-type Props = {
-    releases: {uuid: string, collection: GraphQLTypes.CollectionType}[] | undefined,
+interface Props {
+    releases: {uuid: string; collection: GraphQLTypes.CollectionType}[] | undefined;
 }
 
 export default class ReleasesList extends React.Component<Props> {

@@ -8,6 +8,7 @@ COPY "@types/*" "./@types/"
 COPY .babelrc ./
 COPY webpack.config.js ./
 COPY jest/* ./jest/
+COPY .eslintrc.json ./
 
 RUN npm i
 

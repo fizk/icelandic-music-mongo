@@ -26,113 +26,113 @@ export const Loading: StatelessComponent = () => (
         <g transform="translate(18, 17)">
             <circle opacity="0.2" fill="#444444" cx="19.109" cy="3.965" r="2.908">
                 <animate id="animation1"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="0s;animation2.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="0s;animation2.end" />
                 <animate id="animation2"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation1.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation1.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="29.804" cy="5.656" r="2.908">
                 <animate id="animation3"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="0.2s;animation4.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="0.2s;animation4.end" />
                 <animate id="animation4"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation3.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation3.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="37.208" cy="12.347" r="2.907">
                 <animate id="animation5"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="0.4s;animation6.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="0.4s;animation6.end" />
                 <animate id="animation6"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation5.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation5.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="40.116" cy="22.477" r="2.908">
                 <animate id="animation7"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="0.6s;animation8.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="0.6s;animation8.end" />
                 <animate id="animation8"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation7.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation7.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="37.823" cy="31.519" r="2.908">
                 <animate id="animation9"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="0.8s;animation10.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="0.8s;animation10.end" />
                 <animate id="animation10"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation9.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation9.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="29.804" cy="38.853" r="2.908">
                 <animate id="animation11"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="1.0s;animation12.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="1.0s;animation12.end" />
                 <animate id="animation12"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation11.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation11.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="19.703" cy="40.034" r="2.908">
                 <animate id="animation13"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="1.2s;animation14.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="1.2s;animation14.end" />
                 <animate id="animation14"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation13.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation13.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="10.398" cy="36.581" r="2.908">
                 <animate id="animation15"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="1.4s;animation16.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="1.4s;animation16.end" />
                 <animate id="animation16"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation15.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation15.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="3.881" cy="27.697" r="2.908">
                 <animate id="animation17"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="1.6s;animation18.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="1.6s;animation18.end" />
                 <animate id="animation18"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation17.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation17.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="3.881" cy="17.07" r="2.908">
                 <animate id="animation19"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="1.8s;animation20.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="1.8s;animation20.end" />
                 <animate id="animation20"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation19.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation19.end" />
             </circle>
             <circle opacity="0.2" fill="#444444" cx="10.032" cy="8.565" r="2.908">
                 <animate id="animation21"
-                         attributeName="opacity"
-                         from="1" to="0.2" dur="0.5s"
-                         begin="2.0s;animation22.end" />
+                    attributeName="opacity"
+                    from="1" to="0.2" dur="0.5s"
+                    begin="2.0s;animation22.end" />
                 <animate id="animation22"
-                         attributeName="opacity"
-                         from="0.2" to="0.2" dur="1.8s"
-                         begin="animation21.end" />
+                    attributeName="opacity"
+                    from="0.2" to="0.2" dur="1.8s"
+                    begin="animation21.end" />
             </circle>
 
         </g>

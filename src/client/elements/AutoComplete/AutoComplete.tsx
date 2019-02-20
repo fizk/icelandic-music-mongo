@@ -8,18 +8,18 @@ const mod = (n: number, m: number) => {
     return ((n % m) + m) % m;
 };
 
-type Props = {
-    onType: (term: string) => void
-    onSelect: (value: any) => void
-    onClear: () => void
-    loading?: boolean
-    children: Array<any>
+interface Props {
+    onType: (term: string) => void;
+    onSelect: (value: any) => void;
+    onClear: () => void;
+    loading?: boolean;
+    children: any[];
 }
 
-type State = {
-    index: number
-    counter: number
-    value: string
+interface State {
+    index: number;
+    counter: number;
+    value: string;
 }
 
 export default class AutoComplete extends React.Component<Props, State> {
@@ -133,8 +133,8 @@ export default class AutoComplete extends React.Component<Props, State> {
         return (
             <div className={classVariations('auto-complete', this.props.loading ? ['loading'] : [])}>
                 <input className="auto-complete__input"
-                       onChange={this.handleInput}
-                       value={this.state.value}/>
+                    onChange={this.handleInput}
+                    value={this.state.value}/>
                 {React.Children.count(this.props.children) > 0 && (
                     <div className="auto-complete__drop-down">
                         {React.Children.map(this.props.children, (child: any, i: number) => {

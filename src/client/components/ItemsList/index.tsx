@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom';
 import {Time} from "../../elements/Time";
 import {GraphQLTypes} from "../../../../@types";
 
-type Props = {
+interface Props {
     items: {
-        position: number|undefined,
-        song: GraphQLTypes.ItemType,
-    }[] | undefined,
+        position: number|undefined;
+        song: GraphQLTypes.ItemType;
+    }[] | undefined;
 }
 
 export default class ItemsList extends React.Component<Props> {

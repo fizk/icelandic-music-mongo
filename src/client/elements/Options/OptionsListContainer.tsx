@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-type Props = {
-    width: number
+interface Props {
+    width: number;
 }
 
 class OptionsListContainer extends React.Component<Props> {

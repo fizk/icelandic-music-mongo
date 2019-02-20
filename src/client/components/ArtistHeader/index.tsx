@@ -4,8 +4,8 @@ import Avatar from '../../elements/Avatar';
 import {GraphQLTypes} from "../../../../@types";
 import './_index.scss';
 
-type Props = {
-    artist: GraphQLTypes.ArtistType
+interface Props {
+    artist: GraphQLTypes.ArtistType;
 }
 
 export default class ArtistHeader extends React.Component<Props> {
@@ -36,7 +36,7 @@ export default class ArtistHeader extends React.Component<Props> {
                     <div className="artist-header__headline-avatar">
                         <div className="artist-header__avatar-container">
                             <Avatar src={this.props.artist.avatar === null ? undefined : this.props.artist.avatar}
-                                    variations={['lg']}
+                                variations={['lg']}
                             />
                         </div>
                     </div>

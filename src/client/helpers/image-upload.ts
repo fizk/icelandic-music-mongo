@@ -1,7 +1,7 @@
 
 const validateMime = (file: File) => {
-    return new Promise<File>((pass, fail) => {
-        if(file.type.match(/^image\/.*$/)) {
+    return new Promise((pass, fail) => {
+        if (file.type.match(/^image\/.*$/)) {
             pass(file);
         } else {
             fail(`invalid file type ${file.type}`);
@@ -28,14 +28,14 @@ const readIntoImage = (file: File) => {
     });
 };
 
-const rescaleToCanvas = (image: CanvasImageSource, pixelCrop: {x: number, y: number, width: number, height: number }, config: {width: number, height: number}, factor = 1) => {
-    return new Promise((pass, fail) => {
+const rescaleToCanvas = (image: CanvasImageSource, pixelCrop: {x: number; y: number; width: number; height: number }, config: {width: number; height: number}, factor = 1) => {
+    return new Promise((pass) => {
 
         const mainCanvas = document.createElement('canvas');
         mainCanvas.width = config.width * factor;
         mainCanvas.height = config.height * factor;
         const mainContext = mainCanvas.getContext('2d');
-        mainContext!.drawImage(
+        mainContext && mainContext.drawImage(
             image,
             pixelCrop.x, pixelCrop.y,
             pixelCrop.width, pixelCrop.height,
@@ -49,7 +49,7 @@ const rescaleToCanvas = (image: CanvasImageSource, pixelCrop: {x: number, y: num
     });
 };
 
-export default (file: File, progress: any, config: {width: number, height: number}, crop: {x: number, y: number, width: number, height: number}, path: string = 'http://localhost:4000/upload') => {
+export default (file: File, progress: any, config: {width: number; height: number}, crop: {x: number; y: number; width: number; height: number}, path: string = 'http://localhost:4000/upload') => {
     return new Promise((pass, fail) => {
         validateMime(file)
             .then(readIntoImage)

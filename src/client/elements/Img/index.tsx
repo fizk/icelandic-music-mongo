@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-type Props = {
-    width: number,
-    height: number,
-    src: string,
-    base64: string,
+interface Props {
+    width: number;
+    height: number;
+    src: string;
+    base64: string;
 }
 
 class Img extends React.Component<Props> {

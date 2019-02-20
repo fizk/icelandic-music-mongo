@@ -7,23 +7,23 @@ import ReactMarkdown from 'react-markdown';
 import {SelectArray, Select} from "../../elements/Form";
 import {FormEvent, SyntheticEvent} from "react";
 
-type Props = {
+interface Props {
     collection: {
-        _id: string,
-        name: string,
-        aka: string[],
-        genres: string[],
-        description: string,
-        releaseDates: string,
-    },
-    onSubmit: () => void,
-    onCancel: () => void,
+        _id: string;
+        name: string;
+        aka: string[];
+        genres: string[];
+        description: string;
+        releaseDates: string;
+    };
+    onSubmit: () => void;
+    onCancel: () => void;
 }
 
-type State = {
-    genres: Array<string|undefined>
-    description: string
-    aka: Array<string|undefined>
+interface State {
+    genres: (string|undefined)[];
+    description: string;
+    aka: (string|undefined)[];
 }
 
 class CollectionUpdateForm extends React.Component<Props, State> {

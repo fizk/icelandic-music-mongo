@@ -91,12 +91,12 @@ describe('DataSource.Collection', () => {
     const databaseMock = {
         collection: () => ({
             findOne: ({_id}: {_id: ObjectID}) => ({
-                    [collectionID.toHexString()]: collectionMockData,
-                    [imageID.toHexString()]: imageMockData,
-                    [groupID.toHexString()]: artistGroupMockData,
-                    [itemID.toHexString()]: itemMockDate,
-                    [publisherID.toHexString()]: publisherMockData,
-                }[_id.toHexString()]
+                [collectionID.toHexString()]: collectionMockData,
+                [imageID.toHexString()]: imageMockData,
+                [groupID.toHexString()]: artistGroupMockData,
+                [itemID.toHexString()]: itemMockDate,
+                [publisherID.toHexString()]: publisherMockData,
+            }[_id.toHexString()]
             ),
             find: () => ({
                 toArray: () => Promise.resolve([artistGroupMockData])

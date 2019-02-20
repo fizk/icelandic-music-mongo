@@ -42,7 +42,7 @@ services:
     volumes:
       - ./src:/usr/src/app/src
       - ./public:/usr/src/app/public
-    command: npm test
+    command: bash -c "npm test && npm run lint"
 
   database:
     container_name: icelandic-music-database

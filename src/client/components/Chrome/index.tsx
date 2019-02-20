@@ -7,28 +7,28 @@ import {Grid, Column, Row} from '../../elements/Grid';
 import {IT} from '../../elements/Icons';
 import {SyntheticEvent} from "react";
 
-type Props = {
+interface Props {
     searchResults?: {
-        _id: string,
-        name: string,
+        _id: string;
+        name: string;
         contentType: {
-            type: string,
-        },
+            type: string;
+        };
         avatar: {
-            url: string,
-            base64: string,
-        },
-    }[],
+            url: string;
+            base64: string;
+        };
+    }[];
     user: {
-        id: string,
-        name: string,
-        url: string,
-    },
-    onFullSearch: (term: string) => void,
-    onFullSearchClear: () => void,
-    onLoginStatus: () => void,
-    onLogin: () => void,
-    onLogout: () => void,
+        id: string;
+        name: string;
+        url: string;
+    };
+    onFullSearch: (term: string) => void;
+    onFullSearchClear: () => void;
+    onLoginStatus: () => void;
+    onLogin: () => void;
+    onLogout: () => void;
 }
 
 class Chrome extends React.Component<Props> {

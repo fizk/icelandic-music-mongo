@@ -6,7 +6,7 @@ export const Grid: StatelessComponent<{}> = ({children, }) => (
     <div className="container">{children}</div>
 );
 
-export const Row: StatelessComponent<{head?: boolean, tail?: boolean, justify?: string}> = ({children, head, tail, justify, }) => {
+export const Row: StatelessComponent<{head?: boolean; tail?: boolean; justify?: string}> = ({children, head, tail, justify, }) => {
     const variationsArray = ['row', ];
 
     if (head) {
@@ -27,16 +27,16 @@ export const Row: StatelessComponent<{head?: boolean, tail?: boolean, justify?: 
 };
 
 export const Column: StatelessComponent<{
-    columns?: number,
-    xs?: number,
-    sm?: number,
-    md?: number,
-    lg?: number,
-    xl?: number,
-    offsetSm?: number,
-    offsetMd?: number,
-    offsetLg?: number,
-    offsetXl?: number
+    columns?: number;
+    xs?: number;
+    sm?: number;
+    md?: number;
+    lg?: number;
+    xl?: number;
+    offsetSm?: number;
+    offsetMd?: number;
+    offsetLg?: number;
+    offsetXl?: number;
 }> = ({children, columns, xs, sm, md, lg, xl, offsetSm, offsetMd, offsetLg, offsetXl, }) => {
     const variationsArray = ['col', ];
 

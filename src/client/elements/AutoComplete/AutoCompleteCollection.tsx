@@ -6,11 +6,11 @@ import {GraphQLTypes} from "../../../../@types";
 import {validDate} from "../../helpers/date";
 import './_auto-complete-collection.scss';
 
-type Props = {
-    variations?: string[],
-    onSelect?: (value: any) => void,
-    value?: GraphQLTypes.CollectionType,
-    active?: boolean
+interface Props {
+    variations?: string[];
+    onSelect?: (value: any) => void;
+    value?: GraphQLTypes.CollectionType;
+    active?: boolean;
 }
 
 const AutoCompleteCollection: StatelessComponent<Props> = (
@@ -20,7 +20,7 @@ const AutoCompleteCollection: StatelessComponent<Props> = (
 
     return (
         <div className={classVariations('auto-complete-collection', active ? [...variations, 'active'] : variations)}
-             onClick={() => onSelect(value)}>
+            onClick={() => onSelect(value)}>
             <div className="auto-complete-collection__icon">
                 <Poster src={value!.avatar === null ? undefined : value!.avatar} variations={['sm']}/>  {/*@todo fix this !*/}
             </div>

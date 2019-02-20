@@ -5,12 +5,12 @@ import {validDate} from '../../helpers/date'
 import {GraphQLTypes} from "../../../../@types";
 import './_index.scss';
 
-type Props = {
-    albums: GraphQLTypes.CollectionType[],
+interface Props {
+    albums: GraphQLTypes.CollectionType[];
     artists: {
-        artist: GraphQLTypes.ArtistType,
-        periods: GraphQLTypes.PeriodType[],
-    }[],
+        artist: GraphQLTypes.ArtistType;
+        periods: GraphQLTypes.PeriodType[];
+    }[];
 }
 
 export default class MemberTimeLine extends React.Component<Props> {
@@ -39,7 +39,7 @@ export default class MemberTimeLine extends React.Component<Props> {
             )).reduce((prev, current) => [...prev, ...current], [])
         }).reduce((prev, current) => ([...prev, ...current]), []);
 
-        const albumDate: Array<string|undefined> = this.props.albums
+        const albumDate: (string|undefined)[] = this.props.albums
             .map(album => album.releaseDates);
 
         const date: number[] = [...artistDates, ...albumDate]
@@ -60,76 +60,76 @@ export default class MemberTimeLine extends React.Component<Props> {
         const ticks = timeYear.range(minDate, maxDate, 1);
 
         return (
-           <svg xmlns="" width={width + 100 + (2 * padding)}
+            <svg xmlns="" width={width + 100 + (2 * padding)}
                 height={(this.props.artists.length * bar) + (2 * padding)}
                 viewBox={`0 0 ${width + 100 + (2 * padding)} ${(this.props.artists.length * bar) + (2 * padding)}`}>
-               <g transform={`translate(100, ${padding})`}>
+                <g transform={`translate(100, ${padding})`}>
 
-                   <line x1={0}
-                         y1={0}
-                         x2={0}
-                         y2={this.props.artists.length * bar}
-                         strokeWidth={1}
-                         stroke={'gray'}
-                         strokeDasharray={'1 4'}
-                   />
+                    <line x1={0}
+                        y1={0}
+                        x2={0}
+                        y2={this.props.artists.length * bar}
+                        strokeWidth={1}
+                        stroke={'gray'}
+                        strokeDasharray={'1 4'}
+                    />
 
-                   <g>
-                       {albums.map(album => (
-                           <line x1={Math.round(scale(new Date(album.releaseDates!)))}
-                                 y1={0}
-                                 x2={Math.round(scale(new Date(album.releaseDates!)))}
-                                 y2={this.props.artists.length * bar}
-                                 stroke={'gray'}
-                                 strokeWidth={1}
-                                 key={`album-${album._id}`}
-                           />
-                       ))}
-                   </g>
-                   <g>
-                       {this.props.artists.map((artist, i) => (
-                           <g key={`artists-${i}`}>
-                               {artist.periods.map(period => (
-                                   <line x1={Math.round(scale(new Date(period.from)))}
-                                         y1={(i * bar) + 15}
-                                         x2={Math.round(scale(new Date(period.to)))}
-                                         y2={(i * bar) + 15}
-                                         stroke={'gray'}
-                                         strokeWidth={15}
-                                         key={`period-${i}`}
-                                   />
-                               ))}
-                           </g>
-                       ))}
-                   </g>
-                   <g transform={`translate(0, ${this.props.artists.length * bar})`}>
-                       <line x1={0} y1={0} x2={width} y2={0} strokeWidth={1} stroke={'gray'} strokeDasharray={'1 4'} />
-                       {ticks.map(year => (
-                           <g key={`year-${year.toString()}`}>
-                               <text fontSize={10}
-                                   x={Math.round(scale(year))-12}
-                                   y={16}>
-                                   {year.getFullYear()}
-                               </text>
-                               <line key={`verical-${year.getTime()}`}
-                                     x1={Math.round(scale(year))}
-                                     y1={0}
-                                     x2={Math.round(scale(year))}
-                                     y2={5}
-                                     strokeWidth="1"
-                                     stroke="red"  />
-                           </g>
-                       ))}
-                   </g>
-               </g>
-               <g transform={`translate(${padding}, ${padding})`}>
-                   {this.props.artists.map((artist, i) => (
-                       <text x={0} y={(i * bar) + 20} key={`artis-${i}`}>
-                           {artist.artist.name}
-                       </text>
-                   ))}
-               </g>
-           </svg>
+                    <g>
+                        {albums.map(album => (
+                            <line x1={Math.round(scale(new Date(album.releaseDates!)))}
+                                y1={0}
+                                x2={Math.round(scale(new Date(album.releaseDates!)))}
+                                y2={this.props.artists.length * bar}
+                                stroke={'gray'}
+                                strokeWidth={1}
+                                key={`album-${album._id}`}
+                            />
+                        ))}
+                    </g>
+                    <g>
+                        {this.props.artists.map((artist, i) => (
+                            <g key={`artists-${i}`}>
+                                {artist.periods.map(period => (
+                                    <line x1={Math.round(scale(new Date(period.from)))}
+                                        y1={(i * bar) + 15}
+                                        x2={Math.round(scale(new Date(period.to)))}
+                                        y2={(i * bar) + 15}
+                                        stroke={'gray'}
+                                        strokeWidth={15}
+                                        key={`period-${i}`}
+                                    />
+                                ))}
+                            </g>
+                        ))}
+                    </g>
+                    <g transform={`translate(0, ${this.props.artists.length * bar})`}>
+                        <line x1={0} y1={0} x2={width} y2={0} strokeWidth={1} stroke={'gray'} strokeDasharray={'1 4'} />
+                        {ticks.map(year => (
+                            <g key={`year-${year.toString()}`}>
+                                <text fontSize={10}
+                                    x={Math.round(scale(year))-12}
+                                    y={16}>
+                                    {year.getFullYear()}
+                                </text>
+                                <line key={`verical-${year.getTime()}`}
+                                    x1={Math.round(scale(year))}
+                                    y1={0}
+                                    x2={Math.round(scale(year))}
+                                    y2={5}
+                                    strokeWidth="1"
+                                    stroke="red"  />
+                            </g>
+                        ))}
+                    </g>
+                </g>
+                <g transform={`translate(${padding}, ${padding})`}>
+                    {this.props.artists.map((artist, i) => (
+                        <text x={0} y={(i * bar) + 20} key={`artis-${i}`}>
+                            {artist.artist.name}
+                        </text>
+                    ))}
+                </g>
+            </svg>
         );
     }
 }

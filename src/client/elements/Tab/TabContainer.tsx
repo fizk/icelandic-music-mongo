@@ -1,12 +1,12 @@
 import * as React from 'react';
 import classVariations from '../../helpers/classVariations';
 
-type Props = {
-    variations: string[]
+interface Props {
+    variations: string[];
 }
 
-type State = {
-    index: number
+interface State {
+    index: number;
 }
 
 class TabContainer extends React.Component<Props, State> {
@@ -32,10 +32,10 @@ class TabContainer extends React.Component<Props, State> {
     render() {
         return (<div className={classVariations('tab-container', this.props.variations)}>
             {/*{React.Children.map(this.props.children, child => {*/}
-                {/*return React.cloneElement(child, {*/}
-                    {/*index: this.state.index,*/}
-                    {/*onSelect: this.handleSelect,*/}
-                {/*});*/}
+            {/*return React.cloneElement(child, {*/}
+            {/*index: this.state.index,*/}
+            {/*onSelect: this.handleSelect,*/}
+            {/*});*/}
             {/*})}*/}
         </div>);
 

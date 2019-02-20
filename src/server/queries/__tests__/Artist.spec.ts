@@ -106,11 +106,11 @@ describe('DataSource.Artist', () => {
     const databaseMock = {
         collection: () => ({
             findOne: ({_id}: {_id: ObjectID}) => ({
-                    [groupID.toHexString()]: artistGroupMockData,
-                    [personID.toHexString()]: artistPersonMockData,
-                    [collectionID.toHexString()]: collectionMockData,
-                    [imageID.toHexString()]: imageMockData,
-                }[_id.toHexString()]
+                [groupID.toHexString()]: artistGroupMockData,
+                [personID.toHexString()]: artistPersonMockData,
+                [collectionID.toHexString()]: collectionMockData,
+                [imageID.toHexString()]: imageMockData,
+            }[_id.toHexString()]
             ),
             find: () => ({
                 toArray: () => Promise.resolve([artistGroupMockData])
@@ -220,8 +220,8 @@ describe('DataSource.Artist', () => {
         const database = {
             collection: () => ({
                 findOne: ({_id}: {_id: ObjectID}) => ({
-                        [ID.toHexString()]: artistData,
-                    }[_id.toHexString()]
+                    [ID.toHexString()]: artistData,
+                }[_id.toHexString()]
                 ),
             })
         };

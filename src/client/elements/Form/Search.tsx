@@ -1,14 +1,14 @@
 import * as React from 'react';
 import classVariations from '../../helpers/classVariations';
 
-type Props = {
-    variations: string[],
-    onClear: (event: any) => void,
-    onChange: (event: any) => void,
-    isError?: boolean,
-    isSearching?: boolean,
-    placeholder?: string
-    value?: any
+interface Props {
+    variations: string[];
+    onClear: (event: any) => void;
+    onChange: (event: any) => void;
+    isError?: boolean;
+    isSearching?: boolean;
+    placeholder?: string;
+    value?: any;
 }
 
 class Search extends React.Component<Props> {
