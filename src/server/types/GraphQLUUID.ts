@@ -19,6 +19,6 @@ export const GraphQLUUID = new GraphQLScalarType({
 
     },
     parseLiteral: (ast): string => {
-        return ast.kind
+        return (ast as {value: string}).value;
     }
 });

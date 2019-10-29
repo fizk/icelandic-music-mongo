@@ -87,7 +87,55 @@ describe('DataSource.Artist', () => {
     const artistPersonMockData: PartialArtist = {
         __contentType: 'artist/person',
         _id: personID,
-        __ref: [],
+        __ref: [{
+            __contentType: 'image/avatar',
+            _id: {
+                namespace: 'media',
+                oid: imageID,
+            },
+            __created: new Date(),
+            __uuid: '427dbe30-0001-11e9-b210-d663bd873d93'
+        },{
+            __contentType: 'image/hero',
+            _id: {
+                namespace: 'media',
+                oid: imageID,
+            },
+            __created: new Date(),
+            __uuid: '427dbe30-0001-11e9-b210-d663bd873d93'
+        },{
+            __contentType: 'collection/album',
+            _id: {
+                namespace: 'collection',
+                oid: collectionID,
+            },
+            __created: new Date(),
+            __uuid: '427dbe30-0001-11e9-b210-d663bd873d93'
+        },{
+            __contentType: 'collection/album+single',
+            _id: {
+                namespace: 'collection',
+                oid: collectionID,
+            },
+            __created: new Date(),
+            __uuid: '427dbe30-0002-11e9-b210-d663bd873d93'
+        },{
+            __contentType: 'collection/album+ep',
+            _id: {
+                namespace: 'collection',
+                oid: collectionID,
+            },
+            __created: new Date(),
+            __uuid: '427dbe30-0003-11e9-b210-d663bd873d93'
+        },{
+            __contentType: 'collection/album+compilation',
+            _id: {
+                namespace: 'collection',
+                oid: collectionID,
+            },
+            __created: new Date(),
+            __uuid: '427dbe30-0004-11e9-b210-d663bd873d93'
+        }],
         name: 'Person Name',
         periods: [{from: '2001-01-01', to: undefined}]
     };
@@ -165,7 +213,7 @@ describe('DataSource.Artist', () => {
         expect(actual).toEqual(expected);
     });
 
-    test('Artist images', async () => {
+    test('Group images', async () => {
         const query = `
             query artist {
               Artist (id: "${groupID.toHexString()}") {
@@ -184,6 +232,34 @@ describe('DataSource.Artist', () => {
                 Artist: {
                     __typename: 'Group',
                     _id: groupID.toHexString(),
+                    avatar: {url: 'http://some.jpg'},
+                    hero: {url: 'http://some.jpg'}
+                }
+            }
+        };
+        const actual = await graphql(schema, query, {}, {database: databaseMock});
+        expect(actual).toEqual(expected);
+    });
+
+    test('Person images', async () => {
+        const query = `
+            query artist {
+              Artist (id: "${personID.toHexString()}") {
+                __typename
+                ... on Person {
+                  _id
+                  avatar {url}
+                  hero {url}
+                }
+              }
+            }
+        `;
+
+        const expected: {data: {Artist: PartialGQLArtist}} = {
+            data: {
+                Artist: {
+                    __typename: 'Person',
+                    _id: personID.toHexString(),
                     avatar: {url: 'http://some.jpg'},
                     hero: {url: 'http://some.jpg'}
                 }
@@ -299,6 +375,8 @@ describe('DataSource.Artist', () => {
               Artist (id: "${personID.toHexString()}") {
                 __typename
                 ... on Person {
+                    contentType {type subtype attribute}
+                    genres {type style}
                     period {from to}
                 }
               }
@@ -309,7 +387,13 @@ describe('DataSource.Artist', () => {
             data: {
                 Artist: {
                     __typename: 'Person',
+                    contentType: {
+                        type: 'artist',
+                        subtype: 'person',
+                        attribute: null
+                    },
                     period: {from: '2001-01-01', to: null},
+                    genres: []
                 }
             }
         };
@@ -317,7 +401,7 @@ describe('DataSource.Artist', () => {
         expect(actual).toEqual(expected);
     });
 
-    test('Artist albums', async () => {
+    test('Group albums', async () => {
         const query = `
             query artist {
               Artist (id: "${groupID.toHexString()}") {
@@ -352,6 +436,74 @@ describe('DataSource.Artist', () => {
                         collection: {
                             __typename: 'Collection',
                             name: 'collection name'
+
+                        },
+                        uuid: '427dbe30-0001-11e9-b210-d663bd873d93'
+                    }],
+                    singles: [{
+                        collection: {
+                            __typename: 'Collection',
+                            name: 'collection name'
+                        },
+                        uuid: '427dbe30-0002-11e9-b210-d663bd873d93'
+                    }],
+                    eps: [{
+                        collection: {
+                            __typename: 'Collection',
+                            name: 'collection name'
+                        },
+                        uuid: '427dbe30-0003-11e9-b210-d663bd873d93'
+                    }],
+                    compilations: [{
+                        collection: {
+                            __typename: 'Collection',
+                            name: 'collection name'
+                        },
+                        uuid: '427dbe30-0004-11e9-b210-d663bd873d93'
+                    }],
+                }
+            }
+        };
+        const actual = await graphql(schema, query, {}, {database: databaseMock});
+        expect(actual).toEqual(expected);
+    });
+
+    test('Person albums', async () => {
+        const query = `
+            query artist {
+              Artist (id: "${personID.toHexString()}") {
+                __typename
+                ... on Person {
+                    albums {
+                        uuid
+                        collection {__typename name}
+                    }
+                    singles {
+                        uuid
+                        collection {__typename name}
+                    }
+                    eps {
+                        uuid
+                        collection {__typename name}
+                    }
+                    compilations {
+                        uuid
+                        collection {__typename name}
+                    }
+                }
+              }
+            }
+        `;
+
+        const expected: {data: {Artist: PartialGQLArtist}} = {
+            data: {
+                Artist: {
+                    __typename: 'Person',
+                    albums: [{
+                        collection: {
+                            __typename: 'Collection',
+                            name: 'collection name'
+
                         },
                         uuid: '427dbe30-0001-11e9-b210-d663bd873d93'
                     }],

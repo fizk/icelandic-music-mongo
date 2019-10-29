@@ -18,7 +18,7 @@ declare namespace GraphQLTypes {
 
     export interface Unit {
         _id?: ID
-        __typename?: string,
+        __typename: string,
         updateTime?: string
         createTime?: string
         [key: string]: any
@@ -26,12 +26,12 @@ declare namespace GraphQLTypes {
 
     export interface Period {
         from: string
-        to: string | undefined | null
+        to: string | null | undefined
     }
 
     export interface Genre {
         type: string
-        style: string | undefined | null
+        style: string | null | undefined
     }
 
     export interface Image {
@@ -46,7 +46,7 @@ declare namespace GraphQLTypes {
     export interface ContentType {
         type?: string
         subtype?: string
-        attribute?: string | undefined | null
+        attribute?: string | null | undefined
     }
 
     export interface ArtistRole {
@@ -98,8 +98,8 @@ declare namespace GraphQLTypes {
         singles?: CollectionConnection[]
         period?: Period                     //Artist
         periods?: Period[]                  //Group
-        avatar?: Image | null
-        hero?: Image | null
+        avatar?: Image | null | undefined
+        hero?: Image | null | undefined
     }
 
     export interface Item extends Unit {
@@ -129,8 +129,8 @@ declare namespace GraphQLTypes {
         name: string
         description?: string
         contentType?: ContentType
-        avatar?: Image | null
-        hero?: Image | null
+        avatar?: Image | null | undefined
+        hero?: Image | null | undefined
     }
     
     export interface ArtistInput {
@@ -151,12 +151,12 @@ declare namespace GraphQLTypes {
 
     export interface PeriodInput {
         from: string
-        to: string
+        to: string | null | undefined
     }
 
     export interface GenreInput {
         type: string
-        style: string | undefined | null
+        style: string | null | undefined
     }
 }
 //

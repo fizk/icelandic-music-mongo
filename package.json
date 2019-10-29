@@ -10,6 +10,7 @@
   "scripts": {
     "test": "jest",
     "lint": "./node_modules/.bin/eslint \"./src/**/*.ts\"",
+    "tsc": "./node_modules/.bin/tsc",
     "typescript": "./node_modules/.bin/tsc -w",
     "nodemon": "nodemon --watch ./dist ./dist/server/index.js",
     "build-server": "./node_modules/.bin/babel ./src --out-dir ./dist --extensions '.ts,.tsx'",

@@ -230,7 +230,7 @@ describe('DataSource.Collection', () => {
                   _id
                   songs {
                     position
-                    song {_id name}
+                    song {__typename _id name}
                   }
                 }
               }
@@ -246,6 +246,7 @@ describe('DataSource.Collection', () => {
                         {
                             position: 0,
                             song: {
+                                __typename: 'Item',
                                 _id: itemID.toHexString(),
                                 name: 'Item name'
                             }
@@ -269,7 +270,7 @@ describe('DataSource.Collection', () => {
                     catalogNumber
                     formats
                     date
-                    publisher {_id name}
+                    publisher {__typename _id name}
                   }
                 }
               }
@@ -286,6 +287,7 @@ describe('DataSource.Collection', () => {
                         date: '2001-01-01',
                         formats: ['lp'],
                         publisher: {
+                            __typename: 'Publisher',
                             _id: publisherID.toHexString(),
                             name: 'Publisher'
                         }

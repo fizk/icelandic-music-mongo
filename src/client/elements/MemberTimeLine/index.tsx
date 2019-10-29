@@ -92,7 +92,7 @@ export default class MemberTimeLine extends React.Component<Props> {
                                 {artist.periods.map(period => (
                                     <line x1={Math.round(scale(new Date(period.from)))}
                                         y1={(i * bar) + 15}
-                                        x2={Math.round(scale(new Date(period.to)))}
+                                        x2={Math.round(scale(new Date(period.to || 0)))}
                                         y2={(i * bar) + 15}
                                         stroke={'gray'}
                                         strokeWidth={15}

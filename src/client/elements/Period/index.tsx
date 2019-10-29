@@ -2,8 +2,8 @@ import * as React from 'react';
 import {Time} from "../Time";
 
 interface Props {
-    from: string;
-    to: string;
+    from?: string | null | undefined;
+    to?: string | null | undefined;
 }
 
 export default class PeriodYear extends React.Component<Props> {

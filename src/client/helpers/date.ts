@@ -1,6 +1,6 @@
 // const RFC_3339_REGEX = /^(\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))$/;
 // export const validDate = (date: string): boolean => (date || '').match(RFC_3339_REGEX) !== null;
 
-export const validDate = (date: string|undefined): boolean => {
+export const validDate = (date: string | undefined | null): boolean => {
     return (typeof date === 'string') && new Date(date).toString() !== 'Invalid Date';
 };

@@ -1,7 +1,8 @@
 import {GraphQLID, GraphQLNonNull} from 'graphql';
 import {Artist} from "../types/Artist";
 import {GraphQLUUID} from '../types/GraphQLUUID';
-// import {GraphQlContext} from '../../../@types'
+import {GraphQlContext} from '../../../@types'
+import {ObjectID} from "bson";
 
 export default {
     type: Artist,
@@ -15,12 +16,17 @@ export default {
             type: new GraphQLNonNull(GraphQLUUID)
         },
     },
-    // resolve (root: any, {artist, reference}: any, {database}: GraphQlContext) {
-    //     return database.doc(`/artists/${artist}`).get()
-    //         .then((snapshot: QueryDocumentSnapshot) => {
-    //             const refArray: D.ReferenceUnit[] = snapshot.data().__ref.filter((item: D.ReferenceUnit) =>  item.__uuid !== reference);
-    //             return snapshot.ref.update({__ref: refArray}).then(() => snapshot.ref.get());
-    //         })
-    //         .then((snapshot: QueryDocumentSnapshot) => snapshot.exists ? transformSnapshot(snapshot) : null);
-    // }
+    resolve (root: any, {artist, reference}: any, {database, event}: GraphQlContext) {// eslint-disable-line @typescript-eslint/no-explicit-any
+        return database.collection('artist').findOneAndUpdate(
+            {_id: new ObjectID(artist)},
+            {$pull: {__ref: {__uuid: reference}}},
+            {returnOriginal: false},
+        ).then(result => {
+            if (result.ok === 1) {
+                event.emit('update', 'artist', result.value);
+                return result.value;
+            }
+            return null;
+        });
+    }
 };

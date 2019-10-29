@@ -137,6 +137,10 @@ export const ItemConnection = new GraphQLObjectType<DataSource.CollectionReferen
         song: {
             type: Item,
             resolve: (root, _, {database}) => database.collection('item').findOne({_id: root._id.oid})
+        },
+        uuid: {
+            type: GraphQLString,
+            resolve: ({__uuid}) => __uuid
         }
     })
 });

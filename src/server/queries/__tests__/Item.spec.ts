@@ -142,6 +142,7 @@ describe('DataSource.Item', () => {
                         ... on Person {
                             _id
                             name
+                            __typename
                         }
                     } 
                     roles 
@@ -151,6 +152,7 @@ describe('DataSource.Item', () => {
                         ... on Person {
                             _id
                             name
+                            __typename
                         }
                     } 
                     roles 
@@ -160,6 +162,7 @@ describe('DataSource.Item', () => {
                         ... on Person {
                             _id
                             name
+                            __typename
                         }
                     } 
                     roles 
@@ -175,21 +178,24 @@ describe('DataSource.Item', () => {
                     instruments: [{
                         artist: {
                             _id: personID.toHexString(),
-                            name: 'Artist Person Name'
+                            name: 'Artist Person Name',
+                            __typename: 'Person'
                         },
                         roles: []
                     }],
                     authors: [{
                         artist: {
                             _id: personID.toHexString(),
-                            name: 'Artist Person Name'
+                            name: 'Artist Person Name',
+                            __typename: 'Person'
                         },
                         roles: []
                     }],
                     engineers: [{
                         artist: {
                             _id: personID.toHexString(),
-                            name: 'Artist Person Name'
+                            name: 'Artist Person Name',
+                            __typename: 'Person'
                         },
                         roles: []
                     }],
@@ -204,7 +210,7 @@ describe('DataSource.Item', () => {
         const query = `
             query artist {
               Item (id: "${itemID.toHexString()}") {
-                appearsOn {_id name}
+                appearsOn {__typename _id name}
               }
             }
         `;
@@ -213,6 +219,7 @@ describe('DataSource.Item', () => {
             data: {
                 Item: {
                     appearsOn: [{
+                        __typename: 'Collection',
                         _id: collectionID.toHexString(),
                         name: 'Collection name',
                     }]

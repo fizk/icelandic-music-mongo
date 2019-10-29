@@ -16,8 +16,14 @@ interface Props {
 const AutoCompleteArtist: StatelessComponent<Props> = (
     {children, variations = [], onSelect = () => {}, value = undefined, active = false}
 ) => {
-    const fromDates = (value!.periods || []).map(period => period.from).filter(validDate).map(date => new Date(date).getTime()); //@todo fix !
-    const toDates = (value!.periods || []).map(period => period.to).filter(validDate).map(date => new Date(date).getTime()); //@todo fix !
+    const fromDates = ((value && value.periods) || [])
+        .map(period => period.from)
+        .filter(validDate)
+        .map((date: string) => new Date(date).getTime()); //@todo fix !
+    const toDates = ((value && value.periods) || [])
+        .map(period => period.to)
+        .filter(validDate)
+        .map(date => new Date(date || 0).getTime()); //@todo fix !
     const minDate = Math.min(...fromDates);
     const maxDate = Math.max(...toDates);
 
